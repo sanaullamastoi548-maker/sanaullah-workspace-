@@ -1,85 +1,463 @@
-
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanaullah Workspace | AI Platform</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background: #070b14; color: white; min-height: 100vh; overflow-x: hidden; }
-        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        .container { position: relative; z-index: 2; width: 90%; max-width: 1200px; margin: auto; }
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
-        .logo { font-size: 30px; font-weight: 800; }
-        .gold { color: #ffcc00; }
-        .hero { text-align: center; padding: 80px 20px; }
-        .card { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); padding: 25px; border-radius: 20px; margin: 20px 0; }
-        .open-btn { padding: 12px 25px; background: #ffcc00; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .open-btn:hover { background: #ffaa00; transform: scale(1.05); }
-        textarea, input, select { width: 100%; padding: 12px; margin: 10px 0; background: #111; color: white; border: 1px solid #444; border-radius: 8px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanaullah Workspace | AI Platform</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Noto Nastaliq Urdu', sans-serif;
+}
+
+body {
+    background: #070b14;
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.logo .white {
+    color: white;
+}
+
+.logo .gold {
+    color: #ffcc00;
+    text-shadow: 0 0 15px #ffcc00;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #ddd;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: #ffcc00;
+}
+
+.login-btn {
+    border: 1px solid #ffcc00;
+    padding: 8px 20px;
+    border-radius: 30px;
+    color: #ffcc00;
+    background: transparent;
+    cursor: pointer;
+}
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h1 {
+    font-size: 52px;
+    margin-bottom: 20px;
+}
+
+.hero h1 .white {
+    color: white;
+}
+
+.hero h1 .gold {
+    color: #ffcc00;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #ccc;
+    max-width: 700px;
+    margin: auto;
+}
+
+.glow-line {
+    width: 140px;
+    height: 4px;
+    background: #ffcc00;
+    margin: 25px auto;
+    border-radius: 50px;
+    box-shadow: 0 0 20px #ffcc00;
+}
+
+.hero-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #ffcc00, #ffaa00);
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 40px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+.card {
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1);
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    transition: .4s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #ffcc00;
+    box-shadow: 0 0 30px rgba(255, 204, 0, .2);
+}
+
+.icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    color: white;
+}
+
+.card p {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.open-btn {
+    margin-top: 15px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 25px;
+    background: #ffcc00;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.open-btn:hover {
+    transform: scale(1.05);
+    background: #ffaa00;
+}
+
+textarea, input {
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 12px;
+    width: 100%;
+}
+
+footer {
+    margin-top: 60px;
+    padding: 30px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    color: #aaa;
+}
+
+footer h3 {
+    color: #ffcc00;
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 32px; }
+    .navbar { flex-direction: column; }
+    .nav-links { justify-content: center; }
+}
+</style>
 </head>
 <body>
-    <canvas id="sandCanvas"></canvas>
-    <div class="container">
-        <div class="navbar">
-            <div class="logo">Sanaullah <span class="gold">Workspace</span></div>
-        </div>
-        <div class="hero">
-            <h1>Sanaullah <span class="gold">Workspace</span></h1>
-            <p>AI Powered Digital Platform</p>
-        </div>
 
-        <!-- AI Smart Assistant -->
-        <div class="card" style="max-width: 800px; margin: 40px auto; background: #1a1a2e;">
-            <h2 style="color: #ffcc00;">🤖 سمارٹ فری لانس اسسٹنٹ</h2>
-            <select id="taskType">
-                <option value="upwork">Upwork Proposal (پیشہ ورانہ پروپوزل)</option>
-                <option value="fiverr">Fiverr Gig Description (گگ کی تفصیل)</option>
-                <option value="freelancer">Freelancer.com Bid (بڈنگ کا طریقہ)</option>
-                <option value="linkedin">LinkedIn Connection (نیٹ ورکنگ میسج)</option>
-            </select>
-            <input type="text" id="userTopic" placeholder="کام کا نام لکھیں (مثال: Google Sheets Automation)">
-            <button class="open-btn" onclick="generateAIAnswer()">جواب تیار کریں</button>
-            <div id="aiResponse" style="margin-top: 20px; padding: 15px; background: #0a0a0f; border: 1px solid #ffcc00; border-radius: 10px; min-height: 100px; line-height: 1.6;">
-                جواب یہاں آئے گا...
-            </div>
+<canvas id="sandCanvas"></canvas>
+
+<div class="container">
+    <div class="navbar">
+        <div class="logo">
+            <span class="white">Sanaullah</span>
+            <span class="gold">Workspace</span>
+        </div>
+        <div class="nav-links">
+            <a href="#">ہوم</a>
+            <a href="#">ٹولز</a>
+            <a href="#">AI اسسٹنٹس</a>
+            <a href="#">رابطہ</a>
+            <span class="login-btn">لاگ ان</span>
         </div>
     </div>
 
-    <script>
-        function generateAIAnswer() {
-            let task = document.getElementById("taskType").value;
-            let topic = document.getElementById("userTopic").value;
-            let display = document.getElementById("aiResponse");
-            
-            if (topic === "") { alert("براہ کرم کام کا نام لکھیں!"); return; }
+    <div class="hero">
+        <h1>
+            <span class="white">Sanaullah</span>
+            <span class="gold">Workspace</span>
+        </h1>
+        <div class="glow-line"></div>
+        <p>AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, Automation اور Productivity Tools</p>
+        <a href="#" class="hero-btn">شروع کریں</a>
+    </div>
 
-            let responses = {
-                upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in Google Workspace automation and can deliver this efficiently. Best regards, Sanaullah.`,
-                fiverr: `Are you looking for high-quality ${topic} services? I specialize in automating complex workflows to save your time. Satisfaction guaranteed!`,
-                freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline. Ready to start!`,
-                linkedin: `Hi, I noticed you are working on ${topic}. I specialize in automation solutions and would love to connect. Regards, Sanaullah.`
-            };
+    <h2 class="section-title">📌 ہمارے ٹولز</h2>
+    <div class="cards">
+        <div class="card">
+            <div class="icon">🤖</div>
+            <h3>Freelance Assistant</h3>
+            <p>AI کی مدد سے پرووزل اور نگ ڈسکریشن لکھیں۔</p>
+            <button class="open-btn">Open Tool</button>
+        </div>
+        <div class="card">
+            <div class="icon">✍️</div>
+            <h3>Content Writer</h3>
+            <p>AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
+            <button class="open-btn">Open Tool</button>
+        </div>
+        <div class="card">
+            <div class="icon">📈</div>
+            <h3>SEO Optimizer</h3>
+            <p>اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
+            <button class="open-btn">Open Tool</button>
+        </div>
+        <div class="card">
+            <div class="icon">💻</div>
+            <h3>Code Helper</h3>
+            <p>کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
+            <button class="open-btn">Open Tool</button>
+        </div>
+    </div>
 
-            let result = responses[task];
-            display.innerHTML = `<div id="finalText" style="margin-bottom:15px;">${result}</div>
-                                <button onclick="copyToClipboard()" style="padding:8px 20px; cursor:pointer; background:#ffcc00; border:none; border-radius:5px; font-weight:bold;">📋 کاپی کریں</button>`;
+    <!-- ✍️ نیا ٹول: Text Assistant -->
+    <h2 class="section-title">✍️ Text Assistant</h2>
+    <div class="card" style="max-width: 800px; margin: auto;">
+        <textarea id="textAssistantInput" rows="5" placeholder="یہاں کچھ بھی لکھیں..."></textarea>
+        <br><br>
+        <button class="open-btn" onclick="copyText()">Copy Text</button>
+        <button class="open-btn" onclick="clearText()">Clear Text</button>
+        <br><br>
+        <div id="textAssistantMsg" style="color: #ffcc00; font-size: 14px; text-align: center;"></div>
+    </div>
+
+    <!-- Google Translate -->
+    <h2 class="section-title">🌐 زبان تبدیل کریں</h2>
+    <div class="card" style="max-width: 700px; margin: auto;">
+        <div id="google_translate_element"></div>
+    </div>
+
+    <!-- Text Case Converter -->
+    <h2 class="section-title">🔤 Text Case Converter</h2>
+    <div class="card" style="max-width: 800px; margin: auto;">
+        <textarea id="textInput" placeholder="یہاں اپنا ٹیکسٹ لکھیں..." rows="4"></textarea>
+        <br><br>
+        <button class="open-btn" onclick="convertText('upper')">UPPERCASE</button>
+        <button class="open-btn" onclick="convertText('lower')">lowercase</button>
+        <button class="open-btn" onclick="convertText('capitalize')">Capitalize</button>
+        <br><br>
+        <div id="textResult" style="color: #ddd; text-align: right;"></div>
+    </div>
+
+    <!-- Proposal Generator -->
+    <h2 class="section-title">🤖 Proposal Generator</h2>
+    <div class="card" style="max-width: 800px; margin: auto;">
+        <input type="text" id="jobTitle" placeholder="مثال: Google Sheets Automation">
+        <br><br>
+        <button class="open-btn" onclick="generateProposal()">Generate Proposal</button>
+        <br><br>
+        <div id="proposalResult" style="color: #ddd; text-align: right;"></div>
+    </div>
+</div>
+
+<footer>
+    <h3>Sanaullah Workspace</h3>
+    <p>AI Powered Digital Platform</p>
+    <p>© 2026 All Rights Reserved</p>
+</footer>
+
+<script>
+    function convertText(type) {
+        let text = document.getElementById("textInput").value;
+        let result = "";
+        if (type === "upper") result = text.toUpperCase();
+        else if (type === "lower") result = text.toLowerCase();
+        else if (type === "capitalize") {
+            result = text.toLowerCase().replace(/(^|\s)\S/g, function(t) {
+                return t.toUpperCase();
+            });
+        }
+        document.getElementById("textResult").innerHTML = result;
+    }
+
+    function generateProposal() {
+        let job = document.getElementById("jobTitle").value;
+        if (job === "") {
+            document.getElementById("proposalResult").innerHTML = "براہ کرم جاب کا نام لکھیں";
+            return;
+        }
+        document.getElementById("proposalResult").innerHTML = `
+        Hello,<br><br>
+        I am an experienced professional with strong expertise in ${job}.<br><br>
+        I can deliver high-quality work with attention to detail and within your deadline.<br><br>
+        I would love to discuss your project and help you achieve your goals.<br><br>
+        Looking forward to working with you.<br><br>
+        Best Regards,<br>
+        Sanaullah
+        `;
+    }
+
+    // Text Assistant Functions
+    function copyText() {
+        let textArea = document.getElementById("textAssistantInput");
+        textArea.select();
+        document.execCommand("copy");
+        document.getElementById("textAssistantMsg").innerHTML = "✅ متن کاپی ہو گیا!";
+        setTimeout(() => {
+            document.getElementById("textAssistantMsg").innerHTML = "";
+        }, 2000);
+    }
+
+    function clearText() {
+        document.getElementById("textAssistantInput").value = "";
+        document.getElementById("textAssistantMsg").innerHTML = "🗑️ متن صاف ہو گیا";
+        setTimeout(() => {
+            document.getElementById("textAssistantMsg").innerHTML = "";
+        }, 2000);
+    }
+
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ur',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+    const canvas = document.getElementById('sandCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = [];
+    for (let i = 0; i < 180; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.3 + 0.2,
+            alpha: Math.random() * 0.5 + 0.3,
+            glow: Math.random() * 0.8 + 0.4
+        });
+    }
+
+    let time = 0;
+
+    function drawSand() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        time += 0.02;
+        const pulse = Math.sin(time) * 0.3 + 0.7;
+
+        for (let p of particles) {
+            const brightness = (Math.sin(time * 2 + p.x * 0.01) * 0.3 + 0.7) * p.glow * pulse;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, ${180 + Math.floor(75 * brightness)}, 40, ${p.alpha * brightness})`;
+            ctx.shadowBlur = 12 * brightness;
+            ctx.shadowColor = `rgba(255, 200, 50, 0.8)`;
+            ctx.fill();
+
+            p.x += p.speedX;
+            p.y += p.speedY;
+            if (p.x < -50) p.x = canvas.width + 30;
+            if (p.x > canvas.width + 50) p.x = -30;
+            if (p.y < -50) p.y = canvas.height + 30;
+            if (p.y > canvas.height + 50) p.y = -30;
         }
 
-        function copyToClipboard() {
-            let text = document.getElementById("finalText").innerText;
-            navigator.clipboard.writeText(text).then(() => alert("پوسٹ کاپی ہو گئی!"));
+        for (let i = 0; i < 35; i++) {
+            if (!window.bulbs) {
+                window.bulbs = [];
+                for (let b = 0; b < 35; b++) {
+                    window.bulbs.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 5 + 2,
+                        speed: 0.5 + Math.random() * 1.5
+                    });
+                }
+            }
+            let b = window.bulbs[i];
+            if (b) {
+                const flicker = Math.sin(time * b.speed + i) * 0.5 + 0.5;
+                ctx.beginPath();
+                ctx.arc(b.x, b.y, b.radius * (0.7 + flicker * 0.6), 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 200, 60, ${0.3 + flicker * 0.4})`;
+                ctx.shadowBlur = 15 * flicker;
+                ctx.shadowColor = `rgba(255, 180, 40, 0.8)`;
+                ctx.fill();
+            }
         }
-
-        // Canvas Background Script
-        const canvas = document.getElementById('sandCanvas');
-        const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        // (Canvas logic remains the same as in your original script)
-    </script>
+        requestAnimationFrame(drawSand);
+    }
+    drawSand();
+</script>
 </body>
 </html>
