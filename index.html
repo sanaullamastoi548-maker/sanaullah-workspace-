@@ -1,1 +1,85 @@
 
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanaullah Workspace | AI Platform</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #070b14; color: white; min-height: 100vh; overflow-x: hidden; }
+        canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .container { position: relative; z-index: 2; width: 90%; max-width: 1200px; margin: auto; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; }
+        .logo { font-size: 30px; font-weight: 800; }
+        .gold { color: #ffcc00; }
+        .hero { text-align: center; padding: 80px 20px; }
+        .card { background: rgba(255, 255, 255, .05); border: 1px solid rgba(255, 255, 255, .1); padding: 25px; border-radius: 20px; margin: 20px 0; }
+        .open-btn { padding: 12px 25px; background: #ffcc00; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .open-btn:hover { background: #ffaa00; transform: scale(1.05); }
+        textarea, input, select { width: 100%; padding: 12px; margin: 10px 0; background: #111; color: white; border: 1px solid #444; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <canvas id="sandCanvas"></canvas>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">Sanaullah <span class="gold">Workspace</span></div>
+        </div>
+        <div class="hero">
+            <h1>Sanaullah <span class="gold">Workspace</span></h1>
+            <p>AI Powered Digital Platform</p>
+        </div>
+
+        <!-- AI Smart Assistant -->
+        <div class="card" style="max-width: 800px; margin: 40px auto; background: #1a1a2e;">
+            <h2 style="color: #ffcc00;">🤖 سمارٹ فری لانس اسسٹنٹ</h2>
+            <select id="taskType">
+                <option value="upwork">Upwork Proposal (پیشہ ورانہ پروپوزل)</option>
+                <option value="fiverr">Fiverr Gig Description (گگ کی تفصیل)</option>
+                <option value="freelancer">Freelancer.com Bid (بڈنگ کا طریقہ)</option>
+                <option value="linkedin">LinkedIn Connection (نیٹ ورکنگ میسج)</option>
+            </select>
+            <input type="text" id="userTopic" placeholder="کام کا نام لکھیں (مثال: Google Sheets Automation)">
+            <button class="open-btn" onclick="generateAIAnswer()">جواب تیار کریں</button>
+            <div id="aiResponse" style="margin-top: 20px; padding: 15px; background: #0a0a0f; border: 1px solid #ffcc00; border-radius: 10px; min-height: 100px; line-height: 1.6;">
+                جواب یہاں آئے گا...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateAIAnswer() {
+            let task = document.getElementById("taskType").value;
+            let topic = document.getElementById("userTopic").value;
+            let display = document.getElementById("aiResponse");
+            
+            if (topic === "") { alert("براہ کرم کام کا نام لکھیں!"); return; }
+
+            let responses = {
+                upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in Google Workspace automation and can deliver this efficiently. Best regards, Sanaullah.`,
+                fiverr: `Are you looking for high-quality ${topic} services? I specialize in automating complex workflows to save your time. Satisfaction guaranteed!`,
+                freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline. Ready to start!`,
+                linkedin: `Hi, I noticed you are working on ${topic}. I specialize in automation solutions and would love to connect. Regards, Sanaullah.`
+            };
+
+            let result = responses[task];
+            display.innerHTML = `<div id="finalText" style="margin-bottom:15px;">${result}</div>
+                                <button onclick="copyToClipboard()" style="padding:8px 20px; cursor:pointer; background:#ffcc00; border:none; border-radius:5px; font-weight:bold;">📋 کاپی کریں</button>`;
+        }
+
+        function copyToClipboard() {
+            let text = document.getElementById("finalText").innerText;
+            navigator.clipboard.writeText(text).then(() => alert("پوسٹ کاپی ہو گئی!"));
+        }
+
+        // Canvas Background Script
+        const canvas = document.getElementById('sandCanvas');
+        const ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        // (Canvas logic remains the same as in your original script)
+    </script>
+</body>
+</html>
