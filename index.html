@@ -22,7 +22,6 @@
             color: white;
         }
 
-        /* Main Card */
         .language-card {
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(12px);
@@ -36,7 +35,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        /* Header */
         .header h1 {
             font-size: 38px;
             font-weight: 800;
@@ -44,7 +42,6 @@
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: 1px;
         }
 
         .tagline {
@@ -52,7 +49,6 @@
             color: #ccc;
             margin-top: 10px;
             margin-bottom: 25px;
-            opacity: 0.9;
         }
 
         .glow-line {
@@ -63,35 +59,53 @@
             border-radius: 5px;
         }
 
-        /* Title */
         .section-title {
             color: #ffcc00;
             font-size: 22px;
             margin: 25px 0 20px;
-            font-weight: 600;
         }
 
-        /* Google Translate Container */
+        .search-box {
+            margin-bottom: 25px;
+        }
+
+        #language-search {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #ffcc00;
+            border-radius: 50px;
+            font-size: 16px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            outline: none;
+            text-align: center;
+        }
+
+        #language-search:focus {
+            border-color: #fff;
+            box-shadow: 0 0 12px rgba(255,204,0,0.4);
+        }
+
+        #language-search::placeholder {
+            color: #aaa;
+        }
+
         .translate-container {
             background: rgba(0,0,0,0.3);
             border-radius: 20px;
-            padding: 20px;
+            padding: 15px;
             margin: 20px 0;
         }
 
-        /* Powered By */
-        .powered {
+        .demo-text {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
             margin-top: 25px;
-            font-size: 12px;
-            color: #888;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
-        .powered span {
-            color: #ffcc00;
+            font-size: 14px;
+            line-height: 1.6;
         }
 
-        /* Copy Button */
         .copy-btn {
             background: #ffcc00;
             color: black;
@@ -101,106 +115,116 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 15px;
-            transition: 0.3s;
-        }
-        .copy-btn:hover {
-            background: #ffaa00;
-            transform: scale(0.97);
         }
 
-        /* Demo Text */
-        .demo-text {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 20px;
-            margin-top: 25px;
-            font-size: 14px;
-            line-height: 1.6;
-            text-align: center;
+        .copy-btn:hover {
+            background: #ffaa00;
         }
+
         .copy-message {
             margin-top: 12px;
             font-size: 12px;
+        }
+
+        .powered {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+
+        .powered span {
+            color: #ffcc00;
         }
     </style>
 </head>
 <body>
 
-    <div class="language-card">
-        <!-- Header -->
-        <div class="header">
-            <h1>Sanullah Workspace</h1>
-            <div class="glow-line"></div>
-            <div class="tagline">کی مدد سے AI ، بر مشکل کام کا آسان حل</div>
-        </div>
-
-        <!-- Title -->
-        <div class="section-title">🌐 اپنی زبان تلاش کریں</div>
-
-        <!-- Google Translate Container -->
-        <div class="translate-container">
-            <div id="google_translate_element"></div>
-            <p style="font-size: 11px; margin-top: 12px; opacity: 0.6;">👇 نیچے والے باکس سے اپنی زبان منتخب کریں</p>
-        </div>
-
-        <!-- Demo Text (to show translation works) -->
-        <div class="demo-text">
-            <p>✨ یہ ایک نمونہ متن ہے۔ جب آپ Google Translate سے کوئی زبان منتخب کریں گے، تو یہ پورا صفحہ اسی زبان میں ترجمہ ہو جائے گا۔</p>
-            <button class="copy-btn" onclick="copyDemoText()">📋 کاپی کریں / Copy</button>
-            <div id="copyMessage" class="copy-message"></div>
-        </div>
-
-        <!-- Powered By -->
-        <div class="powered">
-            <span>🔍</span> Powered by <span>Google Translate</span>
-        </div>
+<div class="language-card">
+    <div class="header">
+        <h1>Sanullah Workspace</h1>
+        <div class="glow-line"></div>
+        <div class="tagline">کی مدد سے AI ، بر مشکل کام کا آسان حل</div>
     </div>
 
-    <script>
-        // ========== GOOGLE TRANSLATE INIT ==========
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'ur',
-                autoDisplay: false,
-                includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru'
-            }, 'google_translate_element');
-        }
+    <div class="section-title">🌐 اپنی زبان تلاش کریں</div>
 
-        // ========== COPY FUNCTION (بدون alert) ==========
-        function copyDemoText() {
-            let text = document.querySelector('.demo-text p').innerText;
-            let temp = document.createElement("textarea");
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
-            let success = false;
-            try {
-                success = document.execCommand("copy");
-            } catch(e) {}
-            document.body.removeChild(temp);
-            
-            let msgDiv = document.getElementById("copyMessage");
-            if (success) {
-                msgDiv.innerHTML = "✅ متن کامیابی سے کاپی ہو گیا!";
-                msgDiv.style.color = "#00ff88";
-                msgDiv.style.background = "rgba(0,255,100,0.15)";
-                msgDiv.style.padding = "8px";
-                msgDiv.style.borderRadius = "20px";
-            } else {
-                msgDiv.innerHTML = "❌ کاپی کرنے میں مسئلہ۔ براہ کرم دستی طور پر کاپی کریں۔";
-                msgDiv.style.color = "#ff6666";
-                msgDiv.style.background = "rgba(255,50,50,0.15)";
-                msgDiv.style.padding = "8px";
-                msgDiv.style.borderRadius = "20px";
+    <div class="search-box">
+        <input type="text" id="language-search" placeholder="مثلاً: Urdu, Arabic, English...">
+    </div>
+
+    <div class="translate-container">
+        <div id="google_translate_element"></div>
+    </div>
+
+    <div class="demo-text">
+        <p>✨ یہ ایک نمونہ متن ہے۔ جب آپ Google Translate سے کوئی زبان منتخب کریں گے، تو یہ پورا صفحہ اسی زبان میں ترجمہ ہو جائے گا۔</p>
+        <button class="copy-btn" onclick="copyDemoText()">📋 کاپی کریں / Copy</button>
+        <div id="copyMessage" class="copy-message"></div>
+    </div>
+
+    <div class="powered">
+        <span>🔍</span> Powered by <span>Google Translate</span>
+    </div>
+</div>
+
+<script>
+    // ========== GOOGLE TRANSLATE INIT ==========
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ur',
+            autoDisplay: false,
+            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru'
+        }, 'google_translate_element');
+    }
+
+    // ========== SEARCH FUNCTION ==========
+    function filterLanguages() {
+        let input = document.getElementById('language-search').value.toLowerCase();
+        let select = document.querySelector('.goog-te-combo');
+        if (select) {
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].text.toLowerCase().indexOf(input) > -1) {
+                    select.selectedIndex = i;
+                    select.dispatchEvent(new Event('change'));
+                    break;
+                }
             }
-            setTimeout(() => {
-                msgDiv.innerHTML = "";
-                msgDiv.style.padding = "0";
-            }, 3000);
         }
-    </script>
-    
-    <!-- Google Translate Script -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    }
+
+    // Trigger search on input
+    document.getElementById("language-search").addEventListener("keyup", filterLanguages);
+
+    // ========== COPY FUNCTION ==========
+    function copyDemoText() {
+        let text = document.querySelector('.demo-text p').innerText;
+        let temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        let success = false;
+        try {
+            success = document.execCommand("copy");
+        } catch(e) {}
+        document.body.removeChild(temp);
+        
+        let msgDiv = document.getElementById("copyMessage");
+        if (success) {
+            msgDiv.innerHTML = "✅ متن کامیابی سے کاپی ہو گیا!";
+            msgDiv.style.color = "#00ff88";
+        } else {
+            msgDiv.innerHTML = "❌ کاپی کرنے میں مسئلہ۔";
+            msgDiv.style.color = "#ff6666";
+        }
+        setTimeout(() => {
+            msgDiv.innerHTML = "";
+        }, 3000);
+    }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
