@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanaullah Workspace | Language & Search Tool</title>
+    <title>Sanullah Workspace | Language Tool</title>
     
     <style>
-        /* ویب سائٹ کا مکمل ڈیزائن */
         * {
             margin: 0;
             padding: 0;
@@ -15,92 +14,84 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             color: white;
         }
-        
-        /* Header */
-        .header {
-            background: rgba(44, 62, 80, 0.9);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 40px 30px;
+
+        /* Main Card */
+        .language-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 45px 35px;
+            max-width: 550px;
+            width: 90%;
+            margin: 30px auto;
             text-align: center;
-            border-bottom: 2px solid #ffcc00;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
+
+        /* Header */
         .header h1 {
-            font-size: 42px;
+            font-size: 38px;
             font-weight: 800;
             background: linear-gradient(135deg, #fff, #ffcc00);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
+            letter-spacing: 1px;
         }
-        .header p {
-            font-size: 18px;
+
+        .tagline {
+            font-size: 16px;
+            color: #ccc;
             margin-top: 10px;
+            margin-bottom: 25px;
             opacity: 0.9;
         }
-        
-        /* Language Section */
-        .language-section {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(12px);
-            padding: 35px 25px;
-            text-align: center;
-            border-bottom: 2px solid #ffcc00;
-            max-width: 700px;
-            margin: 40px auto;
-            border-radius: 28px;
+
+        .glow-line {
+            width: 80px;
+            height: 2px;
+            background: #ffcc00;
+            margin: 15px auto;
+            border-radius: 5px;
         }
-        .language-section h3 {
+
+        /* Title */
+        .section-title {
             color: #ffcc00;
-            font-size: 26px;
-            margin-bottom: 20px;
+            font-size: 22px;
+            margin: 25px 0 20px;
+            font-weight: 600;
         }
-        
-        #language-search {
-            padding: 14px 20px;
-            width: 80%;
-            min-width: 250px;
-            border: 2px solid #ffcc00;
-            border-radius: 50px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            outline: none;
-            text-align: center;
-        }
-        #language-search:focus {
-            border-color: #fff;
-            box-shadow: 0 0 12px rgba(255,204,0,0.4);
-        }
-        #language-search::placeholder {
-            color: #aaa;
-        }
-        
+
         /* Google Translate Container */
         .translate-container {
             background: rgba(0,0,0,0.3);
             border-radius: 20px;
             padding: 20px;
-            margin-top: 15px;
+            margin: 20px 0;
         }
-        
-        /* Demo Text */
-        .demo-text {
-            text-align: center;
-            max-width: 600px;
-            margin: 40px auto;
-            padding: 25px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 20px;
-            backdrop-filter: blur(8px);
-            line-height: 1.8;
+
+        /* Powered By */
+        .powered {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
         }
-        
+        .powered span {
+            color: #ffcc00;
+        }
+
+        /* Copy Button */
         .copy-btn {
             background: #ffcc00;
             color: black;
@@ -116,53 +107,54 @@
             background: #ffaa00;
             transform: scale(0.97);
         }
-        
+
+        /* Demo Text */
+        .demo-text {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 25px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: center;
+        }
         .copy-message {
             margin-top: 12px;
             font-size: 12px;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 14px;
-            opacity: 0.7;
-        }
-        footer span {
-            color: #ffcc00;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>Sanaullah Workspace</h1>
-        <p>ہر مشکل کام کا آسان حل، AI کی مدد سے</p>
-    </div>
+    <div class="language-card">
+        <!-- Header -->
+        <div class="header">
+            <h1>Sanullah Workspace</h1>
+            <div class="glow-line"></div>
+            <div class="tagline">کی مدد سے AI ، بر مشکل کام کا آسان حل</div>
+        </div>
 
-    <!-- Language Section (صرف زبان اور سرچ) -->
-    <div class="language-section">
-        <h3>🌐 اپنی زبان تلاش کریں</h3>
-        <input type="text" id="language-search" placeholder="مثلاً: Urdu, Arabic, English..." onkeyup="filterLanguages()">
+        <!-- Title -->
+        <div class="section-title">🌐 اپنی زبان تلاش کریں</div>
+
+        <!-- Google Translate Container -->
         <div class="translate-container">
             <div id="google_translate_element"></div>
+            <p style="font-size: 11px; margin-top: 12px; opacity: 0.6;">👇 نیچے والے باکس سے اپنی زبان منتخب کریں</p>
         </div>
-        <p style="font-size: 12px; margin-top: 12px; opacity: 0.6;">👇 نیچے والے باکس سے اپنی زبان منتخب کریں</p>
-    </div>
 
-    <!-- Demo Text (ترجمہ دیکھنے کے لیے) -->
-    <div class="demo-text">
-        <p>✨ یہ ایک نمونہ متن ہے۔ جب آپ Google Translate سے کوئی زبان منتخب کریں گے، تو یہ پورا صفحہ اسی زبان میں ترجمہ ہو جائے گا۔</p>
-        <button class="copy-btn" onclick="copyDemoText()">📋 کاپی کریں / Copy</button>
-        <div id="copyMessage" class="copy-message"></div>
-    </div>
+        <!-- Demo Text (to show translation works) -->
+        <div class="demo-text">
+            <p>✨ یہ ایک نمونہ متن ہے۔ جب آپ Google Translate سے کوئی زبان منتخب کریں گے، تو یہ پورا صفحہ اسی زبان میں ترجمہ ہو جائے گا۔</p>
+            <button class="copy-btn" onclick="copyDemoText()">📋 کاپی کریں / Copy</button>
+            <div id="copyMessage" class="copy-message"></div>
+        </div>
 
-    <footer>
-        <span>🔍</span> Powered by <span>Google Translate</span>
-    </footer>
+        <!-- Powered By -->
+        <div class="powered">
+            <span>🔍</span> Powered by <span>Google Translate</span>
+        </div>
+    </div>
 
     <script>
         // ========== GOOGLE TRANSLATE INIT ==========
@@ -174,22 +166,7 @@
             }, 'google_translate_element');
         }
 
-        // ========== SEARCH FUNCTION ==========
-        function filterLanguages() {
-            let input = document.getElementById('language-search').value.toLowerCase();
-            let select = document.querySelector('.goog-te-combo');
-            if (select) {
-                for (let i = 0; i < select.options.length; i++) {
-                    if (select.options[i].text.toLowerCase().indexOf(input) > -1) {
-                        select.selectedIndex = i;
-                        select.dispatchEvent(new Event('change'));
-                        break;
-                    }
-                }
-            }
-        }
-
-        // ========== COPY FUNCTION ==========
+        // ========== COPY FUNCTION (بدون alert) ==========
         function copyDemoText() {
             let text = document.querySelector('.demo-text p').innerText;
             let temp = document.createElement("textarea");
