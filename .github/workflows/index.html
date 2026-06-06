@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanullah Workspace | Language Tool</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        /* Main Card */
+        .language-card {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 45px 35px;
+            max-width: 550px;
+            width: 90%;
+            margin: 30px auto;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Header */
+        .header h1 {
+            font-size: 38px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #ffcc00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: #ccc;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .glow-line {
+            width: 80px;
+            height: 2px;
+            background: #ffcc00;
+            margin: 15px auto;
+            border-radius: 5px;
+        }
+
+        /* Title */
+        .section-title {
+            color: #ffcc00;
+            font-size: 22px;
+            margin: 25px 0 20px;
+            font-weight: 600;
+        }
+
+        /* Search Box */
+        .search-box {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        #language-search {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #ffcc00;
+            border-radius: 50px;
+            font-size: 16px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            outline: none;
+            text-align: center;
+            transition: 0.3s;
+        }
+        #language-search:focus {
+            border-color: #fff;
+            box-shadow: 0 0 12px rgba(255,204,0,0.4);
+        }
+        #language-search::placeholder {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Status Message */
+        .status-msg {
+            margin-top: 10px;
+            font-size: 12px;
+            padding: 8px;
+            border-radius: 20px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        .status-success {
+            background: rgba(0,255,100,0.2);
+            color: #00ff88;
+            border: 1px solid #00ff88;
+        }
+        .status-error {
+            background: rgba(255,50,50,0.2);
+            color: #ff6666;
+            border: 1px solid #ff6666;
+        }
+        .status-info {
+            background: rgba(255,204,0,0.2);
+            color: #ffcc00;
+            border: 1px solid #ffcc00;
+        }
+
+        /* Select Dropdown */
+        .select-box {
+            margin-bottom: 30px;
+        }
+        .language-select {
+            width: 100%;
+            padding: 14px 20px;
+            border: 2px solid #ffcc00;
+            border-radius: 50px;
+            font-size: 16px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            cursor: pointer;
+            outline: none;
+            text-align: center;
+        }
+        .language-select option {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        /* Google Translate Container */
+        .translate-container {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        /* Powered By */
+        .powered {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #888;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+        .powered span {
+            color: #ffcc00;
+        }
+
+        /* Copy Button */
+        .copy-btn {
+            background: #ffcc00;
+            color: black;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .copy-btn:hover {
+            background: #ffaa00;
+            transform: scale(0.97);
+        }
+
+        /* Demo Text */
+        .demo-text {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 25px;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .copy-message {
+            margin-top: 12px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="language-card">
+        <!-- Header -->
+        <div class="header">
+            <h1>Sanullah Workspace</h1>
+            <div class="glow-line"></div>
+            <div class="tagline">کی مدد سے AI ، بر مشکل کام کا آسان حل</div>
+        </div>
+
+        <!-- Title -->
+        <div class="section-title">🌐 اپنی زبان تلاش کریں</div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <input type="text" id="language-search" placeholder="Urdu, Arabic, English...">
+            <div id="searchStatus" class="status-msg" style="display: none;"></div>
+        </div>
+
+        <!-- Select Language Dropdown -->
+        <div class="select-box">
+            <select id="language-select" class="language-select" onchange="selectFromDropdown()">
+                <option value="">📋 Select Language</option>
+                <option value="Urdu">🇵🇰 اردو (Urdu)</option>
+                <option value="English">🇬🇧 English</option>
+                <option value="Arabic">🇸🇦 العربية (Arabic)</option>
+                <option value="Hindi">🇮🇳 हिन्दी (Hindi)</option>
+                <option value="Spanish">🇪🇸 Español (Spanish)</option>
+                <option value="French">🇫🇷 Français (French)</option>
+                <option value="German">🇩🇪 Deutsch (German)</option>
+                <option value="Turkish">🇹🇷 Türkçe (Turkish)</option>
+                <option value="Persian">🇮🇷 فارسی (Persian)</option>
+                <option value="Bengali">🇧🇩 বাংলা (Bengali)</option>
+                <option value="Russian">🇷🇺 Русский (Russian)</option>
+            </select>
+        </div>
+
+        <!-- Google Translate Container -->
+        <div class="translate-container">
+            <div id="google_translate_element"></div>
+        </div>
+
+        <!-- Demo Text (to show translation works) -->
+        <div class="demo-text">
+            <p>✨ یہ ایک نمونہ متن ہے۔ جب آپ Google Translate سے کوئی زبان منتخب کریں گے، تو یہ پورا صفحہ اسی زبان میں ترجمہ ہو جائے گا۔</p>
+            <button class="copy-btn" onclick="copyDemoText()">📋 کاپی کریں / Copy</button>
+            <div id="copyMessage" class="copy-message"></div>
+        </div>
+
+        <!-- Powered By -->
+        <div class="powered">
+            <span>🔍</span> Powered by <span>Google Translate</span>
+        </div>
+    </div>
+
+    <script>
+        // ========== SHOW STATUS MESSAGE (خوبصورت پیغام) ==========
+        function showStatus(message, type) {
+            let statusDiv = document.getElementById("searchStatus");
+            statusDiv.style.display = "inline-block";
+            statusDiv.innerHTML = message;
+            statusDiv.className = "status-msg status-" + type;
+            
+            setTimeout(() => {
+                statusDiv.style.display = "none";
+            }, 3000);
+        }
+
+        // ========== GOOGLE TRANSLATE INIT ==========
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ur',
+                autoDisplay: false,
+                includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru'
+            }, 'google_translate_element');
+        }
+
+        // ========== SEARCH FUNCTION (سرچ بار) ==========
+        function searchLanguage() {
+            let searchLang = document.getElementById("language-search").value.trim();
+            if (searchLang === "") {
+                showStatus("⚠️ براہ کرم کوئی زبان لکھیں!", "error");
+                return;
+            }
+            
+            let select = document.querySelector('.goog-te-combo');
+            if (select) {
+                let found = false;
+                for (let i = 0; i < select.options.length; i++) {
+                    let optionText = select.options[i].text.toLowerCase();
+                    let searchLower = searchLang.toLowerCase();
+                    if (optionText.includes(searchLower) || searchLower.includes(optionText.split(' ')[0])) {
+                        select.selectedIndex = i;
+                        select.dispatchEvent(new Event('change'));
+                        found = true;
+                        showStatus("✅ زبان مل گئی! صفحہ ترجمہ ہو رہا ہے...", "success");
+                        break;
+                    }
+                }
+                if (!found) {
+                    showStatus("⚠️ یہ زبان اس وقت دستیاب نہیں۔ براہ کرم دوسری زبان試してみてください۔", "error");
+                }
+            } else {
+                showStatus("⏳ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔", "info");
+            }
+        }
+
+        // ========== SELECT DROPDOWN FUNCTION ==========
+        function selectFromDropdown() {
+            let selectedLang = document.getElementById("language-select").value;
+            if (selectedLang === "") return;
+            
+            document.getElementById("language-search").value = selectedLang;
+            
+            let select = document.querySelector('.goog-te-combo');
+            if (select) {
+                let found = false;
+                for (let i = 0; i < select.options.length; i++) {
+                    let optionText = select.options[i].text.toLowerCase();
+                    let searchLower = selectedLang.toLowerCase();
+                    if (optionText.includes(searchLower) || searchLower.includes(optionText.split(' ')[0])) {
+                        select.selectedIndex = i;
+                        select.dispatchEvent(new Event('change'));
+                        found = true;
+                        showStatus("✅ زبان تبدیل ہو گئی! صفحہ ترجمہ ہو رہا ہے...", "success");
+                        break;
+                    }
+                }
+                if (!found) {
+                    showStatus("⚠️ یہ زبان اس وقت دستیاب نہیں۔", "error");
+                }
+            }
+        }
+
+        // Trigger search when user types and presses Enter
+        document.getElementById("language-search").addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                searchLanguage();
+            }
+        });
+
+        // ========== COPY FUNCTION (بدون alert) ==========
+        function copyDemoText() {
+            let text = document.querySelector('.demo-text p').innerText;
+            let temp = document.createElement("textarea");
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            let success = false;
+            try {
+                success = document.execCommand("copy");
+            } catch(e) {}
+            document.body.removeChild(temp);
+            
+            let msgDiv = document.getElementById("copyMessage");
+            if (success) {
+                msgDiv.innerHTML = "✅ متن کامیابی سے کاپی ہو گیا!";
+                msgDiv.style.color = "#00ff88";
+                msgDiv.style.background = "rgba(0,255,100,0.15)";
+                msgDiv.style.padding = "8px";
+                msgDiv.style.borderRadius = "20px";
+            } else {
+                msgDiv.innerHTML = "❌ کاپی کرنے میں مسئلہ۔ براہ کرم دستی طور پر کاپی کریں۔";
+                msgDiv.style.color = "#ff6666";
+                msgDiv.style.background = "rgba(255,50,50,0.15)";
+                msgDiv.style.padding = "8px";
+                msgDiv.style.borderRadius = "20px";
+            }
+            setTimeout(() => {
+                msgDiv.innerHTML = "";
+                msgDiv.style.padding = "0";
+            }, 3000);
+        }
+    </script>
+    
+    <!-- Google Translate Script -->
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
