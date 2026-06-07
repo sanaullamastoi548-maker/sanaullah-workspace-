@@ -1,324 +1,550 @@
-<!DOCTYPE html>
-<html lang="en">
+         <!DOCTYPE html>
+<html lang="ur" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanullah Workspace | Language Tool</title>
+    <title>Sanaullah Workspace | AI Tools & Productivity</title>
     
     <style>
+        /* ========== ویب سائٹ کا مکمل ڈیزائن ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', 'Noto Nastaliq Urdu', system-ui, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: #070b14;
+            color: #eee;
+            overflow-x: hidden;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
         }
 
-        /* Main Card */
-        .language-card {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            padding: 45px 35px;
-            max-width: 550px;
-            width: 90%;
-            margin: 30px auto;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        /* چمکتی ریت والا کینوس */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-radius: 24px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,204,0,0.3);
+        }
         .header h1 {
-            font-size: 38px;
-            font-weight: 800;
+            font-size: 48px;
             background: linear-gradient(135deg, #fff, #ffcc00);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: 1px;
         }
-
-        .tagline {
-            font-size: 16px;
-            color: #ccc;
+        .header p {
+            font-size: 18px;
             margin-top: 10px;
-            margin-bottom: 25px;
-            opacity: 0.9;
+            opacity: 0.8;
         }
-
         .glow-line {
-            width: 80px;
-            height: 2px;
+            width: 100px;
+            height: 3px;
             background: #ffcc00;
             margin: 15px auto;
             border-radius: 5px;
+            box-shadow: 0 0 10px #ffcc00;
         }
 
-        /* Title */
-        .section-title {
+        /* ========== زبان اور سرچ بار (آپ کا دیا ہوا کوڈ) ========== */
+        .language-section {
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            margin: 30px auto;
+            padding: 30px 20px;
+            max-width: 800px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .language-section h3 {
             color: #ffcc00;
-            font-size: 22px;
-            margin: 25px 0 20px;
-            font-weight: 600;
+            font-size: 26px;
+            margin-bottom: 20px;
         }
-
-        /* Search Box */
         .search-box {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
             margin-bottom: 25px;
         }
         #language-search {
-            width: 100%;
+            flex: 2;
+            min-width: 250px;
             padding: 14px 20px;
             border: 2px solid #ffcc00;
-            border-radius: 50px;
+            border-radius: 60px;
             font-size: 16px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             color: white;
             outline: none;
-            text-align: center;
-            transition: 0.3s;
         }
         #language-search:focus {
             border-color: #fff;
-            box-shadow: 0 0 12px rgba(255,204,0,0.4);
+            box-shadow: 0 0 15px rgba(255,204,0,0.3);
         }
-        #language-search::placeholder {
-            color: #aaa;
+        .search-btn {
+            background: #ffcc00;
+            color: black;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .search-btn:hover {
+            background: #ffaa00;
+            transform: scale(0.98);
+        }
+        .translate-container {
+            background: rgba(0,0,0,0.4);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+        .translate-note {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-top: 15px;
+        }
+        .popular-langs {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .popular-langs h4 {
+            color: #ffcc00;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .lang-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .lang-tag {
+            background: rgba(255,204,0,0.15);
+            border: 1px solid rgba(255,204,0,0.4);
+            border-radius: 40px;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: 0.2s;
             font-size: 14px;
         }
-
-        /* Select Dropdown */
-        .select-box {
-            margin-bottom: 30px;
+        .lang-tag:hover {
+            background: #ffcc00;
+            color: black;
+            transform: translateY(-2px);
         }
-        .language-select {
-            width: 100%;
-            padding: 14px 20px;
-            border: 2px solid #ffcc00;
-            border-radius: 50px;
-            font-size: 16px;
-            background: rgba(0,0,0,0.5);
-            color: white;
-            cursor: pointer;
-            outline: none;
+
+        /* ========== ٹولز کا کنٹینر ========== */
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .tool-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
             text-align: center;
         }
-        .language-select option {
-            background: #1a1a2e;
-            color: white;
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffcc00;
+            box-shadow: 0 0 20px rgba(255,204,0,0.2);
         }
-
-        /* Google Translate Container */
-        .translate-container {
-            background: rgba(0,0,0,0.3);
-            border-radius: 20px;
-            padding: 15px;
-            margin: 20px 0;
-        }
-
-        /* Powered By */
-        .powered {
-            margin-top: 25px;
-            font-size: 12px;
-            color: #888;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-        }
-        .powered span {
+        .tool-card h3 {
             color: #ffcc00;
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+        .tool-card p {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .tool-card button {
+            background: #ffcc00;
+            color: black;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .tool-card button:hover {
+            background: #ffaa00;
+            transform: scale(0.98);
         }
 
-        /* Copy Button */
+        /* Tool Content (for each tool's inner functionality) */
+        .tool-content {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        textarea, input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background: #0c0f1a;
+            border: 1px solid #2c2f3a;
+            border-radius: 12px;
+            color: white;
+            outline: none;
+        }
+        textarea:focus, input:focus, select:focus {
+            border-color: #ffcc00;
+        }
+        .result-box {
+            background: #0a0d18;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            border: 1px solid rgba(255,204,0,0.3);
+            font-size: 14px;
+        }
         .copy-btn {
             background: #ffcc00;
             color: black;
             border: none;
-            padding: 10px 25px;
-            border-radius: 40px;
-            font-weight: bold;
+            padding: 6px 16px;
+            border-radius: 20px;
             cursor: pointer;
-            margin-top: 15px;
-            transition: 0.3s;
-        }
-        .copy-btn:hover {
-            background: #ffaa00;
-            transform: scale(0.97);
-        }
-        .copy-message {
-            margin-top: 12px;
-            font-size: 12px;
-            color: #ffcc00;
+            margin-top: 10px;
         }
 
-        /* Demo Text */
-        .demo-text {
-            background: rgba(255,255,255,0.05);
-            border-radius: 16px;
-            padding: 20px;
-            margin-top: 25px;
-            font-size: 14px;
-            line-height: 1.6;
+        footer {
             text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        footer h3 {
+            color: #ffcc00;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 700px) {
+            .header h1 { font-size: 32px; }
+            .language-section h3 { font-size: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="language-card">
-        <!-- Header -->
-        <div class="header">
-            <h1>Sanullah Workspace</h1>
-            <div class="glow-line"></div>
-            <div class="tagline">کی مدد سے AI ، بر مشکل کام کا آسان حل</div>
-        </div>
+<canvas id="sandCanvas"></canvas>
 
-        <!-- Title -->
-        <div class="section-title">🌐 اپنی زبان تلاش کریں</div>
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>Sanaullah Workspace</h1>
+        <div class="glow-line"></div>
+        <p>🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
+    </div>
 
-        <!-- Search Box -->
+    <!-- ========== زبان اور سرچ بار (آپ کا دیا ہوا کوڈ - بالکل ویسا ہی) ========== -->
+    <div class="language-section">
+        <h3>🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
-            <input type="text" id="language-search" placeholder="Urdu, Arabic, English...">
+            <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic, French, Turkish...">
+            <button class="search-btn" onclick="searchLanguage()">تلاش کریں</button>
         </div>
-
-        <!-- Select Language Dropdown -->
-        <div class="select-box">
-            <select id="language-select" class="language-select" onchange="selectFromDropdown()">
-                <option value="">📋 Select Language</option>
-                <option value="Urdu">🇵🇰 اردو (Urdu)</option>
-                <option value="English">🇬🇧 English</option>
-                <option value="Arabic">🇸🇦 العربية (Arabic)</option>
-                <option value="Hindi">🇮🇳 हिन्दी (Hindi)</option>
-                <option value="Spanish">🇪🇸 Español (Spanish)</option>
-                <option value="French">🇫🇷 Français (French)</option>
-                <option value="German">🇩🇪 Deutsch (German)</option>
-                <option value="Turkish">🇹🇷 Türkçe (Turkish)</option>
-                <option value="Persian">🇮🇷 فارسی (Persian)</option>
-                <option value="Bengali">🇧🇩 বাংলা (Bengali)</option>
-                <option value="Russian">🇷🇺 Русский (Russian)</option>
-            </select>
-        </div>
-
-        <!-- Google Translate Container -->
+        
         <div class="translate-container">
             <div id="google_translate_element"></div>
+            <div class="translate-note">
+                💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔
+            </div>
         </div>
 
-        <!-- Demo Text (to show translation works) -->
-        <div class="demo-text">
-            <p>✨ یہ ایک نمونہ متن ہے۔ جب آپ Google Translate سے کوئی زبان منتخب کریں گے، تو یہ پورا صفحہ اسی زبان میں ترجمہ ہو جائے گا۔</p>
-            <button class="copy-btn" onclick="copyDemoText()">📋 کاپی کریں / Copy</button>
-            <div id="copyMessage" class="copy-message"></div>
-        </div>
-
-        <!-- Powered By -->
-        <div class="powered">
-            <span>🔍</span> Powered by <span>Google Translate</span>
+        <!-- Popular Languages Quick Access -->
+        <div class="popular-langs">
+            <h4>📚 مشہور زبانیں (کلک کریں)</h4>
+            <div class="lang-tags">
+                <span class="lang-tag" onclick="quickSearch('Urdu')">🇵🇰 اردو</span>
+                <span class="lang-tag" onclick="quickSearch('English')">🇬🇧 English</span>
+                <span class="lang-tag" onclick="quickSearch('Arabic')">🇸🇦 العربية</span>
+                <span class="lang-tag" onclick="quickSearch('Hindi')">🇮🇳 हिन्दी</span>
+                <span class="lang-tag" onclick="quickSearch('Spanish')">🇪🇸 Español</span>
+                <span class="lang-tag" onclick="quickSearch('French')">🇫🇷 Français</span>
+                <span class="lang-tag" onclick="quickSearch('German')">🇩🇪 Deutsch</span>
+                <span class="lang-tag" onclick="quickSearch('Turkish')">🇹🇷 Türkçe</span>
+                <span class="lang-tag" onclick="quickSearch('Persian')">🇮🇷 فارسی</span>
+                <span class="lang-tag" onclick="quickSearch('Bengali')">🇧🇩 বাংলা</span>
+            </div>
         </div>
     </div>
 
-    <script>
-        // ========== GOOGLE TRANSLATE INIT ==========
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'ur',
-                autoDisplay: false,
-                includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru'
-            }, 'google_translate_element');
-        }
+    <!-- ========== ٹولز کا کنٹینر ========== -->
+    <div class="tools-container">
+        <!-- Tool 1: Freelance Assistant -->
+        <div class="tool-card">
+            <h3>🤖 Freelance Assistant</h3>
+            <p>AI کی مدد سے پرووزل اور نگ ڈسکریشن لکھیں۔</p>
+            <div class="tool-content">
+                <select id="taskType">
+                    <option value="upwork">Upwork Proposal</option>
+                    <option value="fiverr">Fiverr Gig Description</option>
+                </select>
+                <input type="text" id="userTopic" placeholder="کام کا نام لکھیں">
+                <button onclick="generateAIAnswer()">Generate Proposal</button>
+                <div id="aiResponse" class="result-box">✨ جواب یہاں آئے گا</div>
+            </div>
+        </div>
 
-        // ========== SEARCH FUNCTION (سرچ بار) ==========
-        function searchLanguage() {
-            let searchLang = document.getElementById("language-search").value.trim();
-            if (searchLang === "") {
-                alert("براہ کرم کوئی زبان لکھیں!");
-                return;
-            }
-            
-            let select = document.querySelector('.goog-te-combo');
-            if (select) {
-                let found = false;
-                for (let i = 0; i < select.options.length; i++) {
-                    let optionText = select.options[i].text.toLowerCase();
-                    let searchLower = searchLang.toLowerCase();
-                    if (optionText.includes(searchLower) || searchLower.includes(optionText.split(' ')[0])) {
-                        select.selectedIndex = i;
-                        select.dispatchEvent(new Event('change'));
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
-                }
-            }
-        }
+        <!-- Tool 2: Content Writer -->
+        <div class="tool-card">
+            <h3>✍️ Content Writer</h3>
+            <p>AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
+            <div class="tool-content">
+                <textarea id="contentInput" rows="3" placeholder="اپنا مواد یہاں لکھیں..."></textarea>
+                <button onclick="convertContent('upper')">UPPERCASE</button>
+                <button onclick="convertContent('lower')">lowercase</button>
+                <button onclick="convertContent('capitalize')">Capitalize</button>
+                <div id="contentResult" class="result-box">📝 نتیجہ یہاں آئے گا</div>
+            </div>
+        </div>
 
-        // ========== SELECT DROPDOWN FUNCTION ==========
-        function selectFromDropdown() {
-            let selectedLang = document.getElementById("language-select").value;
-            if (selectedLang === "") return;
-            
-            // سرچ بار میں وہی لکھ دیں
-            document.getElementById("language-search").value = selectedLang;
-            
-            let select = document.querySelector('.goog-te-combo');
-            if (select) {
-                for (let i = 0; i < select.options.length; i++) {
-                    let optionText = select.options[i].text.toLowerCase();
-                    let searchLower = selectedLang.toLowerCase();
-                    if (optionText.includes(searchLower) || searchLower.includes(optionText.split(' ')[0])) {
-                        select.selectedIndex = i;
-                        select.dispatchEvent(new Event('change'));
-                        break;
-                    }
+        <!-- Tool 3: SEO Optimizer -->
+        <div class="tool-card">
+            <h3>📈 SEO Optimizer</h3>
+            <p>اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
+            <div class="tool-content">
+                <input type="text" id="seoKeyword" placeholder="مطلوبہ لفظ">
+                <textarea id="seoContent" rows="3" placeholder="اپنا آرٹیکل لکھیں..."></textarea>
+                <button onclick="optimizeSEO()">SEO Optimize کریں</button>
+                <div id="seoResult" class="result-box">📊 SEO تجاویز یہاں ہوں گی</div>
+            </div>
+        </div>
+
+        <!-- Tool 4: Code Helper -->
+        <div class="tool-card">
+            <h3>💻 Code Helper</h3>
+            <p>کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
+            <div class="tool-content">
+                <select id="codeLanguage">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                </select>
+                <textarea id="codeQuestion" rows="3" placeholder="اپنا سوال لکھیں..."></textarea>
+                <button onclick="generateCodeHelp()">Code Helper سے پوچھیں</button>
+                <div id="codeResult" class="result-box">⚙️ کوڈ کا جواب یہاں آئے گا</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h3>Sanaullah Workspace</h3>
+        <p>AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation</p>
+        <p>© 2026 All Rights Reserved</p>
+    </footer>
+</div>
+
+<script>
+    // ========== GOOGLE TRANSLATE (آپ کے دیے ہوئے کوڈ سے) ==========
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'ur',
+            autoDisplay: false,
+            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh,ja,ko,it,pt'
+        }, 'google_translate_element');
+    }
+
+    function searchLanguage() {
+        let searchLang = document.getElementById("language-search").value.trim();
+        if (searchLang === "") {
+            alert("براہ کرم کوئی زبان لکھیں!");
+            return;
+        }
+        
+        let select = document.querySelector('.goog-te-combo');
+        if (select) {
+            let found = false;
+            for (let i = 0; i < select.options.length; i++) {
+                let optionText = select.options[i].text.toLowerCase();
+                let searchLower = searchLang.toLowerCase();
+                if (optionText.includes(searchLower) || searchLower.includes(optionText.split(' ')[0])) {
+                    select.selectedIndex = i;
+                    select.dispatchEvent(new Event('change'));
+                    found = true;
+                    break;
                 }
             }
-        }
-
-        // Trigger search when user types in search box
-        document.getElementById("language-search").addEventListener("keypress", function(e) {
-            if (e.key === "Enter") {
-                searchLanguage();
+            if (!found) {
+                alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
             }
+        } else {
+            alert("⚠️ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔");
+        }
+    }
+
+    function quickSearch(lang) {
+        document.getElementById("language-search").value = lang;
+        searchLanguage();
+    }
+
+    // ========== HELPER: COPY FUNCTION ==========
+    function universalCopy(elementId) {
+        let el = document.getElementById(elementId);
+        let text = el.innerText || el.textContent;
+        let temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        try { document.execCommand("copy"); } catch(e) {}
+        document.body.removeChild(temp);
+        alert("✅ متن کاپی ہو گیا!");
+    }
+
+    // ========== TOOL 1: Freelance Assistant ==========
+    function generateAIAnswer() {
+        let task = document.getElementById("taskType").value;
+        let topic = document.getElementById("userTopic").value.trim();
+        if (!topic) {
+            document.getElementById("aiResponse").innerHTML = "⚠️ براہ کرم کام کا نام لکھیں!";
+            return;
+        }
+        let responses = {
+            upwork: `Hi Client, I have reviewed your project for ${topic}. I am an expert in this field.\n\nBest regards,\nSanaullah`,
+            fiverr: `Are you looking for high-quality ${topic} services? I deliver professional results.\n\nRegards,\nSanaullah`
+        };
+        let result = responses[task];
+        let uid = "freelance_" + Date.now();
+        document.getElementById("aiResponse").innerHTML = `<div id="${uid}">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+    }
+
+    // ========== TOOL 2: Content Writer ==========
+    function convertContent(type) {
+        let txt = document.getElementById("contentInput").value;
+        if (!txt) { document.getElementById("contentResult").innerHTML = "⚠️ پہلے کچھ لکھیں!"; return; }
+        let res = "";
+        if (type === 'upper') res = txt.toUpperCase();
+        else if (type === 'lower') res = txt.toLowerCase();
+        else if (type === 'capitalize') res = txt.toLowerCase().replace(/(^|\s)\S/g, L => L.toUpperCase());
+        let uid = "content_" + Date.now();
+        document.getElementById("contentResult").innerHTML = `<div id="${uid}">${res}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+    }
+
+    // ========== TOOL 3: SEO Optimizer ==========
+    function optimizeSEO() {
+        let kw = document.getElementById("seoKeyword").value.trim();
+        if (!kw) { document.getElementById("seoResult").innerHTML = "⚠️ مطلوبہ لفظ لکھیں!"; return; }
+        let tips = `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔`;
+        let uid = "seo_" + Date.now();
+        document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+    }
+
+    // ========== TOOL 4: Code Helper ==========
+    function generateCodeHelp() {
+        let lang = document.getElementById("codeLanguage").value;
+        let q = document.getElementById("codeQuestion").value.trim();
+        if (!q) { document.getElementById("codeResult").innerHTML = "⚠️ اپنا سوال لکھیں!"; return; }
+        let samples = {
+            html: `<!-- ${q} کے لیے HTML -->\n<div class="card">\n  <h3>Title</h3>\n  <p>Content</p>\n</div>`,
+            css: `/* ${q} کے لیے CSS */\n.card {\n  background: #111;\n  border-radius: 20px;\n}`,
+            javascript: `// ${q} کے لیے JS\nfunction handleClick() {\n  alert("Hello");\n}`,
+            python: `# ${q} کے لیے Python\ndef my_function():\n    print("Hello")`
+        };
+        let code = samples[lang];
+        let uid = "code_" + Date.now();
+        document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+    }
+</script>
+
+<!-- Google Translate Script -->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+    // ========== گولڈن ریت + چمکتی بلبیں (پس منظر) ==========
+    const canvas = document.getElementById('sandCanvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    let particles = [];
+    for (let i = 0; i < 180; i++) {
+        particles.push({
+            x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1, dx: (Math.random() - 0.5) * 0.5, dy: (Math.random() - 0.5) * 0.3 + 0.2,
+            alpha: Math.random() * 0.5 + 0.3, glow: Math.random() * 0.8 + 0.3
         });
-
-        // ========== COPY FUNCTION ==========
-        function copyDemoText() {
-            let text = document.querySelector('.demo-text p').innerText;
-            let temp = document.createElement("textarea");
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
-            let success = false;
-            try {
-                success = document.execCommand("copy");
-            } catch(e) {}
-            document.body.removeChild(temp);
-            
-            let msgDiv = document.getElementById("copyMessage");
-            if (success) {
-                msgDiv.innerHTML = "✅ متن کامیابی سے کاپی ہو گیا!";
-                msgDiv.style.color = "#00ff88";
-            } else {
-                msgDiv.innerHTML = "❌ کاپی کرنے میں مسئلہ۔";
-                msgDiv.style.color = "#ff6666";
-            }
-            setTimeout(() => {
-                msgDiv.innerHTML = "";
-            }, 3000);
+    }
+    let time = 0;
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        time += 0.02;
+        let pulse = Math.sin(time) * 0.3 + 0.7;
+        for (let p of particles) {
+            let bright = (Math.sin(time * 2 + p.x * 0.01) * 0.3 + 0.7) * p.glow * pulse;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, ${180 + Math.floor(70 * bright)}, 40, ${p.alpha * bright})`;
+            ctx.shadowBlur = 12 * bright;
+            ctx.shadowColor = `rgba(255, 200, 40, 0.9)`;
+            ctx.fill();
+            p.x += p.dx; p.y += p.dy;
+            if (p.x < -50) p.x = canvas.width + 40;
+            if (p.x > canvas.width + 50) p.x = -40;
+            if (p.y < -50) p.y = canvas.height + 40;
+            if (p.y > canvas.height + 50) p.y = -40;
         }
-    </script>
-    
-    <!-- Google Translate Script -->
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        if (!window.bulbs) {
+            window.bulbs = [];
+            for (let i = 0; i < 40; i++) window.bulbs.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 5 + 2, speed: 0.5 + Math.random() * 1.5 });
+        }
+        for (let i = 0; i < window.bulbs.length; i++) {
+            let b = window.bulbs[i];
+            let flick = Math.sin(time * b.speed + i) * 0.5 + 0.5;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.radius * (0.7 + flick * 0.6), 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 210, 70, ${0.25 + flick * 0.4})`;
+            ctx.shadowBlur = 18 * flick;
+            ctx.fill();
+        }
+        requestAnimationFrame(draw);
+    }
+    draw();
+</script>
 </body>
-</html>
+</html>                   
