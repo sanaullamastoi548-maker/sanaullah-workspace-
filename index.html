@@ -74,7 +74,6 @@
         /* Search Box */
         .search-box {
             margin-bottom: 25px;
-            position: relative;
         }
         #language-search {
             width: 100%;
@@ -95,31 +94,6 @@
         #language-search::placeholder {
             color: #aaa;
             font-size: 14px;
-        }
-
-        /* Status Message */
-        .status-msg {
-            margin-top: 10px;
-            font-size: 12px;
-            padding: 8px;
-            border-radius: 20px;
-            display: inline-block;
-            transition: 0.3s;
-        }
-        .status-success {
-            background: rgba(0,255,100,0.2);
-            color: #00ff88;
-            border: 1px solid #00ff88;
-        }
-        .status-error {
-            background: rgba(255,50,50,0.2);
-            color: #ff6666;
-            border: 1px solid #ff6666;
-        }
-        .status-info {
-            background: rgba(255,204,0,0.2);
-            color: #ffcc00;
-            border: 1px solid #ffcc00;
         }
 
         /* Select Dropdown */
@@ -179,6 +153,11 @@
             background: #ffaa00;
             transform: scale(0.97);
         }
+        .copy-message {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #ffcc00;
+        }
 
         /* Demo Text */
         .demo-text {
@@ -189,10 +168,6 @@
             font-size: 14px;
             line-height: 1.6;
             text-align: center;
-        }
-        .copy-message {
-            margin-top: 12px;
-            font-size: 12px;
         }
     </style>
 </head>
@@ -212,7 +187,6 @@
         <!-- Search Box -->
         <div class="search-box">
             <input type="text" id="language-search" placeholder="Urdu, Arabic, English...">
-            <div id="searchStatus" class="status-msg" style="display: none;"></div>
         </div>
 
         <!-- Select Language Dropdown -->
@@ -252,18 +226,6 @@
     </div>
 
     <script>
-        // ========== SHOW STATUS MESSAGE (خوبصورت پیغام) ==========
-        function showStatus(message, type) {
-            let statusDiv = document.getElementById("searchStatus");
-            statusDiv.style.display = "inline-block";
-            statusDiv.innerHTML = message;
-            statusDiv.className = "status-msg status-" + type;
-            
-            setTimeout(() => {
-                statusDiv.style.display = "none";
-            }, 3000);
-        }
-
         // ========== GOOGLE TRANSLATE INIT ==========
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -277,7 +239,7 @@
         function searchLanguage() {
             let searchLang = document.getElementById("language-search").value.trim();
             if (searchLang === "") {
-                showStatus("⚠️ براہ کرم کوئی زبان لکھیں!", "error");
+                alert("براہ کرم کوئی زبان لکھیں!");
                 return;
             }
             
@@ -291,15 +253,12 @@
                         select.selectedIndex = i;
                         select.dispatchEvent(new Event('change'));
                         found = true;
-                        showStatus("✅ زبان مل گئی! صفحہ ترجمہ ہو رہا ہے...", "success");
                         break;
                     }
                 }
                 if (!found) {
-                    showStatus("⚠️ یہ زبان اس وقت دستیاب نہیں۔ براہ کرم دوسری زبان試してみてください۔", "error");
+                    alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
                 }
-            } else {
-                showStatus("⏳ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔", "info");
             }
         }
 
@@ -308,36 +267,31 @@
             let selectedLang = document.getElementById("language-select").value;
             if (selectedLang === "") return;
             
+            // سرچ بار میں وہی لکھ دیں
             document.getElementById("language-search").value = selectedLang;
             
             let select = document.querySelector('.goog-te-combo');
             if (select) {
-                let found = false;
                 for (let i = 0; i < select.options.length; i++) {
                     let optionText = select.options[i].text.toLowerCase();
                     let searchLower = selectedLang.toLowerCase();
                     if (optionText.includes(searchLower) || searchLower.includes(optionText.split(' ')[0])) {
                         select.selectedIndex = i;
                         select.dispatchEvent(new Event('change'));
-                        found = true;
-                        showStatus("✅ زبان تبدیل ہو گئی! صفحہ ترجمہ ہو رہا ہے...", "success");
                         break;
                     }
-                }
-                if (!found) {
-                    showStatus("⚠️ یہ زبان اس وقت دستیاب نہیں۔", "error");
                 }
             }
         }
 
-        // Trigger search when user types and presses Enter
+        // Trigger search when user types in search box
         document.getElementById("language-search").addEventListener("keypress", function(e) {
             if (e.key === "Enter") {
                 searchLanguage();
             }
         });
 
-        // ========== COPY FUNCTION (بدون alert) ==========
+        // ========== COPY FUNCTION ==========
         function copyDemoText() {
             let text = document.querySelector('.demo-text p').innerText;
             let temp = document.createElement("textarea");
@@ -354,19 +308,12 @@
             if (success) {
                 msgDiv.innerHTML = "✅ متن کامیابی سے کاپی ہو گیا!";
                 msgDiv.style.color = "#00ff88";
-                msgDiv.style.background = "rgba(0,255,100,0.15)";
-                msgDiv.style.padding = "8px";
-                msgDiv.style.borderRadius = "20px";
             } else {
-                msgDiv.innerHTML = "❌ کاپی کرنے میں مسئلہ۔ براہ کرم دستی طور پر کاپی کریں۔";
+                msgDiv.innerHTML = "❌ کاپی کرنے میں مسئلہ۔";
                 msgDiv.style.color = "#ff6666";
-                msgDiv.style.background = "rgba(255,50,50,0.15)";
-                msgDiv.style.padding = "8px";
-                msgDiv.style.borderRadius = "20px";
             }
             setTimeout(() => {
                 msgDiv.innerHTML = "";
-                msgDiv.style.padding = "0";
             }, 3000);
         }
     </script>
