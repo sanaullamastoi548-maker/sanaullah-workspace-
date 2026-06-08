@@ -71,7 +71,7 @@
             box-shadow: 0 0 10px #ffcc00;
         }
 
-        /* ========== زبان اور سرچ بار (آپ کا دیا ہوا کوڈ) ========== */
+        /* ========== زبان اور سرچ بار ========== */
         .language-section {
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(12px);
@@ -280,7 +280,7 @@
         <p>🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
     </div>
 
-    <!-- ========== زبان اور سرچ بار (آپ کا دیا ہوا کوڈ - بالکل ویسا ہی) ========== -->
+    <!-- ========== زبان اور سرچ بار ========== -->
     <div class="language-section">
         <h3>🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
@@ -309,38 +309,29 @@
                 <span class="lang-tag" onclick="quickSearch('Turkish')">🇹🇷 Türkçe</span>
                 <span class="lang-tag" onclick="quickSearch('Persian')">🇮🇷 فارسی</span>
                 <span class="lang-tag" onclick="quickSearch('Bengali')">🇧🇩 বাংলা</span>
+                <span class="lang-tag" onclick="quickSearch('Russian')">🇷🇺 Русский</span>
+                <span class="lang-tag" onclick="quickSearch('Chinese')">🇨🇳 中文</span>
+                <span class="lang-tag" onclick="quickSearch('Japanese')">🇯🇵 日本語</span>
+                <span class="lang-tag" onclick="quickSearch('Italian')">🇮🇹 Italiano</span>
+                <span class="lang-tag" onclick="quickSearch('Portuguese')">🇵🇹 Português</span>
             </div>
         </div>
     </div>
 
     <!-- ========== ٹولز کا کنٹینر ========== -->
     <div class="tools-container">
-        <!-- Tool 1: Freelance Assistant -->
+        <!-- Tool 1: Freelance Assistant (تمام آپشنز کے ساتھ) -->
         <div class="tool-card">
             <h3>🤖 Freelance Assistant</h3>
             <p>AI کی مدد سے پرووزل اور نگ ڈسکریشن لکھیں۔</p>
             <div class="tool-content">
                 <select id="taskType">
-                
-                <select id="taskType">
-    <option value="upwork">📘 Upwork Proposal</option>
-<option value="fiverr">🎵 Fiverr Gig Description</option>
-<option value="freelancer">💼 Freelancer.com Bid</option>
-<option value="linkedin">🔗 LinkedIn Connection Message</option>
-<option value="peopleperhour">⏰ PeoplePerHour Proposal</option>
-<option value="guru">🧑‍💻 Guru Proposal</option>
-<option value="toptal">⭐ Toptal Introduction</option>
-<option value="contra">🚀 Contra Pitch</option>
-<option value="indeed">📄 Indeed Job Application</option>
-<option value="remoteok">🌍 Remote Job Application</option>
-<option value="glassdoor">🏢 Glassdoor Application</option>
-<option value="weworkremotely">💻 We Work Remotely Proposal</option>
-<option value="angelco">🦄 Startup Job Pitch</option>
-<option value="facebook">📘 Facebook Business Message</option>
-<option value="instagram">📸 Instagram Client Message</option>
-<option value="twitter">🐦 X (Twitter) Outreach Message</option>
+                    <option value="upwork">📘 Upwork Proposal</option>
+                    <option value="fiverr">🎵 Fiverr Gig Description</option>
+                    <option value="freelancer">💼 Freelancer.com Bid</option>
+                    <option value="linkedin">🔗 LinkedIn Connection Message</option>
                 </select>
-                <input type="text" id="userTopic" placeholder="کام کا نام لکھیں">
+                <input type="text" id="userTopic" placeholder="کام کا نام لکھیں (مثال: Google Sheets Automation)">
                 <button onclick="generateAIAnswer()">Generate Proposal</button>
                 <div id="aiResponse" class="result-box">✨ جواب یہاں آئے گا</div>
             </div>
@@ -397,12 +388,12 @@
 </div>
 
 <script>
-    // ========== GOOGLE TRANSLATE (آپ کے دیے ہوئے کوڈ سے) ==========
+    // ========== GOOGLE TRANSLATE (مکمل زبانوں کے ساتھ) ==========
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'ur',
             autoDisplay: false,
-            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh,ja,ko,it,pt'
+            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk,hi,ta,te,ml,kn,gu,pa,ne,sd,ps,so,sw,am,az,ka,km,lo,my,mn,ne,si,tg,uz'
         }, 'google_translate_element');
     }
 
@@ -452,7 +443,7 @@
         alert("✅ متن کاپی ہو گیا!");
     }
 
-    // ========== TOOL 1: Freelance Assistant ==========
+    // ========== TOOL 1: Freelance Assistant (تمام آپشنز کے ساتھ) ==========
     function generateAIAnswer() {
         let task = document.getElementById("taskType").value;
         let topic = document.getElementById("userTopic").value.trim();
@@ -460,13 +451,17 @@
             document.getElementById("aiResponse").innerHTML = "⚠️ براہ کرم کام کا نام لکھیں!";
             return;
         }
+        
         let responses = {
-            upwork: `Hi Client, I have reviewed your project for ${topic}. I am an expert in this field.\n\nBest regards,\nSanaullah`,
-            fiverr: `Are you looking for high-quality ${topic} services? I deliver professional results.\n\nRegards,\nSanaullah`
+            upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in this field and can deliver efficiently. I have completed similar projects successfully. Let's discuss your specific needs.\n\nBest regards,\nSanaullah`,
+            fiverr: `Are you looking for high-quality ${topic} services? I specialize in delivering professional results with fast turnaround. Satisfaction guaranteed!\n\nOrder now and let's get started.\n\nRegards,\nSanaullah`,
+            freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline. Please check my profile for similar work. Ready to start immediately!\n\nThanks,\nSanaullah`,
+            linkedin: `Hi, I noticed you are working on ${topic}. I specialize in automation and productivity solutions. Would love to connect and discuss how we can collaborate.\n\nBest,\nSanaullah`
         };
+        
         let result = responses[task];
         let uid = "freelance_" + Date.now();
-        document.getElementById("aiResponse").innerHTML = `<div id="${uid}">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
     // ========== TOOL 2: Content Writer ==========
@@ -485,7 +480,7 @@
     function optimizeSEO() {
         let kw = document.getElementById("seoKeyword").value.trim();
         if (!kw) { document.getElementById("seoResult").innerHTML = "⚠️ مطلوبہ لفظ لکھیں!"; return; }
-        let tips = `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔`;
+        let tips = `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔<br>✅ تصاویر میں alt text ${kw} رکھیں۔<br>✅ URLs میں ${kw} استعمال کریں۔`;
         let uid = "seo_" + Date.now();
         document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
@@ -496,14 +491,14 @@
         let q = document.getElementById("codeQuestion").value.trim();
         if (!q) { document.getElementById("codeResult").innerHTML = "⚠️ اپنا سوال لکھیں!"; return; }
         let samples = {
-            html: `<!-- ${q} کے لیے HTML -->\n<div class="card">\n  <h3>Title</h3>\n  <p>Content</p>\n</div>`,
-            css: `/* ${q} کے لیے CSS */\n.card {\n  background: #111;\n  border-radius: 20px;\n}`,
-            javascript: `// ${q} کے لیے JS\nfunction handleClick() {\n  alert("Hello");\n}`,
-            python: `# ${q} کے لیے Python\ndef my_function():\n    print("Hello")`
+            html: `<!-- ${q} کے لیے HTML -->\n<div class="card">\n  <h3>عنوان</h3>\n  <p>مواد یہاں لکھیں</p>\n</div>`,
+            css: `/* ${q} کے لیے CSS */\n.card {\n  background: #111;\n  border-radius: 20px;\n  padding: 20px;\n}`,
+            javascript: `// ${q} کے لیے JavaScript\nfunction handleClick() {\n  alert("ہیلو ورلڈ");\n}`,
+            python: `# ${q} کے لیے Python\ndef my_function():\n    print("ہیلو ورلڈ")\n    return True`
         };
         let code = samples[lang];
         let uid = "code_" + Date.now();
-        document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace; text-align:left; direction:ltr;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 </script>
 
@@ -563,4 +558,4 @@
     draw();
 </script>
 </body>
-</html>       
+</html>
