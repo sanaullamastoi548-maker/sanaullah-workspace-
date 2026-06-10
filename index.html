@@ -446,16 +446,45 @@
                 document.getElementById("aiResponse").innerHTML = `
                     <div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
                     <button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>
-                `;
-            } else {
-                document.getElementById("aiResponse").innerHTML = "❌ AI سے جواب نہیں ملا۔ براہ کرم دوبارہ کوشش کریں۔";
-                console.log("Error response:", data);
-            }
-        } catch (err) {
-            document.getElementById("aiResponse").innerHTML = "❌ نیٹ ورک کا مسئلہ ہے۔ براہ کرم بعد میں کوشش کریں۔";
-            console.error("Fetch error:", err);
-        }
+                // ========== Freelance Assistant - AI Generate ==========
+async function generateAIAnswer() {
+    let task = document.getElementById("taskType").value;
+    let topic = document.getElementById("userTopic").value.trim();
+    
+    if (!topic) {
+        document.getElementById("aiResponse").innerHTML = "⚠️ براہ کرم کام کا نام لکھیں!";
+        return;
     }
+
+    document.getElementById("aiResponse").innerHTML = "⏳ AI جواب تیار کر رہا ہے...";
+
+    try {
+        const response = await fetch("https://white-sunset-cf9f.sanaullahmastoi73.workers.dev/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                prompt: `Write a professional ${task} proposal for this project: ${topic}. Keep it short and professional.` 
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+            let aiText = data.candidates[0].content.parts[0].text;
+            let uid = "freelance_" + Date.now();
+            document.getElementById("aiResponse").innerHTML = `
+                <div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
+                <button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>
+            `;
+        } else {
+            document.getElementById("aiResponse").innerHTML = "❌ AI سے جواب نہیں ملا۔ براہ کرم دوبارہ کوشش کریں۔";
+            console.log("Error response:", data);
+        }
+    } catch (err) {
+        document.getElementById("aiResponse").innerHTML = "❌ نیٹ ورک کا مسئلہ ہے۔ براہ کرم بعد میں کوشش کریں۔";
+        console.error("Fetch error:", err);
+    }
+}
 
     // ========== Content Writer Functions ==========
     function convertContent(type) {
