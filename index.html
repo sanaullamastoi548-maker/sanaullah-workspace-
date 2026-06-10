@@ -5,28 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanaullah Workspace | AI Tools & Productivity</title>
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J0D8F7C2DF"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-J0D8F7C2DF');
-    </script>
-    
     <style>
+        /* ========== ویب سائٹ کا مکمل ڈیزائن ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Noto Nastaliq Urdu', system-ui, sans-serif;
         }
+
         body {
             background: #070b14;
             color: #eee;
             overflow-x: hidden;
             min-height: 100vh;
         }
+
+        /* چمکتی ریت والا کینوس */
         canvas {
             position: fixed;
             top: 0;
@@ -36,6 +31,7 @@
             z-index: 0;
             pointer-events: none;
         }
+
         .container {
             position: relative;
             z-index: 2;
@@ -43,6 +39,8 @@
             margin: 0 auto;
             padding: 20px;
         }
+
+        /* Header */
         .header {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
@@ -72,6 +70,8 @@
             border-radius: 5px;
             box-shadow: 0 0 10px #ffcc00;
         }
+
+        /* ========== زبان اور سرچ بار ========== */
         .language-section {
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(12px);
@@ -164,12 +164,15 @@
             color: black;
             transform: translateY(-2px);
         }
+
+        /* ========== ٹولز کا کنٹینر ========== */
         .tools-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin: 40px 0;
         }
+
         .tool-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(12px);
@@ -208,6 +211,8 @@
             background: #ffaa00;
             transform: scale(0.98);
         }
+
+        /* Tool Content (for each tool's inner functionality) */
         .tool-content {
             margin-top: 20px;
             padding-top: 15px;
@@ -243,6 +248,7 @@
             cursor: pointer;
             margin-top: 10px;
         }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -255,6 +261,7 @@
             color: #ffcc00;
             margin-bottom: 8px;
         }
+
         @media (max-width: 700px) {
             .header h1 { font-size: 32px; }
             .language-section h3 { font-size: 20px; }
@@ -266,22 +273,29 @@
 <canvas id="sandCanvas"></canvas>
 
 <div class="container">
+    <!-- Header -->
     <div class="header">
         <h1>Sanaullah Workspace</h1>
         <div class="glow-line"></div>
         <p>🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
     </div>
 
+    <!-- ========== زبان اور سرچ بار ========== -->
     <div class="language-section">
         <h3>🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
             <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic, French, Turkish...">
             <button class="search-btn" onclick="searchLanguage()">تلاش کریں</button>
         </div>
+        
         <div class="translate-container">
             <div id="google_translate_element"></div>
-            <div class="translate-note">💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔</div>
+            <div class="translate-note">
+                💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔
+            </div>
         </div>
+
+        <!-- Popular Languages Quick Access -->
         <div class="popular-langs">
             <h4>📚 مشہور زبانیں (کلک کریں)</h4>
             <div class="lang-tags">
@@ -304,7 +318,9 @@
         </div>
     </div>
 
+    <!-- ========== ٹولز کا کنٹینر ========== -->
     <div class="tools-container">
+        <!-- Tool 1: Freelance Assistant (تمام آپشنز کے ساتھ) -->
         <div class="tool-card">
             <h3>🤖 Freelance Assistant</h3>
             <p>AI کی مدد سے پرووزل اور نگ ڈسکریشن لکھیں۔</p>
@@ -321,6 +337,7 @@
             </div>
         </div>
 
+        <!-- Tool 2: Content Writer -->
         <div class="tool-card">
             <h3>✍️ Content Writer</h3>
             <p>AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
@@ -333,6 +350,7 @@
             </div>
         </div>
 
+        <!-- Tool 3: SEO Optimizer -->
         <div class="tool-card">
             <h3>📈 SEO Optimizer</h3>
             <p>اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
@@ -344,6 +362,7 @@
             </div>
         </div>
 
+        <!-- Tool 4: Code Helper -->
         <div class="tool-card">
             <h3>💻 Code Helper</h3>
             <p>کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
@@ -369,7 +388,7 @@
 </div>
 
 <script>
-    // Google Translate
+    // ========== GOOGLE TRANSLATE (مکمل زبانوں کے ساتھ) ==========
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'ur',
@@ -380,7 +399,11 @@
 
     function searchLanguage() {
         let searchLang = document.getElementById("language-search").value.trim();
-        if (searchLang === "") { alert("براہ کرم کوئی زبان لکھیں!"); return; }
+        if (searchLang === "") {
+            alert("براہ کرم کوئی زبان لکھیں!");
+            return;
+        }
+        
         let select = document.querySelector('.goog-te-combo');
         if (select) {
             let found = false;
@@ -394,7 +417,9 @@
                     break;
                 }
             }
-            if (!found) alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
+            if (!found) {
+                alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
+            }
         } else {
             alert("⚠️ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔");
         }
@@ -405,6 +430,7 @@
         searchLanguage();
     }
 
+    // ========== HELPER: COPY FUNCTION ==========
     function universalCopy(elementId) {
         let el = document.getElementById(elementId);
         let text = el.innerText || el.textContent;
@@ -417,110 +443,53 @@
         alert("✅ متن کاپی ہو گیا!");
     }
 
-    // ========== Freelance Assistant - AI Generate ==========
-    async function generateAIAnswer() {
+    // ========== TOOL 1: Freelance Assistant (تمام آپشنز کے ساتھ) ==========
+    function generateAIAnswer() {
         let task = document.getElementById("taskType").value;
         let topic = document.getElementById("userTopic").value.trim();
-        
         if (!topic) {
             document.getElementById("aiResponse").innerHTML = "⚠️ براہ کرم کام کا نام لکھیں!";
             return;
         }
-
-        document.getElementById("aiResponse").innerHTML = "⏳ AI جواب تیار کر رہا ہے...";
-
-        try {
-            const response = await fetch("https://white-sunset-cf9f.sanaullahmastoi73.workers.dev/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    prompt: `Write a professional ${task} proposal for this project: ${topic}. Keep it short and professional.` 
-                })
-            });
-
-            const data = await response.json();
-
-            if (data.candidates && data.candidates[0].content.parts[0].text) {
-                let aiText = data.candidates[0].content.parts[0].text;
-                let uid = "freelance_" + Date.now();
-                document.getElementById("aiResponse").innerHTML = `
-                    <div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
-                    <button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>
-                // ========== Freelance Assistant - AI Generate ==========
-async function generateAIAnswer() {
-    let task = document.getElementById("taskType").value;
-    let topic = document.getElementById("userTopic").value.trim();
-    
-    if (!topic) {
-        document.getElementById("aiResponse").innerHTML = "⚠️ براہ کرم کام کا نام لکھیں!";
-        return;
+        
+        let responses = {
+            upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in this field and can deliver efficiently. I have completed similar projects successfully. Let's discuss your specific needs.\n\nBest regards,\nSanaullah`,
+            fiverr: `Are you looking for high-quality ${topic} services? I specialize in delivering professional results with fast turnaround. Satisfaction guaranteed!\n\nOrder now and let's get started.\n\nRegards,\nSanaullah`,
+            freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline. Please check my profile for similar work. Ready to start immediately!\n\nThanks,\nSanaullah`,
+            linkedin: `Hi, I noticed you are working on ${topic}. I specialize in automation and productivity solutions. Would love to connect and discuss how we can collaborate.\n\nBest,\nSanaullah`
+        };
+        
+        let result = responses[task];
+        let uid = "freelance_" + Date.now();
+        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
-    document.getElementById("aiResponse").innerHTML = "⏳ AI جواب تیار کر رہا ہے...";
-
-    try {
-        const response = await fetch("https://white-sunset-cf9f.sanaullahmastoi73.workers.dev/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                prompt: `Write a professional ${task} proposal for this project: ${topic}. Keep it short and professional.` 
-            })
-        });
-
-        const data = await response.json();
-
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
-            let aiText = data.candidates[0].content.parts[0].text;
-            let uid = "freelance_" + Date.now();
-            document.getElementById("aiResponse").innerHTML = `
-                <div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
-                <button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>
-            `;
-        } else {
-            document.getElementById("aiResponse").innerHTML = "❌ AI سے جواب نہیں ملا۔ براہ کرم دوبارہ کوشش کریں۔";
-            console.log("Error response:", data);
-        }
-    } catch (err) {
-        document.getElementById("aiResponse").innerHTML = "❌ نیٹ ورک کا مسئلہ ہے۔ براہ کرم بعد میں کوشش کریں۔";
-        console.error("Fetch error:", err);
-    }
-}
-
-    // ========== Content Writer Functions ==========
+    // ========== TOOL 2: Content Writer ==========
     function convertContent(type) {
-        let input = document.getElementById("contentInput").value;
-        if (!input) { 
-            document.getElementById("contentResult").innerHTML = "⚠️ براہ کرم کچھ لکھیں!"; 
-            return; 
-        }
-        let output = "";
-        if (type === 'upper') output = input.toUpperCase();
-        else if (type === 'lower') output = input.toLowerCase();
-        else if (type === 'capitalize') output = input.replace(/\b\w/g, c => c.toUpperCase());
+        let txt = document.getElementById("contentInput").value;
+        if (!txt) { document.getElementById("contentResult").innerHTML = "⚠️ پہلے کچھ لکھیں!"; return; }
+        let res = "";
+        if (type === 'upper') res = txt.toUpperCase();
+        else if (type === 'lower') res = txt.toLowerCase();
+        else if (type === 'capitalize') res = txt.toLowerCase().replace(/(^|\s)\S/g, L => L.toUpperCase());
         let uid = "content_" + Date.now();
-        document.getElementById("contentResult").innerHTML = `<div id="${uid}">${output}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        document.getElementById("contentResult").innerHTML = `<div id="${uid}">${res}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
-    // ========== SEO Optimizer ==========
+    // ========== TOOL 3: SEO Optimizer ==========
     function optimizeSEO() {
         let kw = document.getElementById("seoKeyword").value.trim();
-        if (!kw) { 
-            document.getElementById("seoResult").innerHTML = "⚠️ مطلوبہ لفظ لکھیں!"; 
-            return; 
-        }
+        if (!kw) { document.getElementById("seoResult").innerHTML = "⚠️ مطلوبہ لفظ لکھیں!"; return; }
         let tips = `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔<br>✅ تصاویر میں alt text ${kw} رکھیں۔<br>✅ URLs میں ${kw} استعمال کریں۔`;
         let uid = "seo_" + Date.now();
         document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
-    // ========== Code Helper ==========
+    // ========== TOOL 4: Code Helper ==========
     function generateCodeHelp() {
         let lang = document.getElementById("codeLanguage").value;
         let q = document.getElementById("codeQuestion").value.trim();
-        if (!q) { 
-            document.getElementById("codeResult").innerHTML = "⚠️ اپنا سوال لکھیں!"; 
-            return; 
-        }
+        if (!q) { document.getElementById("codeResult").innerHTML = "⚠️ اپنا سوال لکھیں!"; return; }
         let samples = {
             html: `<!-- ${q} کے لیے HTML -->\n<div class="card">\n  <h3>عنوان</h3>\n  <p>مواد یہاں لکھیں</p>\n</div>`,
             css: `/* ${q} کے لیے CSS */\n.card {\n  background: #111;\n  border-radius: 20px;\n  padding: 20px;\n}`,
@@ -533,29 +502,23 @@ async function generateAIAnswer() {
     }
 </script>
 
+<!-- Google Translate Script -->
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
-    // ========== Sand Animation ==========
+    // ========== گولڈن ریت + چمکتی بلبیں (پس منظر) ==========
     const canvas = document.getElementById('sandCanvas');
     const ctx = canvas.getContext('2d');
-    function resizeCanvas() { 
-        canvas.width = window.innerWidth; 
-        canvas.height = window.innerHeight; 
-    }
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     let particles = [];
     for (let i = 0; i < 180; i++) {
         particles.push({
-            x: Math.random() * canvas.width, 
-            y: Math.random() * canvas.height,
-            size: Math.random() * 3 + 1, 
-            dx: (Math.random() - 0.5) * 0.5, 
-            dy: (Math.random() - 0.5) * 0.3 + 0.2,
-            alpha: Math.random() * 0.5 + 0.3, 
-            glow: Math.random() * 0.8 + 0.3
+            x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 1, dx: (Math.random() - 0.5) * 0.5, dy: (Math.random() - 0.5) * 0.3 + 0.2,
+            alpha: Math.random() * 0.5 + 0.3, glow: Math.random() * 0.8 + 0.3
         });
     }
     let time = 0;
@@ -571,8 +534,7 @@ async function generateAIAnswer() {
             ctx.shadowBlur = 12 * bright;
             ctx.shadowColor = `rgba(255, 200, 40, 0.9)`;
             ctx.fill();
-            p.x += p.dx; 
-            p.y += p.dy;
+            p.x += p.dx; p.y += p.dy;
             if (p.x < -50) p.x = canvas.width + 40;
             if (p.x > canvas.width + 50) p.x = -40;
             if (p.y < -50) p.y = canvas.height + 40;
@@ -580,14 +542,7 @@ async function generateAIAnswer() {
         }
         if (!window.bulbs) {
             window.bulbs = [];
-            for (let i = 0; i < 40; i++) {
-                window.bulbs.push({ 
-                    x: Math.random() * canvas.width, 
-                    y: Math.random() * canvas.height, 
-                    radius: Math.random() * 5 + 2, 
-                    speed: 0.5 + Math.random() * 1.5 
-                });
-            }
+            for (let i = 0; i < 40; i++) window.bulbs.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 5 + 2, speed: 0.5 + Math.random() * 1.5 });
         }
         for (let i = 0; i < window.bulbs.length; i++) {
             let b = window.bulbs[i];
