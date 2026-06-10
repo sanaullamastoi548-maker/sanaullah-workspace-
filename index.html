@@ -448,16 +448,10 @@
                 document.getElementById("aiResponse").innerHTML = `
                     <div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
                     <button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>
-                `;
-            } else {
-                document.getElementById("aiResponse").innerHTML = "❌ AI سے جواب نہیں ملا۔ براہ کرم دوبارہ کوشش کریں۔";
-                console.log(data);
-            }
-        } catch (err) {
-            document.getElementById("aiResponse").innerHTML = "❌ نیٹ ورک کا مسئلہ ہے، کلاؤڈ فلیر چیک کریں۔";
-            console.error(err);
-        }
-    }
+                const data = await response.json();
+
+document.getElementById("aiResponse").innerHTML =
+"<pre>" + JSON.stringify(data, null, 2) + "</pre>";
 
     // Content Writer Functions
     function convertContent(type) {
