@@ -430,13 +430,15 @@
         document.getElementById("aiResponse").innerHTML = "⏳ AI جواب تیار کر رہا ہے...";
 
         try {
-            const response = await fetch("https://morning-flower-b518.sanaullahmastoi73.workers.dev/", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    prompt: `Write a professional ${task} proposal for this project: ${topic}. Keep it short and professional.` 
-                })
-            });
+    
+   const response = await fetch("https://white-sunset-cf9f.sanaullahmastoi73.workers.dev/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ 
+        prompt: `Write a professional ${task} proposal for this project: ${topic}.` 
+    })
+});
+
 
             const data = await response.json();
 
