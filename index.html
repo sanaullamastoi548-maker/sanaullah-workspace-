@@ -6,32 +6,27 @@
     <title>Sanaullah Workspace | AI Tools & Productivity</title>
     
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-J0D8F7C2DF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-J0D8F7C2DF');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-J0D8F7C2DF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-J0D8F7C2DF');
+    </script>
     
     <style>
-        /* ========== ویب سائٹ کا مکمل ڈیزائن ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Noto Nastaliq Urdu', system-ui, sans-serif;
         }
-
         body {
             background: #070b14;
             color: #eee;
             overflow-x: hidden;
             min-height: 100vh;
         }
-
-        /* چمکتی ریت والا کینوس */
         canvas {
             position: fixed;
             top: 0;
@@ -41,7 +36,6 @@
             z-index: 0;
             pointer-events: none;
         }
-
         .container {
             position: relative;
             z-index: 2;
@@ -49,8 +43,6 @@
             margin: 0 auto;
             padding: 20px;
         }
-
-        /* Header */
         .header {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
@@ -80,8 +72,6 @@
             border-radius: 5px;
             box-shadow: 0 0 10px #ffcc00;
         }
-
-        /* ========== زبان اور سرچ بار ========== */
         .language-section {
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(12px);
@@ -174,15 +164,12 @@
             color: black;
             transform: translateY(-2px);
         }
-
-        /* ========== ٹولز کا کنٹینر ========== */
         .tools-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin: 40px 0;
         }
-
         .tool-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(12px);
@@ -221,8 +208,6 @@
             background: #ffaa00;
             transform: scale(0.98);
         }
-
-        /* Tool Content (for each tool's inner functionality) */
         .tool-content {
             margin-top: 20px;
             padding-top: 15px;
@@ -258,7 +243,6 @@
             cursor: pointer;
             margin-top: 10px;
         }
-
         footer {
             text-align: center;
             padding: 30px;
@@ -271,7 +255,6 @@
             color: #ffcc00;
             margin-bottom: 8px;
         }
-
         @media (max-width: 700px) {
             .header h1 { font-size: 32px; }
             .language-section h3 { font-size: 20px; }
@@ -283,29 +266,22 @@
 <canvas id="sandCanvas"></canvas>
 
 <div class="container">
-    <!-- Header -->
     <div class="header">
         <h1>Sanaullah Workspace</h1>
         <div class="glow-line"></div>
         <p>🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
     </div>
 
-    <!-- ========== زبان اور سرچ بار ========== -->
     <div class="language-section">
         <h3>🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
             <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic, French, Turkish...">
             <button class="search-btn" onclick="searchLanguage()">تلاش کریں</button>
         </div>
-        
         <div class="translate-container">
             <div id="google_translate_element"></div>
-            <div class="translate-note">
-                💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔
-            </div>
+            <div class="translate-note">💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔</div>
         </div>
-
-        <!-- Popular Languages Quick Access -->
         <div class="popular-langs">
             <h4>📚 مشہور زبانیں (کلک کریں)</h4>
             <div class="lang-tags">
@@ -328,9 +304,7 @@
         </div>
     </div>
 
-    <!-- ========== ٹولز کا کنٹینر ========== -->
     <div class="tools-container">
-        <!-- Tool 1: Freelance Assistant (تمام آپشنز کے ساتھ) -->
         <div class="tool-card">
             <h3>🤖 Freelance Assistant</h3>
             <p>AI کی مدد سے پرووزل اور نگ ڈسکریشن لکھیں۔</p>
@@ -347,7 +321,6 @@
             </div>
         </div>
 
-        <!-- Tool 2: Content Writer -->
         <div class="tool-card">
             <h3>✍️ Content Writer</h3>
             <p>AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
@@ -360,7 +333,6 @@
             </div>
         </div>
 
-        <!-- Tool 3: SEO Optimizer -->
         <div class="tool-card">
             <h3>📈 SEO Optimizer</h3>
             <p>اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
@@ -372,7 +344,6 @@
             </div>
         </div>
 
-        <!-- Tool 4: Code Helper -->
         <div class="tool-card">
             <h3>💻 Code Helper</h3>
             <p>کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
@@ -398,7 +369,7 @@
 </div>
 
 <script>
-    // ========== GOOGLE TRANSLATE (مکمل زبانوں کے ساتھ) ==========
+    // Google Translate
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'ur',
@@ -409,11 +380,7 @@
 
     function searchLanguage() {
         let searchLang = document.getElementById("language-search").value.trim();
-        if (searchLang === "") {
-            alert("براہ کرم کوئی زبان لکھیں!");
-            return;
-        }
-        
+        if (searchLang === "") { alert("براہ کرم کوئی زبان لکھیں!"); return; }
         let select = document.querySelector('.goog-te-combo');
         if (select) {
             let found = false;
@@ -427,9 +394,7 @@
                     break;
                 }
             }
-            if (!found) {
-                alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
-            }
+            if (!found) alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
         } else {
             alert("⚠️ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔");
         }
@@ -440,7 +405,6 @@
         searchLanguage();
     }
 
-    // ========== HELPER: COPY FUNCTION ==========
     function universalCopy(elementId) {
         let el = document.getElementById(elementId);
         let text = el.innerText || el.textContent;
@@ -453,25 +417,7 @@
         alert("✅ متن کاپی ہو گیا!");
     }
 
-    // ========== TOOL 1: Freelance Assistant (تمام آپشنز کے ساتھ) ==========
-    function generateAIAnswer() {
-        let task = document.getElementById("taskType").value;
-        let topic = document.getElementById("userTopic").value.trim();
-        if (!topic) {
-            document.getElementById("aiResponse").innerHTML = "⚠️ براہ کرم کام کا نام لکھیں!";
-            return;
-        }
-        
-        let responses = {
-            upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in this field and can deliver efficiently. I have completed similar projects successfully. Let's discuss your specific needs.\n\nBest regards,\nSanaullah`,
-            fiverr: `Are you looking for high-quality ${topic} services? I specialize in delivering professional results with fast turnaround. Satisfaction guaranteed!\n\nOrder now and let's get started.\n\nRegards,\nSanaullah`,
-            freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline. Please check my profile for similar work. Ready to start immediately!\n\nThanks,\nSanaullah`,
-align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
-                <button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>
-            
-          {
-
-          // ========== FIXED TOOL 1: Freelance Assistant ==========
+    // ========== صرف ایک generateAIAnswer فنکشن (یہ درست والا) ==========
     async function generateAIAnswer() {
         let task = document.getElementById("taskType").value;
         let topic = document.getElementById("userTopic").value.trim();
@@ -492,34 +438,38 @@ align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
                 })
             });
 
-            // چیک کریں کہ کیا رسپانس درست ہے
-            if (!response.ok) throw new Error("سروَر سے رابطہ نہیں ہو سکا۔");
-
             const data = await response.json();
 
-            // AI کا رسپانس پروسیس کریں
             if (data.candidates && data.candidates[0].content.parts[0].text) {
                 let aiText = data.candidates[0].content.parts[0].text;
                 let uid = "freelance_" + Date.now();
-                
                 document.getElementById("aiResponse").innerHTML = `
                     <div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
                     <button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>
                 `;
             } else {
-                document.getElementById("aiResponse").innerHTML = "❌ جواب نہیں ملا، شاید کوٹہ ختم ہے!";
-                console.log("Full Data:", data);
+                document.getElementById("aiResponse").innerHTML = "❌ AI سے جواب نہیں ملا۔ براہ کرم دوبارہ کوشش کریں۔";
+                console.log(data);
             }
         } catch (err) {
-            document.getElementById("aiResponse").innerHTML = "❌ نیٹ ورک کا مسئلہ ہے (کنسول چیک کریں)";
-            console.error("Error:", err);
+            document.getElementById("aiResponse").innerHTML = "❌ نیٹ ورک کا مسئلہ ہے، کلاؤڈ فلیر چیک کریں۔";
+            console.error(err);
         }
     }
-  
-            
-}
 
-    // ========== TOOL 3: SEO Optimizer ==========
+    // Content Writer Functions
+    function convertContent(type) {
+        let input = document.getElementById("contentInput").value;
+        if (!input) { document.getElementById("contentResult").innerHTML = "⚠️ براہ کرم کچھ لکھیں!"; return; }
+        let output = "";
+        if (type === 'upper') output = input.toUpperCase();
+        else if (type === 'lower') output = input.toLowerCase();
+        else if (type === 'capitalize') output = input.replace(/\b\w/g, c => c.toUpperCase());
+        let uid = "content_" + Date.now();
+        document.getElementById("contentResult").innerHTML = `<div id="${uid}">${output}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+    }
+
+    // SEO Optimizer
     function optimizeSEO() {
         let kw = document.getElementById("seoKeyword").value.trim();
         if (!kw) { document.getElementById("seoResult").innerHTML = "⚠️ مطلوبہ لفظ لکھیں!"; return; }
@@ -528,7 +478,7 @@ align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
         document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
-    // ========== TOOL 4: Code Helper ==========
+    // Code Helper
     function generateCodeHelp() {
         let lang = document.getElementById("codeLanguage").value;
         let q = document.getElementById("codeQuestion").value.trim();
@@ -545,11 +495,10 @@ align:left; direction:ltr; white-space:pre-wrap;">${aiText}</div>
     }
 </script>
 
-<!-- Google Translate Script -->
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
-    // ========== گولڈن ریت + چمکتی بلبیں (پس منظر) ==========
+    // Sand Animation
     const canvas = document.getElementById('sandCanvas');
     const ctx = canvas.getContext('2d');
     function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
