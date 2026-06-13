@@ -380,6 +380,14 @@
         </div>
         
  </div>
+
+   <div class="tool-card" id="prompt-library-tool">
+        <h3>📚 Prompt Library</h3>
+        <p>سرچ کریں اور ایک کلک میں کاپی کریں!</p>
+        <input type="text" id="promptSearch" placeholder="مثلاً: Fiverr, SEO, Coding..." onkeyup="filterPrompts()" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 20px; border: 1px solid #ffcc00; background: #0c0f1a; color: white;">
+        <div id="promptList" class="tool-content">
+            </div>
+    </div> 
         
     <footer>
         <h3>Sanaullah Workspace</h3>
@@ -693,15 +701,9 @@ function displayPrompts(filter = "") {
         if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
             let id = "p_" + index;
             list.innerHTML += `
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left;">
-                    <h4 style="color: #ffcc00; margin: 0;">${p.title}</h4>
-                    <p style="font-size: 13px; color: #ccc; margin: 5px 0;">${p.text}</p>
-                    <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-weight: bold;">📋 کاپی کریں</button>
-                    <div id="${id}" style="display:none;">${p.text}</div>
-                </div>
-            `;
-        }
-    });
+
+            {
+                
 }
 
 function filterPrompts() {
@@ -717,14 +719,6 @@ function copyPrompt(id) {
 
 displayPrompts();
 </script>
-
-        <div class="tool-card" id="prompt-library-tool">
-        <h3>📚 Prompt Library</h3>
-        <p>سرچ کریں اور ایک کلک میں کاپی کریں!</p>
-        <input type="text" id="promptSearch" placeholder="مثلاً: Fiverr, SEO, Coding..." onkeyup="filterPrompts()" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 20px; border: 1px solid #ffcc00; background: #0c0f1a; color: white;">
-        <div id="promptList" class="tool-content">
-            </div>
-    </div>
 
     <script>
     const promptsData = [
