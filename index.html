@@ -380,21 +380,23 @@
         </div>
         
      </div>
-
-    <!-- Prompt Library Tool -->
-<div class="tool-card" style="grid-column: 1 / -1;">
-    <h3>📚 Prompt Library</h3>
-    <p>اپنی پسند کا پرامپٹ سرچ کریں اور ایک کلک میں کاپی کریں!</p>
     
-    <input type="text" id="promptSearch" placeholder="مثلاً: Fiverr, SEO, Coding..." onkeyup="filterPrompts()">
-    
-    <div id="promptList" class="tools-container" style="margin-top: 20px;">
-        <!-- یہاں پرامپٹس جاوا اسکرپٹ سے آئیں گے -->
+<!-- ========== PROMPT LIBRARY WITH YELLOW BUTTON ========== -->
+    <div class="prompt-section">
+        <h3>📚 Prompt Library</h3>
+        <p>اپنی پسند کا پرامپٹ سرچ کریں اور پیلے بٹن پر کلک کریں!</p>
+        
+        <input type="text" id="promptSearchInput" class="prompt-search-box" placeholder="🔍 یہاں لکھیں: Fiverr, SEO, Upwork, Coding...">
+        
+        <button class="yellow-btn" onclick="searchPromptAndShow()" style="font-size: 16px; padding: 12px 30px;">🟡 سرچ کریں اور دکھائیں</button>
+        
+        <div id="promptResultArea" class="prompt-result-area">
+            <div id="promptResultText" style="margin-bottom: 15px; font-size: 16px; line-height: 1.6; text-align: right;"></div>
+            <button class="copy-btn" onclick="copyPromptResult()">📋 کاپی کریں</button>
+        </div>
     </div>
-</div>
 
     
-
     <footer>
         <h3>Sanaullah Workspace</h3>
         <p>AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation</p>
@@ -515,6 +517,28 @@
         let uid = "code_" + Date.now();
         document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace; text-align:left; direction:ltr;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
+  
+ function displayPrompts(filter = "") {
+    const list = document.getElementById("promptList");
+    list.innerHTML = "";
+    
+    promptsData.forEach((p, index) => {
+        if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
+            let id = "p_" + index;
+            
+            // یہ ہے وہ نیا ڈیزائن جو بالکل دوسرے ٹولز جیسا ہے
+            list.innerHTML += `
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,204,0,0.3); padding: 15px; border-radius: 12px; margin-top: 15px; text-align: left;">
+                    <h4 style="color: #ffcc00; margin: 0 0 10px 0;">${p.title}</h4>
+                    <p style="font-size: 14px; color: #eee; margin-bottom: 15px; line-height: 1.4;">${p.text}</p>
+                    <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">📋 کاپی کریں</button>
+                    <div id="${id}" style="display:none;">${p.text}</div>
+                </div>
+            `;
+        }
+    });
+}
+   
 </script>
 
 <!-- Google Translate Script -->
