@@ -391,19 +391,7 @@
     <h3>📚 Prompt Library</h3>
     <p>اپنی پسند کا پرامپٹ سرچ کریں اور پیلے بٹن پر کلک کریں!</p>
 
-        <div class="tools-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
-
-    <div class="tool-card">
-        <h3>✍️ Content Writer</h3>
-        <p>Create the best articles and content with AI.</p>
-        <textarea id="contentInput" placeholder="...Write your content here"></textarea>
-        <div class="btn-group">
-            <button onclick="transformText('capitalize')">Capitalize</button>
-            <button onclick="transformText('lowercase')">lowercase</button>
-            <button onclick="transformText('uppercase')">UPPERCASE</button>
-        </div>
-        <div id="contentResult" class="result-box">✨ The result will come here</div>
-    </div>
+     <div class="tools-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
 
     <div class="tool-card">
         <h3>🤖 Freelance Assistant</h3>
@@ -442,6 +430,18 @@
         <div id="promptResultText" style="margin-bottom: 15px; font-size: 16px; line-height: 1.6; text-align: right;"></div>
         <button class="copy-btn" onclick="copyPromptResult()">📋 کاپی کریں</button>
     </div>
+    </div>
+
+<div class="tools-container">
+    <div class="tool-card" id="prompt-library-tool" style="grid-column: 1 / -1;">
+        <h3>📚 Prompt Library</h3>
+        <p>سرچ کریں اور ایک کلک میں کاپی کریں!</p>
+        <input type="text" id="promptSearch" ... >
+        <div id="promptList" class="tool-content"></div>
+    </div>
+
+    <div class="tool-card"> <h3>🤖 Freelance Assistant</h3> ... </div>
+    <div class="tool-card"> <h3>✍️ Content Writer</h3> ... </div>
     </div>
     
     <footer>
