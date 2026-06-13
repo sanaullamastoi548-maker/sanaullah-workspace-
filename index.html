@@ -264,14 +264,7 @@
 
         @media (max-width: 700px) {
             .header h1 { font-size: 32px; }
-           .language-section h3 { font-size: 20px; } 
-
-            .prompt-section { background: #0c0f1a; padding: 20px; border-radius: 15px; border: 1px solid #ffcc00; margin: 20px 0; color: white; }
-.prompt-search-box { width: 100%; padding: 12px; margin: 10px 0; border-radius: 20px; border: 1px solid #ffcc00; background: #000; color: white; }
-.yellow-btn { background: #ffcc00; color: black; border: none; padding: 12px 30px; border-radius: 20px; font-weight: bold; cursor: pointer; }
-.prompt-result-area { display: none; background: rgba(255, 204, 0, 0.1); padding: 20px; border-radius: 15px; border: 1px solid #ffcc00; margin-top: 20px; }
-.copy-btn { background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 15px; cursor: pointer; font-weight: bold; }
-            
+            .language-section h3 { font-size: 20px; }
         }
     </style>
 </head>
@@ -385,58 +378,23 @@
                 <div id="codeResult" class="result-box">⚙️ کوڈ کا جواب یہاں آئے گا</div>
             </div>
         </div>
-    </div>
+        
+     </div>
 
-    <div class="prompt-section">
+    <!-- Prompt Library Tool -->
+<div class="tool-card" style="grid-column: 1 / -1;">
     <h3>📚 Prompt Library</h3>
-    <p>اپنی پسند کا پرامپٹ سرچ کریں اور پیلے بٹن پر کلک کریں!</p>
-
-     <div class="tools-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+    <p>اپنی پسند کا پرامپٹ سرچ کریں اور ایک کلک میں کاپی کریں!</p>
+    
+    <input type="text" id="promptSearch" placeholder="مثلاً: Fiverr, SEO, Coding..." onkeyup="filterPrompts()">
+    
+    <div id="promptList" class="tools-container" style="margin-top: 20px;">
+        <!-- یہاں پرامپٹس جاوا اسکرپٹ سے آئیں گے -->
+    </div>
+</div>
 
     
 
-    <div class="tool-card">
-        <h3>💻 Code Helper</h3>
-        <p>Get help from an AI assistant in coding.</p>
-        <select id="langSelect"><option>HTML</option><option>Python</option><option>JavaScript</option></select>
-        <textarea id="codeInput" placeholder="...Write your question"></textarea>
-        <button class="yellow-btn" onclick="askCode()">Ask Code Helper</button>
-        <div id="codeResult" class="result-box">⚙️ The code answer will come here</div>
-    </div>
-
-    <div class="tool-card">
-        <h3>📈 SEO Optimizer</h3>
-        <p>Make your articles and website SEO-friendly.</p>
-        <input type="text" id="keywordInput" placeholder="Keyword">
-        <textarea id="articleInput" placeholder="...Write your article"></textarea>
-        <button class="yellow-btn" onclick="optimizeSEO()">Optimize SEO</button>
-        <div id="seoResult" class="result-box">📝 SEO tips will be here</div>
-    </div>
-
-        </div>
-            
-    <input type="text" id="promptSearchInput" class="prompt-search-box" placeholder="🔍 مثلاً: Fiverr, SEO, Upwork...">
-    
-    <button class="yellow-btn" onclick="searchPromptAndShow()">🟡 سرچ کریں</button>
-    
-    <div id="promptResultArea" class="prompt-result-area">
-        <div id="promptResultText" style="margin-bottom: 15px; font-size: 16px; line-height: 1.6; text-align: right;"></div>
-        <button class="copy-btn" onclick="copyPromptResult()">📋 کاپی کریں</button>
-    </div>
-    </div>
-
-<div class="tools-container">
-    <div class="tool-card" id="prompt-library-tool" style="grid-column: 1 / -1;">
-        <h3>📚 Prompt Library</h3>
-        <p>سرچ کریں اور ایک کلک میں کاپی کریں!</p>
-        <input type="text" id="promptSearch" ... >
-        <div id="promptList" class="tool-content"></div>
-    </div>
-
-    <div class="tool-card"> <h3>🤖 Freelance Assistant</h3> ... </div>
-    <div class="tool-card"> <h3>✍️ Content Writer</h3> ... </div>
-    </div>
-    
     <footer>
         <h3>Sanaullah Workspace</h3>
         <p>AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation</p>
@@ -562,6 +520,10 @@
 <!-- Google Translate Script -->
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
+
+
+    
+    
 <script>
     // ========== گولڈن ریت + چمکتی بلبیں (پس منظر) ==========
     const canvas = document.getElementById('sandCanvas');
@@ -613,56 +575,82 @@
         requestAnimationFrame(draw);
     }
     draw();
-    const promptsData = [
-    { title: "Upwork", text: "Act as a freelancer... [Upwork Proposal Text]" },
-    { title: "SEO", text: "Generate 10 keywords... [SEO Keywords Text]" },
-    { title: "Fiverr", text: "Write a professional gig... [Fiverr Gig Text]" }
-];
-
-function searchPromptAndShow() {
-    const input = document.getElementById("promptSearchInput").value.toLowerCase();
-    const resultText = document.getElementById("promptResultText");
-    const resultArea = document.getElementById("promptResultArea");
-
-    const found = promptsData.find(p => p.title.toLowerCase().includes(input));
-
-    if (found) {
-        resultText.innerText = found.text;
-        resultArea.style.display = "block";
-    } else {
-        alert("پرامپٹ نہیں ملا!");
-    }
-}
-
-function copyPromptResult() {
-    const text = document.getElementById("promptResultText").innerText;
-    navigator.clipboard.writeText(text);
-    alert("✅ کاپی ہو گیا!");
-}
-    
 </script>
-<script>
-const promptsData = [
-    { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills]." },
-    { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." },
-    { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." }
-    // آپ یہاں کوما لگا کر اور بھی پرامپٹس بڑھا سکتے ہیں
-];
+    
 
-function displayPrompts(filter = "") {
+    <script>
+    const promptsData = [
+        { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills]." },
+        { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." },
+        { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." }
+    ];
+
+    function displayPrompts(filter = "") {
+        const list = document.getElementById("promptList");
+        list.innerHTML = "";
+        promptsData.forEach((p, index) => {
+            if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
+                let id = "p_" + index;
+                list.innerHTML += `
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left;">
+                        <h4 style="color: #ffcc00; margin: 0;">${p.title}</h4>
+                        <p style="font-size: 13px; color: #ccc; margin: 5px 0;">${p.text}</p>
+                        <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-weight: bold;">📋 کاپی کریں</button>
+                        <div id="${id}" style="display:none;">${p.text}</div>
+                    </div>
+                `;
+            }
+        });
+    }
+
+     function displayPrompts(filter = "") {
     const list = document.getElementById("promptList");
-    if(!list) return; // یہ چیک کرتا ہے کہ کیا سرچ باکس موجود ہے
     list.innerHTML = "";
+    
     promptsData.forEach((p, index) => {
         if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
             let id = "p_" + index;
+            let resultId = "res_" + index; // یہ وہ جگہ ہے جہاں جواب آئے گا
+            
             list.innerHTML += `
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left;">
-                    <h4 style="color: #ffcc00; margin: 0;">${p.title}</h4>
-                    <p style="font-size: 13px; color: #ccc; margin: 5px 0;">${p.text}</p>
-                    <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-weight: bold;">📋 کاپی کریں</button>
-                    <div id="${id}" style="display:none;">${p.text}</div>
+                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left;">
+                    <h4 style="color: #ffcc00; margin: 0 0 10px 0;">${p.title}</h4>
+                    <p style="font-size: 13px; color: #ccc; margin-bottom: 15px;">${p.text}</p>
+                    
+                    <button onclick="showPrompt('${p.text}', '${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                        استعمال کریں
+                    </button>
+                    
+                    <div id="${resultId}" style="display:none; margin-top: 15px; padding: 10px; background: #0a0d18; border: 1px solid #ffcc00; border-radius: 8px; font-size: 14px;">
+                        <div id="text_${resultId}" style="margin-bottom: 10px; color: white;"></div>
+                        <button class="copy-btn" onclick="copyResult('text_${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer;">📋 کاپی کریں</button>
+                    </div>
                 </div>
+            `;
+        }
+    });
+}
+
+// یہ فنکشن باکس کو ظاہر کرے گا
+function showPrompt(text, resId) {
+    const box = document.getElementById(resId);
+    const textBox = document.getElementById("text_" + resId);
+    textBox.innerText = text;
+    box.style.display = "block"; // باکس دکھا دیں
+}
+
+// یہ فنکشن کاپی کرے گا
+function copyResult(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+    alert("✅ کاپی ہو گیا!");
+}
+        
+            `;
+        }
+    });
+ }
+       
             `;
         }
     });
@@ -681,7 +669,7 @@ function copyPrompt(id) {
 
 displayPrompts();
 </script>
+ 
     
-    
-</body>
+</body>    
 </html>
