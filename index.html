@@ -519,45 +519,9 @@
 
 <!-- Google Translate Script -->
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-const promptsData = [
-    { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills] and ensure the client feels confident. Keep it under 150 words." },
-    { title: "SEO Article Outline", category: "SEO", text: "Create a detailed article outline for the topic '[Topic]'. Include an engaging title, H1, H2, and H3 tags, and suggest 5 long-tail keywords to target." },
-    { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Focus on benefits, include a clear Call-to-Action, and add relevant FAQs." }
-];
 
-function displayPrompts(filter = "") {
-    const list = document.getElementById("promptList");
-    list.innerHTML = "";
-    
-    promptsData.forEach((p, index) => {
-        if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
-            let id = "prompt_" + index;
-            list.innerHTML += `
-                <div class="tool-card" style="text-align:left;">
-                    <h4>${p.title}</h4>
-                    <small style="color:#ffcc00;">${p.category}</small>
-                    <p style="font-size:13px; margin:10px 0;">${p.text}</p>
-                    <button class="copy-btn" onclick="copyPrompt('${id}')">📋 کاپی کریں</button>
-                    <div id="${id}" style="display:none;">${p.text}</div>
-                </div>
-            `;
-        }
-    });
-}
 
-function filterPrompts() {
-    let query = document.getElementById("promptSearch").value;
-    displayPrompts(query);
-}
 
-function copyPrompt(id) {
-    let text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text);
-    alert("پرامپٹ کاپی ہو گیا!");
-}
-
-// ابتدائی لوڈنگ
-displayPrompts();
     
     
 <script>
@@ -612,5 +576,52 @@ displayPrompts();
     }
     draw();
 </script>
-</body>
+    <div class="tool-card" id="prompt-library-tool">
+        <h3>📚 Prompt Library</h3>
+        <p>سرچ کریں اور ایک کلک میں کاپی کریں!</p>
+        <input type="text" id="promptSearch" placeholder="مثلاً: Fiverr, SEO, Coding..." onkeyup="filterPrompts()" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 20px; border: 1px solid #ffcc00; background: #0c0f1a; color: white;">
+        <div id="promptList" class="tool-content">
+            </div>
+    </div>
+
+    <script>
+    const promptsData = [
+        { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills]." },
+        { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." },
+        { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." }
+    ];
+
+    function displayPrompts(filter = "") {
+        const list = document.getElementById("promptList");
+        list.innerHTML = "";
+        promptsData.forEach((p, index) => {
+            if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
+                let id = "p_" + index;
+                list.innerHTML += `
+                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left;">
+                        <h4 style="color: #ffcc00; margin: 0;">${p.title}</h4>
+                        <p style="font-size: 13px; color: #ccc; margin: 5px 0;">${p.text}</p>
+                        <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-weight: bold;">📋 کاپی کریں</button>
+                        <div id="${id}" style="display:none;">${p.text}</div>
+                    </div>
+                `;
+            }
+        });
+    }
+
+    function filterPrompts() {
+        displayPrompts(document.getElementById("promptSearch").value);
+    }
+
+    function copyPrompt(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            alert("پرامپٹ کاپی ہو گیا!");
+        });
+    }
+
+    displayPrompts();
+    </script>
+
+</body> ```   
 </html>
