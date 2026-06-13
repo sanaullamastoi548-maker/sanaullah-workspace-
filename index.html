@@ -6,7 +6,6 @@
     <title>Sanaullah Workspace | AI Tools & Productivity</title>
     
     <style>
-        /* ========== ویب سائٹ کا مکمل ڈیزائن ========== */
         * {
             margin: 0;
             padding: 0;
@@ -21,7 +20,6 @@
             min-height: 100vh;
         }
 
-        /* چمکتی ریت والا کینوس */
         canvas {
             position: fixed;
             top: 0;
@@ -40,7 +38,6 @@
             padding: 20px;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
@@ -71,7 +68,6 @@
             box-shadow: 0 0 10px #ffcc00;
         }
 
-        /* ========== زبان اور سرچ بار ========== */
         .language-section {
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(12px);
@@ -104,10 +100,6 @@
             background: rgba(0,0,0,0.6);
             color: white;
             outline: none;
-        }
-        #language-search:focus {
-            border-color: #fff;
-            box-shadow: 0 0 15px rgba(255,204,0,0.3);
         }
         .search-btn {
             background: #ffcc00;
@@ -165,7 +157,6 @@
             transform: translateY(-2px);
         }
 
-        /* ========== ٹولز کا کنٹینر ========== */
         .tools-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -212,7 +203,6 @@
             transform: scale(0.98);
         }
 
-        /* Tool Content (for each tool's inner functionality) */
         .tool-content {
             margin-top: 20px;
             padding-top: 15px;
@@ -273,14 +263,12 @@
 <canvas id="sandCanvas"></canvas>
 
 <div class="container">
-    <!-- Header -->
     <div class="header">
         <h1>Sanaullah Workspace</h1>
         <div class="glow-line"></div>
         <p>🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
     </div>
 
-    <!-- ========== زبان اور سرچ بار ========== -->
     <div class="language-section">
         <h3>🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
@@ -295,7 +283,6 @@
             </div>
         </div>
 
-        <!-- Popular Languages Quick Access -->
         <div class="popular-langs">
             <h4>📚 مشہور زبانیں (کلک کریں)</h4>
             <div class="lang-tags">
@@ -318,12 +305,10 @@
         </div>
     </div>
 
-    <!-- ========== ٹولز کا کنٹینر ========== -->
     <div class="tools-container">
-        <!-- Tool 1: Freelance Assistant (تمام آپشنز کے ساتھ) -->
         <div class="tool-card">
             <h3>🤖 Freelance Assistant</h3>
-            <p>AI کی مدد سے پرووزل اور نگ ڈسکریشن لکھیں۔</p>
+            <p>AI کی مدد سے پروپوزل اور Gig ڈسکریشن لکھیں۔</p>
             <div class="tool-content">
                 <select id="taskType">
                     <option value="upwork">📘 Upwork Proposal</option>
@@ -337,7 +322,6 @@
             </div>
         </div>
 
-        <!-- Tool 2: Content Writer -->
         <div class="tool-card">
             <h3>✍️ Content Writer</h3>
             <p>AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
@@ -350,7 +334,6 @@
             </div>
         </div>
 
-        <!-- Tool 3: SEO Optimizer -->
         <div class="tool-card">
             <h3>📈 SEO Optimizer</h3>
             <p>اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
@@ -362,7 +345,6 @@
             </div>
         </div>
 
-        <!-- Tool 4: Code Helper -->
         <div class="tool-card">
             <h3>💻 Code Helper</h3>
             <p>کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
@@ -378,22 +360,18 @@
                 <div id="codeResult" class="result-box">⚙️ کوڈ کا جواب یہاں آئے گا</div>
             </div>
         </div>
-        
-     </div>
-
-    <!-- Prompt Library Tool -->
-<div class="tool-card" style="grid-column: 1 / -1;">
-    <h3>📚 Prompt Library</h3>
-    <p>اپنی پسند کا پرامپٹ سرچ کریں اور ایک کلک میں کاپی کریں!</p>
-    
-    <input type="text" id="promptSearch" placeholder="مثلاً: Fiverr, SEO, Coding..." onkeyup="filterPrompts()">
-    
-    <div id="promptList" class="tools-container" style="margin-top: 20px;">
-        <!-- یہاں پرامپٹس جاوا اسکرپٹ سے آئیں گے -->
     </div>
-</div>
 
-    
+    <!-- Prompt Library Tool with YELLOW BUTTON -->
+    <div class="tool-card" style="grid-column: 1 / -1;">
+        <h3>📚 Prompt Library</h3>
+        <p>اپنی پسند کا پرامپٹ سرچ کریں اور پیلے بٹن پر کلک کریں!</p>
+        
+        <input type="text" id="promptSearch" placeholder="مثلاً: Fiverr, SEO, Coding..." onkeyup="filterPrompts()">
+        
+        <div id="promptList" class="tools-container" style="margin-top: 20px; display: block;">
+        </div>
+    </div>
 
     <footer>
         <h3>Sanaullah Workspace</h3>
@@ -403,12 +381,11 @@
 </div>
 
 <script>
-    // ========== GOOGLE TRANSLATE (مکمل زبانوں کے ساتھ) ==========
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'ur',
             autoDisplay: false,
-            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk,hi,ta,te,ml,kn,gu,pa,ne,sd,ps,so,sw,am,az,ka,km,lo,my,mn,ne,si,tg,uz'
+            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk'
         }, 'google_translate_element');
     }
 
@@ -445,20 +422,12 @@
         searchLanguage();
     }
 
-    // ========== HELPER: COPY FUNCTION ==========
     function universalCopy(elementId) {
         let el = document.getElementById(elementId);
         let text = el.innerText || el.textContent;
-        let temp = document.createElement("textarea");
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        try { document.execCommand("copy"); } catch(e) {}
-        document.body.removeChild(temp);
-        alert("✅ متن کاپی ہو گیا!");
+        navigator.clipboard.writeText(text).then(() => alert("✅ متن کاپی ہو گیا!"));
     }
 
-    // ========== TOOL 1: Freelance Assistant (تمام آپشنز کے ساتھ) ==========
     function generateAIAnswer() {
         let task = document.getElementById("taskType").value;
         let topic = document.getElementById("userTopic").value.trim();
@@ -468,18 +437,17 @@
         }
         
         let responses = {
-            upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in this field and can deliver efficiently. I have completed similar projects successfully. Let's discuss your specific needs.\n\nBest regards,\nSanaullah`,
-            fiverr: `Are you looking for high-quality ${topic} services? I specialize in delivering professional results with fast turnaround. Satisfaction guaranteed!\n\nOrder now and let's get started.\n\nRegards,\nSanaullah`,
-            freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline. Please check my profile for similar work. Ready to start immediately!\n\nThanks,\nSanaullah`,
-            linkedin: `Hi, I noticed you are working on ${topic}. I specialize in automation and productivity solutions. Would love to connect and discuss how we can collaborate.\n\nBest,\nSanaullah`
+            upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in this field and can deliver efficiently.`,
+            fiverr: `Are you looking for high-quality ${topic} services? I specialize in delivering professional results with fast turnaround.`,
+            freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline.`,
+            linkedin: `Hi, I noticed you are working on ${topic}. Would love to connect and discuss how we can collaborate.`
         };
         
         let result = responses[task];
         let uid = "freelance_" + Date.now();
-        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
-    // ========== TOOL 2: Content Writer ==========
     function convertContent(type) {
         let txt = document.getElementById("contentInput").value;
         if (!txt) { document.getElementById("contentResult").innerHTML = "⚠️ پہلے کچھ لکھیں!"; return; }
@@ -491,16 +459,14 @@
         document.getElementById("contentResult").innerHTML = `<div id="${uid}">${res}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
-    // ========== TOOL 3: SEO Optimizer ==========
     function optimizeSEO() {
         let kw = document.getElementById("seoKeyword").value.trim();
         if (!kw) { document.getElementById("seoResult").innerHTML = "⚠️ مطلوبہ لفظ لکھیں!"; return; }
-        let tips = `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔<br>✅ تصاویر میں alt text ${kw} رکھیں۔<br>✅ URLs میں ${kw} استعمال کریں۔`;
+        let tips = `🔍 SEO تجاویز "${kw}":\n✅ عنوان میں ${kw} ڈالیں۔\n✅ پہلے 100 الفاظ میں ${kw} لائیں۔\n✅ Meta description میں ${kw} لکھیں۔`;
         let uid = "seo_" + Date.now();
-        document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
-    // ========== TOOL 4: Code Helper ==========
     function generateCodeHelp() {
         let lang = document.getElementById("codeLanguage").value;
         let q = document.getElementById("codeQuestion").value.trim();
@@ -515,17 +481,52 @@
         let uid = "code_" + Date.now();
         document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace; text-align:left; direction:ltr;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
-</script>
 
-<!-- Google Translate Script -->
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    const promptsData = [
+        { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting Upwork proposal for [Project Name]. Highlight my skills in [Your Skills]." },
+        { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." },
+        { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." }
+    ];
 
+    function displayPrompts(filter = "") {
+        const list = document.getElementById("promptList");
+        list.innerHTML = "";
+        promptsData.forEach((p, index) => {
+            if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
+                let resultId = "res_" + index;
+                list.innerHTML += `
+                    <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left;">
+                        <h4 style="color: #ffcc00; margin: 0 0 10px 0;">${p.title} <span style="font-size: 12px;">(${p.category})</span></h4>
+                        <p style="font-size: 13px; color: #ccc; margin-bottom: 15px;">${p.text}</p>
+                        <button onclick="showPrompt('${p.text.replace(/'/g, "\\'")}', '${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">🟡 استعمال کریں</button>
+                        <div id="${resultId}" style="display:none; margin-top: 15px; padding: 10px; background: #0a0d18; border: 1px solid #ffcc00; border-radius: 8px;">
+                            <div id="text_${resultId}" style="margin-bottom: 10px; color: white;"></div>
+                            <button class="copy-btn" onclick="copyResult('text_${resultId}')">📋 کاپی کریں</button>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+    }
 
+    function showPrompt(text, resId) {
+        const box = document.getElementById(resId);
+        const textBox = document.getElementById("text_" + resId);
+        textBox.innerText = text;
+        box.style.display = "block";
+    }
 
-    
-    
-<script>
-    // ========== گولڈن ریت + چمکتی بلبیں (پس منظر) ==========
+    function copyResult(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text).then(() => alert("✅ پرامپٹ کاپی ہو گیا!"));
+    }
+
+    function filterPrompts() {
+        displayPrompts(document.getElementById("promptSearch").value);
+    }
+
+    displayPrompts();
+
     const canvas = document.getElementById('sandCanvas');
     const ctx = canvas.getContext('2d');
     function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -559,117 +560,10 @@
             if (p.y < -50) p.y = canvas.height + 40;
             if (p.y > canvas.height + 50) p.y = -40;
         }
-        if (!window.bulbs) {
-            window.bulbs = [];
-            for (let i = 0; i < 40; i++) window.bulbs.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 5 + 2, speed: 0.5 + Math.random() * 1.5 });
-        }
-        for (let i = 0; i < window.bulbs.length; i++) {
-            let b = window.bulbs[i];
-            let flick = Math.sin(time * b.speed + i) * 0.5 + 0.5;
-            ctx.beginPath();
-            ctx.arc(b.x, b.y, b.radius * (0.7 + flick * 0.6), 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 210, 70, ${0.25 + flick * 0.4})`;
-            ctx.shadowBlur = 18 * flick;
-            ctx.fill();
-        }
         requestAnimationFrame(draw);
     }
     draw();
 </script>
-    
-
-    <script>
-    const promptsData = [
-        { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills]." },
-        { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." },
-        { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." }
-    ];
-
-    function displayPrompts(filter = "") {
-        const list = document.getElementById("promptList");
-        list.innerHTML = "";
-        promptsData.forEach((p, index) => {
-            if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
-                let id = "p_" + index;
-                list.innerHTML += `
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left;">
-                        <h4 style="color: #ffcc00; margin: 0;">${p.title}</h4>
-                        <p style="font-size: 13px; color: #ccc; margin: 5px 0;">${p.text}</p>
-                        <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-weight: bold;">📋 کاپی کریں</button>
-                        <div id="${id}" style="display:none;">${p.text}</div>
-                    </div>
-                `;
-            }
-        });
-    }
-
-     function displayPrompts(filter = "") {
-    const list = document.getElementById("promptList");
-    list.innerHTML = "";
-    
-    promptsData.forEach((p, index) => {
-        if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
-            let id = "p_" + index;
-            let resultId = "res_" + index; // یہ وہ جگہ ہے جہاں جواب آئے گا
-            
-            list.innerHTML += `
-                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left;">
-                    <h4 style="color: #ffcc00; margin: 0 0 10px 0;">${p.title}</h4>
-                    <p style="font-size: 13px; color: #ccc; margin-bottom: 15px;">${p.text}</p>
-                    
-                    <button onclick="showPrompt('${p.text}', '${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s;">
-                        استعمال کریں
-                    </button>
-                    
-                    <div id="${resultId}" style="display:none; margin-top: 15px; padding: 10px; background: #0a0d18; border: 1px solid #ffcc00; border-radius: 8px; font-size: 14px;">
-                        <div id="text_${resultId}" style="margin-bottom: 10px; color: white;"></div>
-                        <button class="copy-btn" onclick="copyResult('text_${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer;">📋 کاپی کریں</button>
-                    </div>
-                </div>
-            `;
-        }
-    });
-}
-
-// یہ فنکشن باکس کو ظاہر کرے گا
-function showPrompt(text, resId) {
-    const box = document.getElementById(resId);
-    const textBox = document.getElementById("text_" + resId);
-    textBox.innerText = text;
-    box.style.display = "block"; // باکس دکھا دیں
-}
-
-// یہ فنکشن کاپی کرے گا
-function copyResult(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text);
-    alert("✅ کاپی ہو گیا!");
-}
-        
-            `;
-        }
-    });
- }
-       
-            `;
-        }
-    });
-}
-
-function filterPrompts() {
-    displayPrompts(document.getElementById("promptSearch").value);
-}
-
-function copyPrompt(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        alert("پرامپٹ کاپی ہو گیا!");
-    });
-}
-
-displayPrompts();
-</script>
- 
-    
-</body>    
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
 </html>
