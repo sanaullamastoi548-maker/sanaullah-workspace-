@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanaullah Workspace | AI Tools & Productivity</title>
+    
     <style>
+        /* ========== ویب سائٹ کا مکمل ڈیزائن ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', 'Noto Nastaliq Urdu', system-ui, sans-serif;
         }
+
         body {
             background: #070b14;
             color: #eee;
             overflow-x: hidden;
             min-height: 100vh;
         }
+
+        /* چمکتی ریت والا کینوس */
         canvas {
             position: fixed;
             top: 0;
@@ -26,13 +31,16 @@
             z-index: 0;
             pointer-events: none;
         }
+
         .container {
             position: relative;
             z-index: 2;
-            max-width: 1300px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
+
+        /* Header */
         .header {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
@@ -62,6 +70,8 @@
             border-radius: 5px;
             box-shadow: 0 0 10px #ffcc00;
         }
+
+        /* ========== زبان اور سرچ بار ========== */
         .language-section {
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(12px);
@@ -94,6 +104,10 @@
             background: rgba(0,0,0,0.6);
             color: white;
             outline: none;
+        }
+        #language-search:focus {
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255,204,0,0.3);
         }
         .search-btn {
             background: #ffcc00;
@@ -150,15 +164,15 @@
             color: black;
             transform: translateY(-2px);
         }
-        
-        /* Three Tools Layout */
-        .three-tools {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+
+        /* ========== ٹولز کا کنٹینر ========== */
+        .tools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             margin: 40px 0;
         }
+
         .tool-card {
             background: rgba(255,255,255,0.05);
             backdrop-filter: blur(12px);
@@ -167,8 +181,6 @@
             border: 1px solid rgba(255,255,255,0.1);
             transition: 0.3s;
             text-align: center;
-            flex: 1;
-            min-width: 280px;
         }
         .tool-card:hover {
             transform: translateY(-5px);
@@ -185,22 +197,22 @@
             margin-bottom: 20px;
             line-height: 1.5;
         }
-        .yellow-btn {
+        .tool-card button {
             background: #ffcc00;
             color: black;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 24px;
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 14px;
-            margin: 5px;
         }
-        .yellow-btn:hover {
+        .tool-card button:hover {
             background: #ffaa00;
             transform: scale(0.98);
         }
+
+        /* Tool Content (for each tool's inner functionality) */
         .tool-content {
             margin-top: 20px;
             padding-top: 15px;
@@ -236,42 +248,7 @@
             cursor: pointer;
             margin-top: 10px;
         }
-        
-        /* Prompt Library */
-        .prompt-section {
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(12px);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 40px 0;
-            border: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-        .prompt-section h3 {
-            color: #ffcc00;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        .prompt-search-box {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto 20px auto;
-            padding: 14px 20px;
-            border-radius: 60px;
-            background: #0c0f1a;
-            color: white;
-            border: 1px solid #ffcc00;
-            display: block;
-        }
-        .prompt-result-area {
-            background: #0a0d18;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            border: 1px solid rgba(255,204,0,0.3);
-            display: none;
-        }
-        
+
         footer {
             text-align: center;
             padding: 30px;
@@ -284,12 +261,17 @@
             color: #ffcc00;
             margin-bottom: 8px;
         }
-        
-        @media (max-width: 900px) {
-            .three-tools {
-                flex-direction: column;
-            }
+
+        @media (max-width: 700px) {
             .header h1 { font-size: 32px; }
+           .language-section h3 { font-size: 20px; } 
+
+            .prompt-section { background: #0c0f1a; padding: 20px; border-radius: 15px; border: 1px solid #ffcc00; margin: 20px 0; color: white; }
+.prompt-search-box { width: 100%; padding: 12px; margin: 10px 0; border-radius: 20px; border: 1px solid #ffcc00; background: #000; color: white; }
+.yellow-btn { background: #ffcc00; color: black; border: none; padding: 12px 30px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+.prompt-result-area { display: none; background: rgba(255, 204, 0, 0.1); padding: 20px; border-radius: 15px; border: 1px solid #ffcc00; margin-top: 20px; }
+.copy-btn { background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 15px; cursor: pointer; font-weight: bold; }
+            
         }
     </style>
 </head>
@@ -298,13 +280,14 @@
 <canvas id="sandCanvas"></canvas>
 
 <div class="container">
+    <!-- Header -->
     <div class="header">
         <h1>Sanaullah Workspace</h1>
         <div class="glow-line"></div>
         <p>🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
     </div>
 
-    <!-- ========== GOOGLE TRANSLATE WITH ALL LANGUAGES ========== -->
+    <!-- ========== زبان اور سرچ بار ========== -->
     <div class="language-section">
         <h3>🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
@@ -319,6 +302,7 @@
             </div>
         </div>
 
+        <!-- Popular Languages Quick Access -->
         <div class="popular-langs">
             <h4>📚 مشہور زبانیں (کلک کریں)</h4>
             <div class="lang-tags">
@@ -341,11 +325,12 @@
         </div>
     </div>
 
-    <!-- ========== THREE TOOLS (LEFT, CENTER, RIGHT) ========== -->
-    <div class="three-tools">
+    <!-- ========== ٹولز کا کنٹینر ========== -->
+    <div class="tools-container">
+        <!-- Tool 1: Freelance Assistant (تمام آپشنز کے ساتھ) -->
         <div class="tool-card">
             <h3>🤖 Freelance Assistant</h3>
-            <p>AI کی مدد سے پروپوزل اور Gig ڈسکریشن لکھیں۔</p>
+            <p>AI کی مدد سے پرووزل اور نگ ڈسکریشن لکھیں۔</p>
             <div class="tool-content">
                 <select id="taskType">
                     <option value="upwork">📘 Upwork Proposal</option>
@@ -353,68 +338,69 @@
                     <option value="freelancer">💼 Freelancer.com Bid</option>
                     <option value="linkedin">🔗 LinkedIn Connection Message</option>
                 </select>
-                <input type="text" id="userTopic" placeholder="کام کا نام لکھیں">
-                <button class="yellow-btn" onclick="generateAIAnswer()">Generate Proposal</button>
+                <input type="text" id="userTopic" placeholder="کام کا نام لکھیں (مثال: Google Sheets Automation)">
+                <button onclick="generateAIAnswer()">Generate Proposal</button>
                 <div id="aiResponse" class="result-box">✨ جواب یہاں آئے گا</div>
             </div>
         </div>
 
+        <!-- Tool 2: Content Writer -->
         <div class="tool-card">
             <h3>✍️ Content Writer</h3>
             <p>AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
             <div class="tool-content">
                 <textarea id="contentInput" rows="3" placeholder="اپنا مواد یہاں لکھیں..."></textarea>
-                <button class="yellow-btn" onclick="convertContent('upper')">UPPERCASE</button>
-                <button class="yellow-btn" onclick="convertContent('lower')">lowercase</button>
-                <button class="yellow-btn" onclick="convertContent('capitalize')">Capitalize</button>
+                <button onclick="convertContent('upper')">UPPERCASE</button>
+                <button onclick="convertContent('lower')">lowercase</button>
+                <button onclick="convertContent('capitalize')">Capitalize</button>
                 <div id="contentResult" class="result-box">📝 نتیجہ یہاں آئے گا</div>
             </div>
         </div>
 
+        <!-- Tool 3: SEO Optimizer -->
         <div class="tool-card">
             <h3>📈 SEO Optimizer</h3>
             <p>اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
             <div class="tool-content">
                 <input type="text" id="seoKeyword" placeholder="مطلوبہ لفظ">
                 <textarea id="seoContent" rows="3" placeholder="اپنا آرٹیکل لکھیں..."></textarea>
-                <button class="yellow-btn" onclick="optimizeSEO()">Optimize SEO</button>
+                <button onclick="optimizeSEO()">SEO Optimize کریں</button>
                 <div id="seoResult" class="result-box">📊 SEO تجاویز یہاں ہوں گی</div>
+            </div>
+        </div>
+
+        <!-- Tool 4: Code Helper -->
+        <div class="tool-card">
+            <h3>💻 Code Helper</h3>
+            <p>کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
+            <div class="tool-content">
+                <select id="codeLanguage">
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="python">Python</option>
+                </select>
+                <textarea id="codeQuestion" rows="3" placeholder="اپنا سوال لکھیں..."></textarea>
+                <button onclick="generateCodeHelp()">Code Helper سے پوچھیں</button>
+                <div id="codeResult" class="result-box">⚙️ کوڈ کا جواب یہاں آئے گا</div>
             </div>
         </div>
     </div>
 
-    <!-- Code Helper -->
-    <div class="tool-card" style="margin-bottom: 20px;">
-        <h3>💻 Code Helper</h3>
-        <p>کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
-        <div class="tool-content">
-            <select id="codeLanguage">
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
-                <option value="javascript">JavaScript</option>
-                <option value="python">Python</option>
-            </select>
-            <textarea id="codeQuestion" rows="3" placeholder="اپنا سوال لکھیں..."></textarea>
-            <button class="yellow-btn" onclick="generateCodeHelp()">Ask Code Helper</button>
-            <div id="codeResult" class="result-box">⚙️ کوڈ کا جواب یہاں آئے گا</div>
-        </div>
-    </div>
-
-    <!-- ========== PROMPT LIBRARY WITH YELLOW BUTTON ========== -->
     <div class="prompt-section">
-        <h3>📚 Prompt Library</h3>
-        <p>اپنی پسند کا پرامپٹ سرچ کریں اور پیلے بٹن پر کلک کریں!</p>
-        
-        <input type="text" id="promptSearchInput" class="prompt-search-box" placeholder="🔍 یہاں لکھیں: Fiverr, SEO, Upwork, Coding...">
-        
-        <button class="yellow-btn" onclick="searchPromptAndShow()" style="font-size: 16px; padding: 12px 30px;">🟡 سرچ کریں اور دکھائیں</button>
-        
-        <div id="promptResultArea" class="prompt-result-area">
-            <div id="promptResultText" style="margin-bottom: 15px; font-size: 16px; line-height: 1.6; text-align: right;"></div>
-            <button class="copy-btn" onclick="copyPromptResult()">📋 کاپی کریں</button>
-        </div>
+    <h3>📚 Prompt Library</h3>
+    <p>اپنی پسند کا پرامپٹ سرچ کریں اور پیلے بٹن پر کلک کریں!</p>
+    
+    <input type="text" id="promptSearchInput" class="prompt-search-box" placeholder="🔍 مثلاً: Fiverr, SEO, Upwork...">
+    
+    <button class="yellow-btn" onclick="searchPromptAndShow()">🟡 سرچ کریں</button>
+    
+    <div id="promptResultArea" class="prompt-result-area">
+        <div id="promptResultText" style="margin-bottom: 15px; font-size: 16px; line-height: 1.6; text-align: right;"></div>
+        <button class="copy-btn" onclick="copyPromptResult()">📋 کاپی کریں</button>
     </div>
-
+    </div>
+    
     <footer>
         <h3>Sanaullah Workspace</h3>
         <p>AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation</p>
@@ -423,57 +409,12 @@
 </div>
 
 <script>
-    // Prompt Data
-    const promptsLibrary = {
-        "fiverr": "Write a professional SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits, pricing packages, and FAQs. Make it persuasive and client-focused.",
-        "upwork": "Act as a professional freelancer. Write a high-converting Upwork proposal for [Project Name]. Highlight my skills in [Your Skills]. Keep it short and compelling.",
-        "seo": "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition and high search intent. Also provide meta title and description suggestions.",
-        "content": "Create a detailed blog post outline for [Topic]. Include introduction, 5 main subheadings with bullet points, and a strong conclusion. Add SEO tips.",
-        "coding": "Act as a senior developer. Debug this [Language] code and explain the issue: [Paste Code Here]. Provide the corrected code with comments.",
-        "freelancing": "Write a professional LinkedIn connection message for a client looking for [Service]. Keep it polite, short, and value-driven.",
-        "default": "You searched for: [QUERY]. Please refine your search. Try: Fiverr, Upwork, SEO, Content, Coding, or Freelancing."
-    };
-
-    function searchPromptAndShow() {
-        let query = document.getElementById("promptSearchInput").value.trim().toLowerCase();
-        let resultText = "";
-        
-        if (!query) {
-            resultText = "⚠️ براہ کرم کچھ لکھیں! مثال: Fiverr, SEO, Upwork";
-        } else {
-            let found = false;
-            for (let key in promptsLibrary) {
-                if (query.includes(key) || key.includes(query)) {
-                    resultText = promptsLibrary[key];
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                resultText = promptsLibrary["default"].replace("[QUERY]", query);
-            }
-        }
-        
-        document.getElementById("promptResultText").innerHTML = resultText;
-        document.getElementById("promptResultArea").style.display = "block";
-        window.currentPromptResult = resultText;
-    }
-
-    function copyPromptResult() {
-        if (window.currentPromptResult) {
-            navigator.clipboard.writeText(window.currentPromptResult);
-            alert("✅ پرامپٹ کاپی ہو گیا!");
-        } else {
-            alert("⚠️ کاپی کرنے کے لیے کوئی متن نہیں ہے");
-        }
-    }
-
-    // Google Translate Functions
+    // ========== GOOGLE TRANSLATE (مکمل زبانوں کے ساتھ) ==========
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'ur',
             autoDisplay: false,
-            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk'
+            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk,hi,ta,te,ml,kn,gu,pa,ne,sd,ps,so,sw,am,az,ka,km,lo,my,mn,ne,si,tg,uz'
         }, 'google_translate_element');
     }
 
@@ -483,6 +424,7 @@
             alert("براہ کرم کوئی زبان لکھیں!");
             return;
         }
+        
         let select = document.querySelector('.goog-te-combo');
         if (select) {
             let found = false;
@@ -496,7 +438,9 @@
                     break;
                 }
             }
-            if (!found) alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
+            if (!found) {
+                alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
+            }
         } else {
             alert("⚠️ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔");
         }
@@ -507,12 +451,20 @@
         searchLanguage();
     }
 
+    // ========== HELPER: COPY FUNCTION ==========
     function universalCopy(elementId) {
         let el = document.getElementById(elementId);
         let text = el.innerText || el.textContent;
-        navigator.clipboard.writeText(text).then(() => alert("✅ متن کاپی ہو گیا!"));
+        let temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        try { document.execCommand("copy"); } catch(e) {}
+        document.body.removeChild(temp);
+        alert("✅ متن کاپی ہو گیا!");
     }
 
+    // ========== TOOL 1: Freelance Assistant (تمام آپشنز کے ساتھ) ==========
     function generateAIAnswer() {
         let task = document.getElementById("taskType").value;
         let topic = document.getElementById("userTopic").value.trim();
@@ -520,17 +472,20 @@
             document.getElementById("aiResponse").innerHTML = "⚠️ براہ کرم کام کا نام لکھیں!";
             return;
         }
+        
         let responses = {
-            upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in this field and can deliver efficiently.`,
-            fiverr: `Are you looking for high-quality ${topic} services? I specialize in delivering professional results with fast turnaround.`,
-            freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline.`,
-            linkedin: `Hi, I noticed you are working on ${topic}. Would love to connect and discuss how we can collaborate.`
+            upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in this field and can deliver efficiently. I have completed similar projects successfully. Let's discuss your specific needs.\n\nBest regards,\nSanaullah`,
+            fiverr: `Are you looking for high-quality ${topic} services? I specialize in delivering professional results with fast turnaround. Satisfaction guaranteed!\n\nOrder now and let's get started.\n\nRegards,\nSanaullah`,
+            freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline. Please check my profile for similar work. Ready to start immediately!\n\nThanks,\nSanaullah`,
+            linkedin: `Hi, I noticed you are working on ${topic}. I specialize in automation and productivity solutions. Would love to connect and discuss how we can collaborate.\n\nBest,\nSanaullah`
         };
+        
         let result = responses[task];
         let uid = "freelance_" + Date.now();
-        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
+    // ========== TOOL 2: Content Writer ==========
     function convertContent(type) {
         let txt = document.getElementById("contentInput").value;
         if (!txt) { document.getElementById("contentResult").innerHTML = "⚠️ پہلے کچھ لکھیں!"; return; }
@@ -542,14 +497,16 @@
         document.getElementById("contentResult").innerHTML = `<div id="${uid}">${res}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
+    // ========== TOOL 3: SEO Optimizer ==========
     function optimizeSEO() {
         let kw = document.getElementById("seoKeyword").value.trim();
         if (!kw) { document.getElementById("seoResult").innerHTML = "⚠️ مطلوبہ لفظ لکھیں!"; return; }
-        let tips = `🔍 SEO تجاویز "${kw}":\n✅ عنوان میں ${kw} ڈالیں۔\n✅ پہلے 100 الفاظ میں ${kw} لائیں۔\n✅ Meta description میں ${kw} لکھیں۔`;
+        let tips = `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔<br>✅ تصاویر میں alt text ${kw} رکھیں۔<br>✅ URLs میں ${kw} استعمال کریں۔`;
         let uid = "seo_" + Date.now();
-        document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
 
+    // ========== TOOL 4: Code Helper ==========
     function generateCodeHelp() {
         let lang = document.getElementById("codeLanguage").value;
         let q = document.getElementById("codeQuestion").value.trim();
@@ -564,13 +521,19 @@
         let uid = "code_" + Date.now();
         document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace; text-align:left; direction:ltr;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
     }
+</script>
 
-    // Canvas Animation
+<!-- Google Translate Script -->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script>
+    // ========== گولڈن ریت + چمکتی بلبیں (پس منظر) ==========
     const canvas = document.getElementById('sandCanvas');
     const ctx = canvas.getContext('2d');
     function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
+
     let particles = [];
     for (let i = 0; i < 180; i++) {
         particles.push({
@@ -598,10 +561,49 @@
             if (p.y < -50) p.y = canvas.height + 40;
             if (p.y > canvas.height + 50) p.y = -40;
         }
+        if (!window.bulbs) {
+            window.bulbs = [];
+            for (let i = 0; i < 40; i++) window.bulbs.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 5 + 2, speed: 0.5 + Math.random() * 1.5 });
+        }
+        for (let i = 0; i < window.bulbs.length; i++) {
+            let b = window.bulbs[i];
+            let flick = Math.sin(time * b.speed + i) * 0.5 + 0.5;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.radius * (0.7 + flick * 0.6), 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 210, 70, ${0.25 + flick * 0.4})`;
+            ctx.shadowBlur = 18 * flick;
+            ctx.fill();
+        }
         requestAnimationFrame(draw);
     }
     draw();
+    const promptsData = [
+    { title: "Upwork", text: "Act as a freelancer... [Upwork Proposal Text]" },
+    { title: "SEO", text: "Generate 10 keywords... [SEO Keywords Text]" },
+    { title: "Fiverr", text: "Write a professional gig... [Fiverr Gig Text]" }
+];
+
+function searchPromptAndShow() {
+    const input = document.getElementById("promptSearchInput").value.toLowerCase();
+    const resultText = document.getElementById("promptResultText");
+    const resultArea = document.getElementById("promptResultArea");
+
+    const found = promptsData.find(p => p.title.toLowerCase().includes(input));
+
+    if (found) {
+        resultText.innerText = found.text;
+        resultArea.style.display = "block";
+    } else {
+        alert("پرامپٹ نہیں ملا!");
+    }
+}
+
+function copyPromptResult() {
+    const text = document.getElementById("promptResultText").innerText;
+    navigator.clipboard.writeText(text);
+    alert("✅ کاپی ہو گیا!");
+}
+    
 </script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
