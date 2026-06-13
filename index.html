@@ -625,20 +625,26 @@ const promptsData = [
     // آپ یہاں کوما لگا کر اور بھی پرامپٹس بڑھا سکتے ہیں
 ];
 
-function displayPrompts(filter = "") {
+ function displayPrompts(filter = "") {
     const list = document.getElementById("promptList");
-    if(!list) return; // یہ چیک کرتا ہے کہ کیا سرچ باکس موجود ہے
     list.innerHTML = "";
+    
     promptsData.forEach((p, index) => {
         if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
             let id = "p_" + index;
+            // یہ ہے وہ نیا ڈیزائن جو بالکل دوسرے ٹولز جیسا ہے
             list.innerHTML += `
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left;">
-                    <h4 style="color: #ffcc00; margin: 0;">${p.title}</h4>
-                    <p style="font-size: 13px; color: #ccc; margin: 5px 0;">${p.text}</p>
-                    <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-weight: bold;">📋 کاپی کریں</button>
+                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,204,0,0.3); padding: 15px; border-radius: 12px; margin-top: 15px; text-align: left;">
+                    <h4 style="color: #ffcc00; margin: 0 0 10px 0;">${p.title}</h4>
+                    <p style="font-size: 14px; color: #eee; margin-bottom: 15px; line-height: 1.4;">${p.text}</p>
+                    <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">📋 کاپی کریں</button>
                     <div id="${id}" style="display:none;">${p.text}</div>
                 </div>
+            `;
+        }
+    });
+ }
+       
             `;
         }
     });
