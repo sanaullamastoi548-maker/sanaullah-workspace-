@@ -603,43 +603,49 @@
         });
     }
 
-    function filterPrompts() {
-        displayPrompts(document.getElementById("promptSearch").value);
-    }
-
-    function copyPrompt(id) {
-        const text = document.getElementById(id).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            alert("پرامپٹ کاپی ہو گیا!");
-        });
-    }
-
-    displayPrompts();
-    </script>
-
-   <script>
-const promptsData = [
-    { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills]." },
-    { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." },
-    { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." }
-    // آپ یہاں کوما لگا کر اور بھی پرامپٹس بڑھا سکتے ہیں
-];
-
- function displayPrompts(filter = "") {
+     function displayPrompts(filter = "") {
     const list = document.getElementById("promptList");
     list.innerHTML = "";
     
     promptsData.forEach((p, index) => {
         if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
             let id = "p_" + index;
-            // یہ ہے وہ نیا ڈیزائن جو بالکل دوسرے ٹولز جیسا ہے
+            let resultId = "res_" + index; // یہ وہ جگہ ہے جہاں جواب آئے گا
+            
             list.innerHTML += `
-                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,204,0,0.3); padding: 15px; border-radius: 12px; margin-top: 15px; text-align: left;">
+                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left;">
                     <h4 style="color: #ffcc00; margin: 0 0 10px 0;">${p.title}</h4>
-                    <p style="font-size: 14px; color: #eee; margin-bottom: 15px; line-height: 1.4;">${p.text}</p>
-                    <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">📋 کاپی کریں</button>
-                    <div id="${id}" style="display:none;">${p.text}</div>
+                    <p style="font-size: 13px; color: #ccc; margin-bottom: 15px;">${p.text}</p>
+                    
+                    <button onclick="showPrompt('${p.text}', '${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                        استعمال کریں
+                    </button>
+                    
+                    <div id="${resultId}" style="display:none; margin-top: 15px; padding: 10px; background: #0a0d18; border: 1px solid #ffcc00; border-radius: 8px; font-size: 14px;">
+                        <div id="text_${resultId}" style="margin-bottom: 10px; color: white;"></div>
+                        <button class="copy-btn" onclick="copyResult('text_${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer;">📋 کاپی کریں</button>
+                    </div>
                 </div>
+            `;
+        }
+    });
+}
+
+// یہ فنکشن باکس کو ظاہر کرے گا
+function showPrompt(text, resId) {
+    const box = document.getElementById(resId);
+    const textBox = document.getElementById("text_" + resId);
+    textBox.innerText = text;
+    box.style.display = "block"; // باکس دکھا دیں
+}
+
+// یہ فنکشن کاپی کرے گا
+function copyResult(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text);
+    alert("✅ کاپی ہو گیا!");
+}
+        
             `;
         }
     });
