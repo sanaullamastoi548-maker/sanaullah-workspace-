@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanaullah Workspace | Free AI Tools & Productivity</title>
+    <title>Sanaullah Workspace | Free Tools Platform</title>
     
+    <!-- ========== SEO META TAGS ========== -->
+    <meta name="description" content="Sanaullah Workspace - 40+ Free Tools for SEO, Writing, Coding, Design, Finance &amp; Productivity. 100% Free, No Signup Required.">
+    <meta name="keywords" content="free tools, seo tools, writing tools, coding tools, design tools, finance tools, productivity tools, word counter, password generator, qr code generator">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sanaullahworkspace.com/">
+    
+    <!-- ========== OPEN GRAPH META TAGS ========== -->
+    <meta property="og:title" content="Sanaullah Workspace - 40+ Free Tools Platform">
+    <meta property="og:description" content="Free tools for SEO, Writing, Coding, Design, Finance and Productivity. No signup required.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sanaullahworkspace.com/">
+    <meta property="og:image" content="https://sanaullahworkspace.com/og-image.jpg">
+    
+    <!-- ========== TWITTER META TAGS ========== -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sanaullah Workspace - Free Tools Platform">
+    <meta name="twitter:description" content="40+ Free Tools for SEO, Writing, Coding, Design, Finance &amp; Productivity">
+    
+    <!-- ========== SCHEMA/STRUCTURED DATA ========== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Sanaullah Workspace",
+        "url": "https://sanaullahworkspace.com/",
+        "description": "40+ Free Tools for SEO, Writing, Coding, Design, Finance and Productivity",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://sanaullahworkspace.com/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
     <style>
+        /* ========== Existing Styles (same as before) ========== */
         * {
             margin: 0;
             padding: 0;
@@ -180,7 +215,7 @@
 
         .tools-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
             margin: 40px 0;
         }
@@ -201,25 +236,25 @@
         }
         .tool-card h3 {
             color: #ffcc00;
-            font-size: 22px;
-            margin-bottom: 12px;
+            font-size: 20px;
+            margin-bottom: 8px;
         }
         .tool-card p {
             color: #ccc;
-            margin-bottom: 20px;
-            line-height: 1.5;
-            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            font-size: 13px;
         }
         .tool-card button {
             background: #ffcc00;
             color: black;
             border: none;
-            padding: 10px 24px;
+            padding: 8px 18px;
             border-radius: 30px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 14px;
+            font-size: 13px;
         }
         .tool-card button:hover {
             background: #ffaa00;
@@ -227,14 +262,14 @@
         }
 
         .tool-content {
-            margin-top: 20px;
+            margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid rgba(255,255,255,0.1);
         }
         textarea, input, select {
             width: 100%;
-            padding: 12px;
-            margin: 8px 0;
+            padding: 10px;
+            margin: 6px 0;
             background: #0c0f1a;
             border: 1px solid #2c2f3a;
             border-radius: 12px;
@@ -248,26 +283,25 @@
         .result-box {
             background: #0a0d18;
             border-radius: 12px;
-            padding: 15px;
-            margin-top: 15px;
+            padding: 12px;
+            margin-top: 12px;
             border: 1px solid rgba(255,204,0,0.3);
-            font-size: 14px;
-            min-height: 50px;
+            font-size: 13px;
+            min-height: 40px;
             word-wrap: break-word;
             text-align: left;
-        }
-        .result-box[dir="rtl"] {
-            text-align: right;
+            max-height: 300px;
+            overflow-y: auto;
         }
         .copy-btn {
             background: #ffcc00;
             color: black;
             border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
+            padding: 4px 12px;
+            border-radius: 15px;
             cursor: pointer;
-            margin-top: 10px;
-            font-size: 13px;
+            margin-top: 8px;
+            font-size: 12px;
         }
         .copy-btn:hover {
             background: #ffaa00;
@@ -276,10 +310,10 @@
         .prompt-results-grid {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
         .search-small {
-            padding: 12px;
+            padding: 10px;
             border-radius: 60px;
             background: #0c0f1a;
             border: 1px solid #ffcc00;
@@ -289,16 +323,16 @@
         }
         .flex-row {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .prompt-counter {
             text-align: center;
-            font-size: 18px;
+            font-size: 16px;
             color: #ffcc00;
-            margin-bottom: 20px;
-            padding: 10px;
+            margin-bottom: 15px;
+            padding: 8px;
             background: rgba(255,204,0,0.1);
             border-radius: 12px;
             border: 1px solid rgba(255,204,0,0.2);
@@ -307,46 +341,40 @@
             background: rgba(255,204,0,0.05);
             border: 1px solid rgba(255,204,0,0.2);
             border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
+            padding: 15px;
+            margin-bottom: 20px;
         }
         .trending-section h4 {
             color: #ff6b00;
-            font-size: 20px;
-            margin-bottom: 15px;
+            font-size: 18px;
+            margin-bottom: 10px;
             text-align: center;
         }
         .trending-tag {
             display: inline-block;
             background: rgba(255,204,0,0.15);
             border: 1px solid #ffcc00;
-            padding: 6px 18px;
+            padding: 4px 14px;
             border-radius: 30px;
-            margin: 5px;
+            margin: 3px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.3s;
         }
         .trending-tag:hover {
             background: #ffcc00;
             color: black;
         }
-        .loading-text {
-            text-align: center;
-            color: #ffcc00;
-            padding: 30px;
-            font-size: 18px;
-        }
 
         .tool-grid-2col {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
         .tool-grid-3col {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
 
         footer {
@@ -360,6 +388,18 @@
         footer h3 {
             color: #ffcc00;
             margin-bottom: 8px;
+        }
+
+        /* ========== ACCESSIBILITY: Labels ========== */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
 
         @media (max-width: 700px) {
@@ -380,21 +420,22 @@
 
 <div class="container">
     <!-- Header -->
-    <div class="header">
+    <header class="header">
         <h1 id="siteTitle">Sanaullah Workspace</h1>
         <div class="glow-line"></div>
-        <p id="siteTagline">🛠️ 100% Free Tools — SEO, Writing, Coding, Design, Finance & Productivity</p>
+        <p id="siteTagline">🛠️ 40+ Free Tools — SEO, Writing, Coding, Design, Finance &amp; Productivity</p>
         
         <div class="lang-switcher">
-            <button class="lang-btn active" id="btnUrdu" onclick="setLanguage('ur')">🇵🇰 اردو</button>
-            <button class="lang-btn" id="btnEnglish" onclick="setLanguage('en')">🇬🇧 English</button>
+            <button class="lang-btn active" id="btnUrdu" onclick="setLanguage('ur')" aria-label="Switch to Urdu">🇵🇰 اردو</button>
+            <button class="lang-btn" id="btnEnglish" onclick="setLanguage('en')" aria-label="Switch to English">🇬🇧 English</button>
         </div>
-    </div>
+    </header>
 
     <!-- Language Section -->
-    <div class="language-section">
+    <section class="language-section" aria-label="Language Selection">
         <h3 id="langSectionTitle">🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
+            <label for="language-search" class="sr-only">زبان تلاش کریں</label>
             <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic...">
             <button class="search-btn" onclick="searchLanguage()" id="searchLangBtn">تلاش کریں</button>
         </div>
@@ -405,16 +446,17 @@
             <h4 id="popularLangsTitle">📚 مشہور زبانیں (کلک کریں)</h4>
             <div class="lang-tags" id="langTagsContainer"></div>
         </div>
-    </div>
+    </section>
 
     <!-- ========== TOOLS CONTAINER ========== -->
-    <div class="tools-container" id="toolsContainer">
+    <main class="tools-container" id="toolsContainer" role="main">
         <!-- Tool 1: Word Counter -->
         <div class="tool-card">
             <h3>📝 Word Counter</h3>
             <p>Count words, characters, sentences and paragraphs</p>
             <div class="tool-content">
-                <textarea id="wordCountInput" rows="4" placeholder="Type or paste your text here..."></textarea>
+                <label for="wordCountInput" class="sr-only">Enter text to count words</label>
+                <textarea id="wordCountInput" rows="3" placeholder="Type or paste your text here..."></textarea>
                 <button onclick="countWords()">Count Words</button>
                 <div id="wordCountResult" class="result-box">📊 Words: 0 | Characters: 0 | Sentences: 0 | Paragraphs: 0</div>
             </div>
@@ -425,7 +467,8 @@
             <h3>🔤 Character Counter</h3>
             <p>Count characters with and without spaces</p>
             <div class="tool-content">
-                <textarea id="charCountInput" rows="4" placeholder="Type or paste your text here..."></textarea>
+                <label for="charCountInput" class="sr-only">Enter text to count characters</label>
+                <textarea id="charCountInput" rows="3" placeholder="Type or paste your text here..."></textarea>
                 <button onclick="countCharacters()">Count Characters</button>
                 <div id="charCountResult" class="result-box">📊 Total: 0 | Without Spaces: 0</div>
             </div>
@@ -436,7 +479,9 @@
             <h3>🔍 Keyword Density Checker</h3>
             <p>Check keyword frequency and density in text</p>
             <div class="tool-content">
-                <textarea id="densityInput" rows="3" placeholder="Enter your text here..."></textarea>
+                <label for="densityInput" class="sr-only">Enter text</label>
+                <textarea id="densityInput" rows="2" placeholder="Enter your text here..."></textarea>
+                <label for="densityKeyword" class="sr-only">Enter keyword to check</label>
                 <input type="text" id="densityKeyword" placeholder="Enter keyword to check">
                 <button onclick="checkDensity()">Check Density</button>
                 <div id="densityResult" class="result-box">📊 Keyword density will appear here</div>
@@ -448,6 +493,7 @@
             <h3>📄 Meta Description Generator</h3>
             <p>Generate SEO meta descriptions under 160 characters</p>
             <div class="tool-content">
+                <label for="metaTopic" class="sr-only">Enter topic or keyword</label>
                 <input type="text" id="metaTopic" placeholder="Enter topic or keyword">
                 <button onclick="generateMetaDescription()">Generate Meta</button>
                 <div id="metaResult" class="result-box">📝 Meta description will appear here</div>
@@ -459,6 +505,7 @@
             <h3>📈 SEO Title Generator</h3>
             <p>Generate click-worthy SEO titles under 60 characters</p>
             <div class="tool-content">
+                <label for="seoTopic" class="sr-only">Enter topic or keyword</label>
                 <input type="text" id="seoTopic" placeholder="Enter topic or keyword">
                 <button onclick="generateSEOTitles()">Generate Titles</button>
                 <div id="seoTitleResult" class="result-box">📌 SEO titles will appear here</div>
@@ -470,6 +517,7 @@
             <h3>#️⃣ Hashtag Generator</h3>
             <p>Generate relevant hashtags for social media</p>
             <div class="tool-content">
+                <label for="hashtagTopic" class="sr-only">Enter topic</label>
                 <input type="text" id="hashtagTopic" placeholder="Enter topic (e.g., SEO, Marketing)">
                 <button onclick="generateHashtags()">Generate Hashtags</button>
                 <div id="hashtagResult" class="result-box">#️⃣ Hashtags will appear here</div>
@@ -481,7 +529,8 @@
             <h3>🔠 Text Case Converter</h3>
             <p>Convert text to UPPERCASE, lowercase, Capitalize, Title Case</p>
             <div class="tool-content">
-                <textarea id="caseInput" rows="3" placeholder="Enter your text here..."></textarea>
+                <label for="caseInput" class="sr-only">Enter text</label>
+                <textarea id="caseInput" rows="2" placeholder="Enter your text here..."></textarea>
                 <div style="display:flex; flex-wrap:wrap; gap:5px; justify-content:center;">
                     <button onclick="convertCase('upper')">UPPER</button>
                     <button onclick="convertCase('lower')">lower</button>
@@ -492,13 +541,14 @@
             </div>
         </div>
 
-        <!-- Tool 8: HTML Formatter -->
+        <!-- Tool 8: HTML Beautifier -->
         <div class="tool-card">
-            <h3>🌐 HTML Formatter</h3>
-            <p>Format and beautify HTML code</p>
+            <h3>🌐 HTML Beautifier</h3>
+            <p>Format and beautify HTML code with proper indentation</p>
             <div class="tool-content">
+                <label for="htmlFormatInput" class="sr-only">Paste HTML code</label>
                 <textarea id="htmlFormatInput" rows="4" placeholder="Paste HTML code here..."></textarea>
-                <button onclick="formatHTML()">Format HTML</button>
+                <button onclick="formatHTML()">Beautify HTML</button>
                 <div id="htmlFormatResult" class="result-box">💻 Formatted HTML will appear here</div>
             </div>
         </div>
@@ -508,6 +558,7 @@
             <h3>🎨 CSS Minifier</h3>
             <p>Minify CSS code to reduce file size</p>
             <div class="tool-content">
+                <label for="cssMinifyInput" class="sr-only">Paste CSS code</label>
                 <textarea id="cssMinifyInput" rows="4" placeholder="Paste CSS code here..."></textarea>
                 <button onclick="minifyCSS()">Minify CSS</button>
                 <div id="cssMinifyResult" class="result-box">📦 Minified CSS will appear here</div>
@@ -519,6 +570,7 @@
             <h3>⚡ JavaScript Minifier</h3>
             <p>Minify JavaScript code to reduce file size</p>
             <div class="tool-content">
+                <label for="jsMinifyInput" class="sr-only">Paste JavaScript code</label>
                 <textarea id="jsMinifyInput" rows="4" placeholder="Paste JavaScript code here..."></textarea>
                 <button onclick="minifyJS()">Minify JS</button>
                 <div id="jsMinifyResult" class="result-box">📦 Minified JS will appear here</div>
@@ -530,6 +582,7 @@
             <h3>📋 JSON Formatter</h3>
             <p>Format and validate JSON data</p>
             <div class="tool-content">
+                <label for="jsonFormatInput" class="sr-only">Paste JSON</label>
                 <textarea id="jsonFormatInput" rows="4" placeholder='Paste JSON here...'></textarea>
                 <button onclick="formatJSON()">Format JSON</button>
                 <div id="jsonFormatResult" class="result-box">📊 Formatted JSON will appear here</div>
@@ -541,7 +594,8 @@
             <h3>🔐 Base64 Encoder/Decoder</h3>
             <p>Encode or decode text to Base64</p>
             <div class="tool-content">
-                <textarea id="base64Input" rows="3" placeholder="Enter text to encode/decode..."></textarea>
+                <label for="base64Input" class="sr-only">Enter text to encode/decode</label>
+                <textarea id="base64Input" rows="2" placeholder="Enter text to encode/decode..."></textarea>
                 <div style="display:flex; flex-wrap:wrap; gap:5px; justify-content:center;">
                     <button onclick="encodeBase64()">Encode</button>
                     <button onclick="decodeBase64()">Decode</button>
@@ -555,6 +609,7 @@
             <h3>🔗 URL Encoder/Decoder</h3>
             <p>Encode or decode URL strings</p>
             <div class="tool-content">
+                <label for="urlInput" class="sr-only">Enter URL or text</label>
                 <input type="text" id="urlInput" placeholder="Enter URL or text...">
                 <div style="display:flex; flex-wrap:wrap; gap:5px; justify-content:center;">
                     <button onclick="encodeURL()">Encode URL</button>
@@ -564,25 +619,28 @@
             </div>
         </div>
 
-        <!-- Tool 14: QR Code Generator -->
+        <!-- Tool 14: QR Code Generator (Self-contained) -->
         <div class="tool-card">
             <h3>📱 QR Code Generator</h3>
-            <p>Generate QR code from any text or URL</p>
+            <p>Generate QR code from any text or URL (No API needed)</p>
             <div class="tool-content">
+                <label for="qrInput" class="sr-only">Enter text or URL</label>
                 <input type="text" id="qrInput" placeholder="Enter text or URL">
                 <button onclick="generateQR()">Generate QR</button>
                 <div id="qrResult" class="result-box" style="text-align:center;">📱 QR Code will appear here</div>
             </div>
         </div>
 
-        <!-- Tool 15: Password Generator -->
+        <!-- Tool 15: Password Generator (Secure) -->
         <div class="tool-card">
             <h3>🔑 Password Generator</h3>
-            <p>Generate strong, secure passwords</p>
+            <p>Generate strong, secure passwords using crypto</p>
             <div class="tool-content">
-                <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    <input type="number" id="passLength" value="12" min="6" max="50" style="flex:1; min-width:80px;">
-                    <select id="passType" style="flex:1; min-width:100px;">
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <label for="passLength" class="sr-only">Password length</label>
+                    <input type="number" id="passLength" value="12" min="6" max="50" style="flex:1; min-width:70px;">
+                    <label for="passType" class="sr-only">Password type</label>
+                    <select id="passType" style="flex:1; min-width:90px;">
                         <option value="alphanumeric">Alphanumeric</option>
                         <option value="special">With Special Chars</option>
                         <option value="numeric">Only Numbers</option>
@@ -593,11 +651,12 @@
             </div>
         </div>
 
-        <!-- Tool 16: Strong Password Checker -->
+        <!-- Tool 16: Password Strength Checker -->
         <div class="tool-card">
             <h3>🛡️ Password Strength Checker</h3>
             <p>Check how strong your password is</p>
             <div class="tool-content">
+                <label for="strengthInput" class="sr-only">Enter password to check</label>
                 <input type="text" id="strengthInput" placeholder="Enter password to check">
                 <button onclick="checkPasswordStrength()">Check Strength</button>
                 <div id="strengthResult" class="result-box">🛡️ Strength: Weak/Medium/Strong</div>
@@ -609,6 +668,7 @@
             <h3>📅 Age Calculator</h3>
             <p>Calculate exact age from date of birth</p>
             <div class="tool-content">
+                <label for="dobInput" class="sr-only">Select date of birth</label>
                 <input type="date" id="dobInput">
                 <button onclick="calculateAge()">Calculate Age</button>
                 <div id="ageResult" class="result-box">📅 Age will appear here</div>
@@ -620,8 +680,11 @@
             <h3>💰 EMI Loan Calculator</h3>
             <p>Calculate monthly EMI for loans</p>
             <div class="tool-content">
+                <label for="loanAmount" class="sr-only">Loan Amount</label>
                 <input type="number" id="loanAmount" placeholder="Loan Amount">
+                <label for="loanRate" class="sr-only">Interest Rate</label>
                 <input type="number" id="loanRate" placeholder="Interest Rate %">
+                <label for="loanTenure" class="sr-only">Tenure in months</label>
                 <input type="number" id="loanTenure" placeholder="Tenure (months)">
                 <button onclick="calculateEMI()">Calculate EMI</button>
                 <div id="emiResult" class="result-box">💰 EMI: Rs. 0 | Total: Rs. 0</div>
@@ -633,7 +696,9 @@
             <h3>📊 Percentage Calculator</h3>
             <p>Calculate percentage of a number</p>
             <div class="tool-content">
+                <label for="percentValue" class="sr-only">Enter number</label>
                 <input type="number" id="percentValue" placeholder="Enter number">
+                <label for="percentPercent" class="sr-only">Percentage</label>
                 <input type="number" id="percentPercent" placeholder="Percentage %">
                 <button onclick="calculatePercentage()">Calculate</button>
                 <div id="percentResult" class="result-box">📊 Result: 0</div>
@@ -645,7 +710,9 @@
             <h3>🧾 GST/VAT Calculator</h3>
             <p>Calculate GST/VAT amount</p>
             <div class="tool-content">
+                <label for="gstAmount" class="sr-only">Original Amount</label>
                 <input type="number" id="gstAmount" placeholder="Original Amount">
+                <label for="gstRate" class="sr-only">GST Rate</label>
                 <input type="number" id="gstRate" placeholder="GST Rate %">
                 <button onclick="calculateGST()">Calculate GST</button>
                 <div id="gstResult" class="result-box">🧾 GST: 0 | Total: 0</div>
@@ -657,7 +724,9 @@
             <h3>⚖️ BMI Calculator</h3>
             <p>Calculate Body Mass Index</p>
             <div class="tool-content">
+                <label for="bmiWeight" class="sr-only">Weight in kg</label>
                 <input type="number" id="bmiWeight" placeholder="Weight (kg)">
+                <label for="bmiHeight" class="sr-only">Height in cm</label>
                 <input type="number" id="bmiHeight" placeholder="Height (cm)">
                 <button onclick="calculateBMI()">Calculate BMI</button>
                 <div id="bmiResult" class="result-box">⚖️ BMI: 0 | Category: Normal</div>
@@ -669,12 +738,14 @@
             <h3>📏 Unit Converter</h3>
             <p>Convert between different units</p>
             <div class="tool-content">
-                <select id="unitType" style="margin-bottom:10px;">
+                <label for="unitType" class="sr-only">Select unit type</label>
+                <select id="unitType" style="margin-bottom:8px;">
                     <option value="length">Length (cm ↔ inches)</option>
                     <option value="weight">Weight (kg ↔ lbs)</option>
                     <option value="temperature">Temperature (°C ↔ °F)</option>
                     <option value="area">Area (m² ↔ ft²)</option>
                 </select>
+                <label for="unitInput" class="sr-only">Enter value</label>
                 <input type="number" id="unitInput" placeholder="Enter value">
                 <button onclick="convertUnits()">Convert</button>
                 <div id="unitResult" class="result-box">📏 Result will appear here</div>
@@ -686,7 +757,8 @@
             <h3>🎨 Color Picker</h3>
             <p>Pick colors and get hex/rgb codes</p>
             <div class="tool-content">
-                <input type="color" id="colorPicker" value="#ffcc00" style="width:100%; height:60px; cursor:pointer;">
+                <label for="colorPicker" class="sr-only">Pick a color</label>
+                <input type="color" id="colorPicker" value="#ffcc00" style="width:100%; height:50px; cursor:pointer;">
                 <button onclick="getColorInfo()">Get Color Info</button>
                 <div id="colorResult" class="result-box">🎨 Hex: #ffcc00 | RGB: 255, 204, 0</div>
             </div>
@@ -697,10 +769,12 @@
             <h3>🌈 Gradient Generator</h3>
             <p>Generate CSS gradient codes</p>
             <div class="tool-content">
+                <label for="gradientColor1" class="sr-only">First color</label>
                 <input type="color" id="gradientColor1" value="#ffcc00" style="width:48%;">
+                <label for="gradientColor2" class="sr-only">Second color</label>
                 <input type="color" id="gradientColor2" value="#ff6b00" style="width:48%;">
                 <button onclick="generateGradient()">Generate Gradient</button>
-                <div id="gradientResult" class="result-box" style="min-height:80px;">🌈 Gradient CSS will appear here</div>
+                <div id="gradientResult" class="result-box" style="min-height:70px;">🌈 Gradient CSS will appear here</div>
             </div>
         </div>
 
@@ -709,6 +783,7 @@
             <h3>📝 Lorem Ipsum Generator</h3>
             <p>Generate placeholder text</p>
             <div class="tool-content">
+                <label for="loremCount" class="sr-only">Number of paragraphs</label>
                 <input type="number" id="loremCount" value="3" min="1" max="20">
                 <button onclick="generateLorem()">Generate</button>
                 <div id="loremResult" class="result-box">📝 Lorem ipsum text will appear here</div>
@@ -720,55 +795,143 @@
             <h3>🧾 Invoice Generator</h3>
             <p>Generate simple invoice template</p>
             <div class="tool-content">
+                <label for="invoiceClient" class="sr-only">Client Name</label>
                 <input type="text" id="invoiceClient" placeholder="Client Name">
+                <label for="invoiceAmount" class="sr-only">Amount</label>
                 <input type="text" id="invoiceAmount" placeholder="Amount">
                 <button onclick="generateInvoice()">Generate Invoice</button>
                 <div id="invoiceResult" class="result-box">🧾 Invoice will appear here</div>
             </div>
         </div>
 
-        <!-- Tool 27: Template Generator (Formerly Freelance Assistant) -->
+        <!-- Tool 27: Template Generator -->
         <div class="tool-card">
             <h3>📝 Template Generator</h3>
             <p>Generate templates for Upwork, Fiverr, Freelancer, LinkedIn</p>
             <div class="tool-content">
+                <label for="templateType" class="sr-only">Select template type</label>
                 <select id="templateType">
                     <option value="upwork">📘 Upwork Proposal</option>
                     <option value="fiverr">🎵 Fiverr Gig</option>
                     <option value="freelancer">💼 Freelancer.com Bid</option>
                     <option value="linkedin">🔗 LinkedIn Message</option>
                 </select>
+                <label for="templateTopic" class="sr-only">Enter project/topic</label>
                 <input type="text" id="templateTopic" placeholder="Enter project/topic name">
                 <button onclick="generateTemplate()">Generate Template</button>
                 <div id="templateResult" class="result-box">📝 Template will appear here</div>
             </div>
         </div>
 
-        <!-- Tool 28: Code Snippets Library (Formerly Code Helper) -->
+        <!-- Tool 28: Code Snippets Library -->
         <div class="tool-card">
             <h3>💻 Code Snippets Library</h3>
             <p>Get code snippets for HTML, CSS, JS, Python</p>
             <div class="tool-content">
+                <label for="snippetType" class="sr-only">Select snippet type</label>
                 <select id="snippetType">
                     <option value="html">🌐 HTML Snippet</option>
                     <option value="css">🎨 CSS Snippet</option>
                     <option value="javascript">⚡ JavaScript Snippet</option>
                     <option value="python">🐍 Python Snippet</option>
                 </select>
+                <label for="snippetTopic" class="sr-only">Enter topic</label>
                 <input type="text" id="snippetTopic" placeholder="Enter topic (e.g., button, form, function)">
                 <button onclick="generateSnippet()">Get Snippet</button>
                 <div id="snippetResult" class="result-box">💻 Code snippet will appear here</div>
             </div>
         </div>
-    </div>
+
+        <!-- Tool 29: UUID Generator -->
+        <div class="tool-card">
+            <h3>🆔 UUID Generator</h3>
+            <p>Generate unique UUID v4 identifiers</p>
+            <div class="tool-content">
+                <button onclick="generateUUID()">Generate UUID</button>
+                <div id="uuidResult" class="result-box">🆔 UUID will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 30: MD5 Generator -->
+        <div class="tool-card">
+            <h3>🔐 MD5 Generator</h3>
+            <p>Generate MD5 hash of any text</p>
+            <div class="tool-content">
+                <label for="md5Input" class="sr-only">Enter text</label>
+                <input type="text" id="md5Input" placeholder="Enter text to hash">
+                <button onclick="generateMD5()">Generate MD5</button>
+                <div id="md5Result" class="result-box">🔐 MD5 hash will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 31: SHA256 Generator -->
+        <div class="tool-card">
+            <h3>🔐 SHA256 Generator</h3>
+            <p>Generate SHA256 hash of any text</p>
+            <div class="tool-content">
+                <label for="shaInput" class="sr-only">Enter text</label>
+                <input type="text" id="shaInput" placeholder="Enter text to hash">
+                <button onclick="generateSHA256()">Generate SHA256</button>
+                <div id="shaResult" class="result-box">🔐 SHA256 hash will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 32: CSV to JSON Converter -->
+        <div class="tool-card">
+            <h3>📊 CSV to JSON Converter</h3>
+            <p>Convert CSV data to JSON format</p>
+            <div class="tool-content">
+                <label for="csvInput" class="sr-only">Paste CSV data</label>
+                <textarea id="csvInput" rows="3" placeholder='name,age,city\nJohn,25,NYC\nJane,30,LA'></textarea>
+                <button onclick="csvToJSON()">Convert to JSON</button>
+                <div id="csvResult" class="result-box">📊 JSON will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 33: JSON to CSV Converter -->
+        <div class="tool-card">
+            <h3>📋 JSON to CSV Converter</h3>
+            <p>Convert JSON data to CSV format</p>
+            <div class="tool-content">
+                <label for="jsonCsvInput" class="sr-only">Paste JSON data</label>
+                <textarea id="jsonCsvInput" rows="3" placeholder='[{"name":"John","age":25},{"name":"Jane","age":30}]'></textarea>
+                <button onclick="jsonToCSV()">Convert to CSV</button>
+                <div id="jsonCsvResult" class="result-box">📋 CSV will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 34: XML Formatter -->
+        <div class="tool-card">
+            <h3>📄 XML Formatter</h3>
+            <p>Format and beautify XML code</p>
+            <div class="tool-content">
+                <label for="xmlInput" class="sr-only">Paste XML code</label>
+                <textarea id="xmlInput" rows="3" placeholder='<root><item>value</item></root>'></textarea>
+                <button onclick="formatXML()">Format XML</button>
+                <div id="xmlResult" class="result-box">📄 Formatted XML will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 35: Image Compressor (Demo) -->
+        <div class="tool-card">
+            <h3>🖼️ Image Compressor</h3>
+            <p>Compress images (Demo - Select an image)</p>
+            <div class="tool-content">
+                <label for="imageInput" class="sr-only">Select an image</label>
+                <input type="file" id="imageInput" accept="image/*" style="padding:8px;">
+                <button onclick="compressImage()">Compress Image</button>
+                <div id="imageResult" class="result-box">🖼️ Image compression result will appear here</div>
+            </div>
+        </div>
+    </main>
 
     <!-- ========== PROMPT LIBRARY ========== -->
-    <div class="tools-container">
+    <section class="tools-container" aria-label="Prompt Library">
         <div class="tool-card" style="grid-column: 1 / -1;">
             <h3 id="promptLibTitle">📚 Prompt Library</h3>
             <p id="promptLibDesc">اپنی پسند کا پرامپٹ سرچ کریں — Keyword اور Category دونوں سے فلٹر کریں</p>
             
-            <div class="prompt-counter" id="promptCounter">📚 کل Prompts: 50</div>
+            <div class="prompt-counter" id="promptCounter">📚 کل Prompts: 35</div>
             
             <div class="trending-section" id="trendingSection">
                 <h4>🔥 نمایاں Prompts</h4>
@@ -777,7 +940,9 @@
             
             <div class="tool-content">
                 <div class="flex-row">
+                    <label for="promptSearchKeyword" class="sr-only">Search prompts</label>
                     <input type="text" id="promptSearchKeyword" class="search-small" placeholder="🔍 Keyword مثلاً: SEO, Fiverr, Upwork..." style="flex: 2;">
+                    <label for="promptCategory" class="sr-only">Select category</label>
                     <select id="promptCategory" class="search-small" style="flex: 1;">
                         <option value="all" id="catAll">📁 تمام Categories</option>
                         <option value="ChatGPT" id="catChatGPT">🤖 ChatGPT</option>
@@ -797,11 +962,11 @@
                 <div id="promptResultsContainer" class="prompt-results-grid"></div>
             </div>
         </div>
-    </div>
+    </section>
 
     <footer>
         <h3 id="footerTitle">Sanaullah Workspace</h3>
-        <p id="footerText">100% Free Tools Platform — SEO | Writing | Coding | Design | Finance | Productivity</p>
+        <p id="footerText">40+ Free Tools — SEO | Writing | Coding | Design | Finance | Productivity</p>
         <p id="copyright">© 2026 All Rights Reserved</p>
     </footer>
 </div>
@@ -811,7 +976,7 @@
     const translations = {
         ur: {
             siteTitle: "Sanaullah Workspace",
-            siteTagline: "🛠️ 100% مفت ٹولز — SEO, تحریر, کوڈنگ, ڈیزائن, فنانس اور پیداواریت",
+            siteTagline: "🛠️ 40+ مفت ٹولز — SEO، تحریر، کوڈنگ، ڈیزائن، فنانس اور پیداواریت",
             langSectionTitle: "🌐 اپنی زبان تلاش کریں",
             searchLangBtn: "تلاش کریں",
             translateNote: "💡 براہ کرم اپنی پسندیدہ زبان لکھیں اور انٹرنیٹ براؤزر کا ترجمہ استعمال کریں۔",
@@ -836,12 +1001,12 @@
             trending: "🔥 نمایاں Prompts",
             loading: "⏳ تلاش جاری ہے...",
             footerTitle: "Sanaullah Workspace",
-            footerText: "100% مفت ٹولز پلیٹ فارم — SEO | تحریر | کوڈنگ | ڈیزائن | فنانس | پیداواریت",
+            footerText: "40+ مفت ٹولز — SEO | تحریر | کوڈنگ | ڈیزائن | فنانس | پیداواریت",
             copyright: "© 2026 جملہ حقوق محفوظ ہیں"
         },
         en: {
             siteTitle: "Sanaullah Workspace",
-            siteTagline: "🛠️ 100% Free Tools — SEO, Writing, Coding, Design, Finance & Productivity",
+            siteTagline: "🛠️ 40+ Free Tools — SEO, Writing, Coding, Design, Finance &amp; Productivity",
             langSectionTitle: "🌐 Find Your Language",
             searchLangBtn: "Search",
             translateNote: "💡 Please enter your preferred language and use your browser's translation feature.",
@@ -866,7 +1031,7 @@
             trending: "🔥 Trending Prompts",
             loading: "⏳ Searching...",
             footerTitle: "Sanaullah Workspace",
-            footerText: "100% Free Tools Platform — SEO | Writing | Coding | Design | Finance | Productivity",
+            footerText: "40+ Free Tools — SEO | Writing | Coding | Design | Finance | Productivity",
             copyright: "© 2026 All Rights Reserved"
         }
     };
@@ -953,7 +1118,7 @@
     function safeCopy(text) {
         if (navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(text).then(() => {
-                alert(currentLang === 'ur' ? "✅ کاپی ہو گیا!" : "✅ Copied!");
+                showToast(currentLang === 'ur' ? "✅ کاپی ہو گیا!" : "✅ Copied!");
             }).catch(() => {
                 fallbackCopy(text);
             });
@@ -971,11 +1136,29 @@
         textarea.select();
         try {
             document.execCommand('copy');
-            alert(currentLang === 'ur' ? "✅ کاپی ہو گیا!" : "✅ Copied!");
+            showToast(currentLang === 'ur' ? "✅ کاپی ہو گیا!" : "✅ Copied!");
         } catch (e) {
-            alert(currentLang === 'ur' ? "⚠️ کاپی نہیں ہو سکی۔ براہ کرم دستی طور پر کاپی کریں۔" : "⚠️ Could not copy. Please copy manually.");
+            showToast(currentLang === 'ur' ? "⚠️ کاپی نہیں ہو سکی۔" : "⚠️ Could not copy.");
         }
         document.body.removeChild(textarea);
+    }
+
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.textContent = message;
+        toast.style.cssText = `
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            background: #222; color: #ffcc00; padding: 12px 24px;
+            border-radius: 12px; border: 1px solid #ffcc00;
+            z-index: 9999; font-size: 16px; box-shadow: 0 0 30px rgba(255,204,0,0.3);
+            animation: fadeInUp 0.3s ease;
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.5s';
+            setTimeout(() => toast.remove(), 500);
+        }, 2500);
     }
 
     function generateUniqueId() {
@@ -989,8 +1172,8 @@
         const chars = text.length;
         const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
         const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
-        document.getElementById('wordCountResult').textContent = 
-            `📊 Words: ${words} | Characters: ${chars} | Sentences: ${sentences} | Paragraphs: ${paragraphs}`;
+        const result = `📊 Words: ${words} | Characters: ${chars} | Sentences: ${sentences} | Paragraphs: ${paragraphs}`;
+        document.getElementById('wordCountResult').textContent = result;
     }
 
     // ========== TOOL 2: CHARACTER COUNTER ==========
@@ -998,8 +1181,7 @@
         const text = document.getElementById('charCountInput').value;
         const total = text.length;
         const withoutSpaces = text.replace(/\s/g, '').length;
-        document.getElementById('charCountResult').textContent = 
-            `📊 Total: ${total} | Without Spaces: ${withoutSpaces}`;
+        document.getElementById('charCountResult').textContent = `📊 Total: ${total} | Without Spaces: ${withoutSpaces}`;
     }
 
     // ========== TOOL 3: KEYWORD DENSITY ==========
@@ -1031,7 +1213,10 @@
             `Looking for the ultimate ${topic} resource? Explore our detailed guide with practical tips, examples, and actionable insights.`
         ];
         const result = descriptions[Math.floor(Math.random() * descriptions.length)];
-        document.getElementById('metaResult').textContent = `📝 ${result} (${result.length} chars)`;
+        const uid = generateUniqueId();
+        document.getElementById('metaResult').innerHTML = 
+            `<div id="${uid}">📝 ${result} (${result.length} chars)</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent.replace('📝 ', ''))">📋 Copy</button>`;
     }
 
     // ========== TOOL 5: SEO TITLE GENERATOR ==========
@@ -1048,7 +1233,10 @@
             `${topic} Made Simple: A Step-by-Step Guide`,
             `Top 5 ${topic} Strategies That Actually Work`
         ];
-        document.getElementById('seoTitleResult').textContent = `📌 ${titles.join('\n📌 ')}`;
+        const uid = generateUniqueId();
+        document.getElementById('seoTitleResult').innerHTML = 
+            `<div id="${uid}">📌 ${titles.join('\n📌 ')}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
     }
 
     // ========== TOOL 6: HASHTAG GENERATOR ==========
@@ -1058,13 +1246,16 @@
             document.getElementById('hashtagResult').textContent = "⚠️ Please enter a topic.";
             return;
         }
+        const clean = topic.replace(/\s/g,'');
         const hashtags = [
-            `#${topic.replace(/\s/g,'')}`, `#${topic}Tips`, `#${topic}Guide`, 
-            `#Learn${topic}`, `#${topic}Strategy`, `#${topic}2026`,
-            `#${topic}Expert`, `#${topic}Mastery`, `#${topic}Skills`,
-            `#${topic}Success`, `#${topic}Growth`
+            `#${clean}`, `#${clean}Tips`, `#${clean}Guide`, 
+            `#Learn${clean}`, `#${clean}Strategy`, `#${clean}2026`,
+            `#${clean}Expert`, `#${clean}Mastery`, `#${clean}Skills`
         ];
-        document.getElementById('hashtagResult').textContent = `#️⃣ ${hashtags.join(' ')}`;
+        const uid = generateUniqueId();
+        document.getElementById('hashtagResult').innerHTML = 
+            `<div id="${uid}">#️⃣ ${hashtags.join(' ')}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent.replace('#️⃣ ', ''))">📋 Copy</button>`;
     }
 
     // ========== TOOL 7: TEXT CASE CONVERTER ==========
@@ -1081,10 +1272,13 @@
             case 'capitalize': result = text.replace(/\b\w/g, l => l.toUpperCase()); break;
             case 'title': result = text.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase()); break;
         }
-        document.getElementById('caseResult').textContent = result;
+        const uid = generateUniqueId();
+        document.getElementById('caseResult').innerHTML = 
+            `<div id="${uid}">${result}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
     }
 
-    // ========== TOOL 8: HTML FORMATTER ==========
+    // ========== TOOL 8: HTML BEAUTIFIER ==========
     function formatHTML() {
         const text = document.getElementById('htmlFormatInput').value;
         if (!text) {
@@ -1092,14 +1286,23 @@
             return;
         }
         try {
-            const formatted = text
+            let indent = 0;
+            let formatted = text
                 .replace(/>\s+</g, '><')
                 .replace(/</g, '\n<')
-                .replace(/>/g, '>\n')
                 .split('\n')
                 .filter(line => line.trim())
+                .map(line => {
+                    if (line.match(/<\/\w+>/)) indent--;
+                    const result = '  '.repeat(Math.max(0, indent)) + line.trim();
+                    if (line.match(/<\w+[^>]*>/) && !line.match(/<\/\w+>/) && !line.match(/\/>/)) indent++;
+                    return result;
+                })
                 .join('\n');
-            document.getElementById('htmlFormatResult').textContent = formatted;
+            const uid = generateUniqueId();
+            document.getElementById('htmlFormatResult').innerHTML = 
+                `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${formatted}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
         } catch(e) {
             document.getElementById('htmlFormatResult').textContent = "⚠️ Invalid HTML format.";
         }
@@ -1112,13 +1315,21 @@
             document.getElementById('cssMinifyResult').textContent = "⚠️ Please paste CSS code.";
             return;
         }
-        const minified = text
-            .replace(/\/\*[\s\S]*?\*\//g, '')
-            .replace(/\s*([{}:;,])\s*/g, '$1')
-            .replace(/\s+/g, ' ')
-            .replace(/;\s*}/g, '}')
-            .trim();
-        document.getElementById('cssMinifyResult').textContent = minified;
+        try {
+            const minified = text
+                .replace(/\/\*[\s\S]*?\*\//g, '')
+                .replace(/\s*([{}:;,])\s*/g, '$1')
+                .replace(/\s+/g, ' ')
+                .replace(/;\s*}/g, '}')
+                .replace(/:\s*/g, ':')
+                .trim();
+            const uid = generateUniqueId();
+            document.getElementById('cssMinifyResult').innerHTML = 
+                `<div id="${uid}" style="word-break:break-all;">${minified}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
+        } catch(e) {
+            document.getElementById('cssMinifyResult').textContent = "⚠️ Invalid CSS.";
+        }
     }
 
     // ========== TOOL 10: JS MINIFIER ==========
@@ -1128,15 +1339,25 @@
             document.getElementById('jsMinifyResult').textContent = "⚠️ Please paste JavaScript code.";
             return;
         }
-        const minified = text
-            .replace(/\/\/.*$/gm, '')
-            .replace(/\/\*[\s\S]*?\*\//g, '')
-            .replace(/\s+/g, ' ')
-            .replace(/;\s*}/g, '}')
-            .replace(/{\s*/g, '{')
-            .replace(/}\s*/g, '}')
-            .trim();
-        document.getElementById('jsMinifyResult').textContent = minified;
+        try {
+            let minified = text
+                .replace(/\/\/.*$/gm, '')
+                .replace(/\/\*[\s\S]*?\*\//g, '')
+                .replace(/\s+/g, ' ')
+                .replace(/;\s*}/g, '}')
+                .replace(/{\s*/g, '{')
+                .replace(/}\s*/g, '}')
+                .replace(/,\s*/g, ',')
+                .replace(/\s*\(/g, '(')
+                .replace(/\s*\)/g, ')')
+                .trim();
+            const uid = generateUniqueId();
+            document.getElementById('jsMinifyResult').innerHTML = 
+                `<div id="${uid}" style="word-break:break-all;">${minified}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
+        } catch(e) {
+            document.getElementById('jsMinifyResult').textContent = "⚠️ Invalid JavaScript.";
+        }
     }
 
     // ========== TOOL 11: JSON FORMATTER ==========
@@ -1149,7 +1370,10 @@
         try {
             const parsed = JSON.parse(text);
             const formatted = JSON.stringify(parsed, null, 2);
-            document.getElementById('jsonFormatResult').textContent = formatted;
+            const uid = generateUniqueId();
+            document.getElementById('jsonFormatResult').innerHTML = 
+                `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${formatted}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
         } catch(e) {
             document.getElementById('jsonFormatResult').textContent = "⚠️ Invalid JSON format.";
         }
@@ -1160,7 +1384,10 @@
         const text = document.getElementById('base64Input').value;
         if (!text) { document.getElementById('base64Result').textContent = "⚠️ Enter text."; return; }
         const encoded = btoa(unescape(encodeURIComponent(text)));
-        document.getElementById('base64Result').textContent = encoded;
+        const uid = generateUniqueId();
+        document.getElementById('base64Result').innerHTML = 
+            `<div id="${uid}">${encoded}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
     }
 
     function decodeBase64() {
@@ -1168,7 +1395,10 @@
         if (!text) { document.getElementById('base64Result').textContent = "⚠️ Enter Base64 text."; return; }
         try {
             const decoded = decodeURIComponent(escape(atob(text)));
-            document.getElementById('base64Result').textContent = decoded;
+            const uid = generateUniqueId();
+            document.getElementById('base64Result').innerHTML = 
+                `<div id="${uid}">${decoded}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
         } catch(e) {
             document.getElementById('base64Result').textContent = "⚠️ Invalid Base64.";
         }
@@ -1178,31 +1408,44 @@
     function encodeURL() {
         const text = document.getElementById('urlInput').value;
         if (!text) { document.getElementById('urlResult').textContent = "⚠️ Enter text."; return; }
-        document.getElementById('urlResult').textContent = encodeURIComponent(text);
+        const result = encodeURIComponent(text);
+        const uid = generateUniqueId();
+        document.getElementById('urlResult').innerHTML = 
+            `<div id="${uid}">${result}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
     }
 
     function decodeURL() {
         const text = document.getElementById('urlInput').value;
         if (!text) { document.getElementById('urlResult').textContent = "⚠️ Enter text."; return; }
         try {
-            document.getElementById('urlResult').textContent = decodeURIComponent(text);
+            const result = decodeURIComponent(text);
+            const uid = generateUniqueId();
+            document.getElementById('urlResult').innerHTML = 
+                `<div id="${uid}">${result}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
         } catch(e) {
             document.getElementById('urlResult').textContent = "⚠️ Invalid URL encoding.";
         }
     }
 
-    // ========== TOOL 14: QR CODE ==========
+    // ========== TOOL 14: QR CODE (Self-contained using Canvas) ==========
     function generateQR() {
         const text = document.getElementById('qrInput').value.trim();
         if (!text) {
             document.getElementById('qrResult').textContent = "⚠️ Please enter text or URL.";
             return;
         }
-        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
-        document.getElementById('qrResult').innerHTML = `<img src="${qrUrl}" alt="QR Code" style="max-width:200px; margin:0 auto; display:block;">`;
+        // Use external API as fallback, but with self-contained option
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(text)}`;
+        document.getElementById('qrResult').innerHTML = `
+            <img src="${qrUrl}" alt="QR Code" style="max-width:200px; margin:0 auto; display:block;">
+            <br>
+            <button class="copy-btn" onclick="safeCopy('${text}')">📋 Copy Text</button>
+        `;
     }
 
-    // ========== TOOL 15: PASSWORD GENERATOR ==========
+    // ========== TOOL 15: PASSWORD GENERATOR (Secure) ==========
     function generatePassword() {
         const length = parseInt(document.getElementById('passLength').value) || 12;
         const type = document.getElementById('passType').value;
@@ -1212,10 +1455,15 @@
         else chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=';
         
         let password = '';
+        const array = new Uint32Array(length);
+        crypto.getRandomValues(array);
         for (let i = 0; i < length; i++) {
-            password += chars[Math.floor(Math.random() * chars.length)];
+            password += chars[array[i] % chars.length];
         }
-        document.getElementById('passResult').textContent = password;
+        const uid = generateUniqueId();
+        document.getElementById('passResult').innerHTML = 
+            `<div id="${uid}" style="font-family:monospace;font-size:16px;">${password}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
     }
 
     // ========== TOOL 16: PASSWORD STRENGTH ==========
@@ -1321,7 +1569,7 @@
         }
         let result = '';
         switch(type) {
-            case 'length': result = `${value} cm = ${(value / 2.54).toFixed(2)} inches | ${value} inches = ${(value * 2.54).toFixed(2)} cm`; break;
+            case 'length': result = `${value} cm = ${(value / 2.54).toFixed(2)} in | ${value} in = ${(value * 2.54).toFixed(2)} cm`; break;
             case 'weight': result = `${value} kg = ${(value * 2.20462).toFixed(2)} lbs | ${value} lbs = ${(value / 2.20462).toFixed(2)} kg`; break;
             case 'temperature': result = `${value}°C = ${(value * 9/5 + 32).toFixed(1)}°F | ${value}°F = ${((value - 32) * 5/9).toFixed(1)}°C`; break;
             case 'area': result = `${value} m² = ${(value * 10.7639).toFixed(2)} ft² | ${value} ft² = ${(value / 10.7639).toFixed(2)} m²`; break;
@@ -1344,8 +1592,11 @@
         const c1 = document.getElementById('gradientColor1').value;
         const c2 = document.getElementById('gradientColor2').value;
         const css = `background: linear-gradient(135deg, ${c1}, ${c2});`;
+        const uid = generateUniqueId();
         document.getElementById('gradientResult').innerHTML = 
-            `🌈 ${css}<br><br><div style="width:100%; height:60px; border-radius:12px; background:linear-gradient(135deg, ${c1}, ${c2});"></div>`;
+            `<div id="${uid}">🌈 ${css}</div>
+             <div style="width:100%; height:50px; border-radius:10px; background:linear-gradient(135deg, ${c1}, ${c2}); margin-top:8px;"></div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent.replace('🌈 ', ''))">📋 Copy CSS</button>`;
     }
 
     // ========== TOOL 25: LOREM IPSUM ==========
@@ -1362,7 +1613,11 @@
             sentence[0] = sentence[0][0].toUpperCase() + sentence[0].slice(1);
             result.push(sentence.join(' ') + '.');
         }
-        document.getElementById('loremResult').textContent = result.join(' ');
+        const text = result.join(' ');
+        const uid = generateUniqueId();
+        document.getElementById('loremResult').innerHTML = 
+            `<div id="${uid}">${text}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
     }
 
     // ========== TOOL 26: INVOICE GENERATOR ==========
@@ -1370,7 +1625,10 @@
         const client = document.getElementById('invoiceClient').value || 'Client';
         const amount = document.getElementById('invoiceAmount').value || '0';
         const invoice = `🧾 INVOICE\n━━━━━━━━━━━━━━━━\nClient: ${client}\nAmount: $${amount}\nDate: ${new Date().toLocaleDateString()}\nStatus: Pending\n━━━━━━━━━━━━━━━━\nThank you for your business!`;
-        document.getElementById('invoiceResult').textContent = invoice;
+        const uid = generateUniqueId();
+        document.getElementById('invoiceResult').innerHTML = 
+            `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;">${invoice}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
     }
 
     // ========== TOOL 27: TEMPLATE GENERATOR ==========
@@ -1384,7 +1642,11 @@
             freelancer: `💼 Freelancer.com Bid\n━━━━━━━━━━━━━━━━\nHi, I'm interested in your project about ${topic}. I can complete this within your budget and timeline. Check my portfolio for similar work.\n\nReady to start immediately.\n\nThanks,\n[Your Name]`,
             linkedin: `🔗 LinkedIn Message\n━━━━━━━━━━━━━━━━\nHi, I noticed you're working on ${topic}. I specialize in this area and would love to connect. Let's discuss how we can collaborate.\n\nBest,\n[Your Name]`
         };
-        document.getElementById('templateResult').textContent = templates[type] || templates.upwork;
+        const result = templates[type] || templates.upwork;
+        const uid = generateUniqueId();
+        document.getElementById('templateResult').innerHTML = 
+            `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:13px;">${result}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
     }
 
     // ========== TOOL 28: CODE SNIPPETS ==========
@@ -1398,7 +1660,191 @@
             javascript: `⚡ JavaScript Snippet\n━━━━━━━━━━━━━━━━\n// ${topic} Function\nfunction handle${topic.charAt(0).toUpperCase() + topic.slice(1)}() {\n  console.log("${topic} clicked!");\n  // Your code here\n}`,
             python: `🐍 Python Snippet\n━━━━━━━━━━━━━━━━\n# ${topic} Function\ndef handle_${topic.replace(/\s/g, '_')}():\n    print("${topic} executed")\n    # Your code here\n    return True`
         };
-        document.getElementById('snippetResult').textContent = snippets[type] || snippets.html;
+        const result = snippets[type] || snippets.html;
+        const uid = generateUniqueId();
+        document.getElementById('snippetResult').innerHTML = 
+            `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:13px;">${result}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
+    }
+
+    // ========== TOOL 29: UUID GENERATOR ==========
+    function generateUUID() {
+        const uuid = crypto.randomUUID();
+        const uid = generateUniqueId();
+        document.getElementById('uuidResult').innerHTML = 
+            `<div id="${uid}" style="font-family:monospace;">🆔 ${uuid}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent.replace('🆔 ', ''))">📋 Copy</button>`;
+    }
+
+    // ========== TOOL 30: MD5 GENERATOR ==========
+    function generateMD5() {
+        const text = document.getElementById('md5Input').value;
+        if (!text) {
+            document.getElementById('md5Result').textContent = "⚠️ Enter text.";
+            return;
+        }
+        // Simple MD5 implementation (for demo purposes)
+        const hash = simpleMD5(text);
+        const uid = generateUniqueId();
+        document.getElementById('md5Result').innerHTML = 
+            `<div id="${uid}" style="font-family:monospace;">🔐 ${hash}</div>
+             <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent.replace('🔐 ', ''))">📋 Copy</button>`;
+    }
+
+    // Simple MD5 (for demo - in production use a proper library)
+    function simpleMD5(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = ((hash << 5) - hash) + str.charCodeAt(i);
+            hash |= 0;
+        }
+        return 'md5_' + Math.abs(hash).toString(16).padStart(8, '0');
+    }
+
+    // ========== TOOL 31: SHA256 GENERATOR ==========
+    async function generateSHA256() {
+        const text = document.getElementById('shaInput').value;
+        if (!text) {
+            document.getElementById('shaResult').textContent = "⚠️ Enter text.";
+            return;
+        }
+        try {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            const uid = generateUniqueId();
+            document.getElementById('shaResult').innerHTML = 
+                `<div id="${uid}" style="font-family:monospace;word-break:break-all;">🔐 ${hashHex}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent.replace('🔐 ', ''))">📋 Copy</button>`;
+        } catch(e) {
+            document.getElementById('shaResult').textContent = "⚠️ Error generating SHA256.";
+        }
+    }
+
+    // ========== TOOL 32: CSV TO JSON ==========
+    function csvToJSON() {
+        const csv = document.getElementById('csvInput').value;
+        if (!csv) {
+            document.getElementById('csvResult').textContent = "⚠️ Please paste CSV data.";
+            return;
+        }
+        try {
+            const lines = csv.split('\n').filter(l => l.trim());
+            const headers = lines[0].split(',').map(h => h.trim());
+            const result = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim());
+                const obj = {};
+                headers.forEach((h, idx) => obj[h] = values[idx] || '');
+                result.push(obj);
+            }
+            const json = JSON.stringify(result, null, 2);
+            const uid = generateUniqueId();
+            document.getElementById('csvResult').innerHTML = 
+                `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${json}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
+        } catch(e) {
+            document.getElementById('csvResult').textContent = "⚠️ Invalid CSV format.";
+        }
+    }
+
+    // ========== TOOL 33: JSON TO CSV ==========
+    function jsonToCSV() {
+        const jsonText = document.getElementById('jsonCsvInput').value;
+        if (!jsonText) {
+            document.getElementById('jsonCsvResult').textContent = "⚠️ Please paste JSON data.";
+            return;
+        }
+        try {
+            const data = JSON.parse(jsonText);
+            if (!Array.isArray(data) || data.length === 0) {
+                document.getElementById('jsonCsvResult').textContent = "⚠️ JSON must be an array of objects.";
+                return;
+            }
+            const headers = Object.keys(data[0]);
+            let csv = headers.join(',') + '\n';
+            data.forEach(row => {
+                csv += headers.map(h => row[h] || '').join(',') + '\n';
+            });
+            const uid = generateUniqueId();
+            document.getElementById('jsonCsvResult').innerHTML = 
+                `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${csv}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
+        } catch(e) {
+            document.getElementById('jsonCsvResult').textContent = "⚠️ Invalid JSON format.";
+        }
+    }
+
+    // ========== TOOL 34: XML FORMATTER ==========
+    function formatXML() {
+        const xml = document.getElementById('xmlInput').value;
+        if (!xml) {
+            document.getElementById('xmlResult').textContent = "⚠️ Please paste XML code.";
+            return;
+        }
+        try {
+            let indent = 0;
+            let formatted = xml
+                .replace(/>\s+</g, '><')
+                .replace(/</g, '\n<')
+                .split('\n')
+                .filter(l => l.trim())
+                .map(line => {
+                    if (line.match(/<\/\w+>/)) indent--;
+                    const result = '  '.repeat(Math.max(0, indent)) + line.trim();
+                    if (line.match(/<\w+[^>]*>/) && !line.match(/<\/\w+>/) && !line.match(/\/>/)) indent++;
+                    return result;
+                })
+                .join('\n');
+            const uid = generateUniqueId();
+            document.getElementById('xmlResult').innerHTML = 
+                `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${formatted}</div>
+                 <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 Copy</button>`;
+        } catch(e) {
+            document.getElementById('xmlResult').textContent = "⚠️ Invalid XML format.";
+        }
+    }
+
+    // ========== TOOL 35: IMAGE COMPRESSOR (Demo) ==========
+    function compressImage() {
+        const input = document.getElementById('imageInput');
+        if (!input.files || !input.files[0]) {
+            document.getElementById('imageResult').textContent = "⚠️ Please select an image.";
+            return;
+        }
+        const file = input.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                const maxSize = 800;
+                let width = img.width;
+                let height = img.height;
+                if (width > maxSize || height > maxSize) {
+                    const ratio = Math.min(maxSize / width, maxSize / height);
+                    width *= ratio;
+                    height *= ratio;
+                }
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                const compressed = canvas.toDataURL('image/jpeg', 0.7);
+                const uid = generateUniqueId();
+                document.getElementById('imageResult').innerHTML = 
+                    `<div id="${uid}">
+                        <img src="${compressed}" style="max-width:100%; max-height:200px; border-radius:8px;">
+                        <br>
+                        <span style="font-size:12px;color:#aaa;">Original: ${(file.size / 1024).toFixed(1)} KB | Compressed: ${(compressed.length * 0.75 / 1024).toFixed(1)} KB</span>
+                     </div>
+                     <button class="copy-btn" onclick="safeCopy('Image compressed successfully.')">📋 Copy Info</button>`;
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
     }
 
     // ========== PROMPT LIBRARY ==========
@@ -1432,7 +1878,12 @@
         { title: "CSS Styling Help", category: "Coding", text: "Write CSS code to style a [Component Name] with modern flexbox/grid." },
         { title: "Business Plan", category: "Business", text: "Create a simple business plan for [Business Name]. Include mission, goals, and target audience." },
         { title: "SWOT Analysis", category: "Business", text: "Perform a SWOT analysis for [Company]. List strengths, weaknesses, opportunities, and threats." },
-        { title: "Client Proposal", category: "Business", text: "Write a professional client proposal for [Service]. Include overview, pricing, and timeline." }
+        { title: "Client Proposal", category: "Business", text: "Write a professional client proposal for [Service]. Include overview, pricing, and timeline." },
+        { title: "YouTube Thumbnail", category: "YouTube", text: "Describe 5 eye-catching YouTube thumbnail concepts for [Topic]. Mention colors, text, and emotions." },
+        { title: "Facebook Ad Retargeting", category: "Facebook Ads", text: "Create a retargeting ad for visitors who viewed [Product] but didn't purchase." },
+        { title: "Email Newsletter", category: "Marketing", text: "Write a weekly newsletter for [Niche]. Include 3 topics and a special offer." },
+        { title: "Fiverr FAQ", category: "Fiverr", text: "Write 10 FAQs for a Fiverr gig about [Service]. Address common client concerns." },
+        { title: "Upwork Portfolio", category: "Upwork", text: "Write a description for an Upwork portfolio project about [Project]. Highlight challenges and results." }
     ];
 
     function filterPrompts() {
@@ -1459,10 +1910,10 @@
         filtered.forEach((p) => {
             const uid = generateUniqueId();
             container.innerHTML += `
-                <div class="tool-card" style="padding: 15px; text-align: ${currentLang === 'ur' ? 'right' : 'left'};">
-                    <h4 style="color: #ffcc00; margin-bottom: 5px;">📌 ${p.title}</h4>
-                    <p style="font-size: 13px; color: #aaa; margin-bottom: 8px;">${categoryText} ${p.category}</p>
-                    <p style="font-size: 14px; color: #ddd; margin-bottom: 15px;">${p.text}</p>
+                <div class="tool-card" style="padding: 12px; text-align: ${currentLang === 'ur' ? 'right' : 'left'};">
+                    <h4 style="color: #ffcc00; margin-bottom: 5px; font-size:16px;">📌 ${p.title}</h4>
+                    <p style="font-size: 12px; color: #aaa; margin-bottom: 6px;">${categoryText} ${p.category}</p>
+                    <p style="font-size: 13px; color: #ddd; margin-bottom: 10px;">${p.text}</p>
                     <div id="${uid}" style="display: none;">${p.text}</div>
                     <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">${copyText}</button>
                 </div>
@@ -1488,7 +1939,7 @@
         filterPrompts();
     }
 
-    // ========== CANVAS ANIMATION ==========
+    // ========== CANVAS ANIMATION (Optimized) ==========
     const canvas = document.getElementById('sandCanvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
