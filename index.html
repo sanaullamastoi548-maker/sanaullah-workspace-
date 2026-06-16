@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="ur" dir="rtl" id="mainHtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,6 +69,28 @@
             margin: 15px auto;
             border-radius: 5px;
             box-shadow: 0 0 10px #ffcc00;
+        }
+
+        /* Language Switcher Buttons */
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .lang-btn {
+            background: rgba(255,204,0,0.2);
+            border: 1px solid #ffcc00;
+            color: #ffcc00;
+            padding: 8px 25px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            background: #ffcc00;
+            color: black;
         }
 
         /* ========== زبان اور سرچ بار ========== */
@@ -249,6 +271,32 @@
             margin-top: 10px;
         }
 
+        /* Prompt Library کے لیے اضافی CSS */
+        .prompt-results-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .search-small {
+            padding: 12px;
+            border-radius: 60px;
+            background: #0c0f1a;
+            border: 1px solid #ffcc00;
+            color: white;
+            outline: none;
+        }
+        .flex-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 768px) {
+            .flex-row {
+                flex-direction: column;
+            }
+        }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -275,97 +323,89 @@
 <div class="container">
     <!-- Header -->
     <div class="header">
-        <h1>Sanaullah Workspace</h1>
+        <h1 id="siteTitle">Sanaullah Workspace</h1>
         <div class="glow-line"></div>
-        <p>🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
+        <p id="siteTagline">🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
+        
+        <!-- Language Switcher Buttons -->
+        <div class="lang-switcher">
+            <button class="lang-btn active" id="btnUrdu" onclick="setLanguage('ur')">🇵🇰 اردو</button>
+            <button class="lang-btn" id="btnEnglish" onclick="setLanguage('en')">🇬🇧 English</button>
+        </div>
     </div>
 
     <!-- ========== زبان اور سرچ بار ========== -->
     <div class="language-section">
-        <h3>🌐 اپنی زبان تلاش کریں</h3>
+        <h3 id="langSectionTitle">🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
             <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic, French, Turkish...">
-            <button class="search-btn" onclick="searchLanguage()">تلاش کریں</button>
+            <button class="search-btn" onclick="searchLanguage()" id="searchLangBtn">تلاش کریں</button>
         </div>
         
         <div class="translate-container">
             <div id="google_translate_element"></div>
-            <div class="translate-note">
+            <div class="translate-note" id="translateNote">
                 💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔
             </div>
         </div>
 
         <!-- Popular Languages Quick Access -->
         <div class="popular-langs">
-            <h4>📚 مشہور زبانیں (کلک کریں)</h4>
-            <div class="lang-tags">
-                <span class="lang-tag" onclick="quickSearch('Urdu')">🇵🇰 اردو</span>
-                <span class="lang-tag" onclick="quickSearch('English')">🇬🇧 English</span>
-                <span class="lang-tag" onclick="quickSearch('Arabic')">🇸🇦 العربية</span>
-                <span class="lang-tag" onclick="quickSearch('Hindi')">🇮🇳 हिन्दी</span>
-                <span class="lang-tag" onclick="quickSearch('Spanish')">🇪🇸 Español</span>
-                <span class="lang-tag" onclick="quickSearch('French')">🇫🇷 Français</span>
-                <span class="lang-tag" onclick="quickSearch('German')">🇩🇪 Deutsch</span>
-                <span class="lang-tag" onclick="quickSearch('Turkish')">🇹🇷 Türkçe</span>
-                <span class="lang-tag" onclick="quickSearch('Persian')">🇮🇷 فارسی</span>
-                <span class="lang-tag" onclick="quickSearch('Bengali')">🇧🇩 বাংলা</span>
-                <span class="lang-tag" onclick="quickSearch('Russian')">🇷🇺 Русский</span>
-                <span class="lang-tag" onclick="quickSearch('Chinese')">🇨🇳 中文</span>
-                <span class="lang-tag" onclick="quickSearch('Japanese')">🇯🇵 日本語</span>
-                <span class="lang-tag" onclick="quickSearch('Italian')">🇮🇹 Italiano</span>
-                <span class="lang-tag" onclick="quickSearch('Portuguese')">🇵🇹 Português</span>
+            <h4 id="popularLangsTitle">📚 مشہور زبانیں (کلک کریں)</h4>
+            <div class="lang-tags" id="langTagsContainer">
+                <!-- Dynamic language tags will be here -->
             </div>
         </div>
     </div>
 
     <!-- ========== ٹولز کا کنٹینر ========== -->
     <div class="tools-container">
-        <!-- Tool 1: Freelance Assistant (تمام آپشنز کے ساتھ) -->
+        <!-- Tool 1: Freelance Assistant -->
         <div class="tool-card">
-            <h3>🤖 Freelance Assistant</h3>
-            <p>AI کی مدد سے پرووزل اور نگ ڈسکریشن لکھیں۔</p>
+            <h3 id="tool1Title">🤖 Freelance Assistant</h3>
+            <p id="tool1Desc">AI کی مدد سے پروپوزل اور Gig ڈسکریشن لکھیں۔</p>
             <div class="tool-content">
                 <select id="taskType">
-                    <option value="upwork">📘 Upwork Proposal</option>
-                    <option value="fiverr">🎵 Fiverr Gig Description</option>
-                    <option value="freelancer">💼 Freelancer.com Bid</option>
-                    <option value="linkedin">🔗 LinkedIn Connection Message</option>
+                    <option value="upwork" id="optUpwork">📘 Upwork Proposal</option>
+                    <option value="fiverr" id="optFiverr">🎵 Fiverr Gig Description</option>
+                    <option value="freelancer" id="optFreelancer">💼 Freelancer.com Bid</option>
+                    <option value="linkedin" id="optLinkedin">🔗 LinkedIn Connection Message</option>
                 </select>
                 <input type="text" id="userTopic" placeholder="کام کا نام لکھیں (مثال: Google Sheets Automation)">
-                <button onclick="generateAIAnswer()">Generate Proposal</button>
+                <button onclick="generateAIAnswer()" id="generateProposalBtn">Generate Proposal</button>
                 <div id="aiResponse" class="result-box">✨ جواب یہاں آئے گا</div>
             </div>
         </div>
 
         <!-- Tool 2: Content Writer -->
         <div class="tool-card">
-            <h3>✍️ Content Writer</h3>
-            <p>AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
+            <h3 id="tool2Title">✍️ Content Writer</h3>
+            <p id="tool2Desc">AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
             <div class="tool-content">
                 <textarea id="contentInput" rows="3" placeholder="اپنا مواد یہاں لکھیں..."></textarea>
-                <button onclick="convertContent('upper')">UPPERCASE</button>
-                <button onclick="convertContent('lower')">lowercase</button>
-                <button onclick="convertContent('capitalize')">Capitalize</button>
+                <button onclick="convertContent('upper')" id="upperBtn">UPPERCASE</button>
+                <button onclick="convertContent('lower')" id="lowerBtn">lowercase</button>
+                <button onclick="convertContent('capitalize')" id="capitalizeBtn">Capitalize</button>
                 <div id="contentResult" class="result-box">📝 نتیجہ یہاں آئے گا</div>
             </div>
         </div>
 
         <!-- Tool 3: SEO Optimizer -->
         <div class="tool-card">
-            <h3>📈 SEO Optimizer</h3>
-            <p>اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
+            <h3 id="tool3Title">📈 SEO Optimizer</h3>
+            <p id="tool3Desc">اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
             <div class="tool-content">
-                <input type="text" id="seoKeyword" placeholder="مطلوبہ لفظ">
+                <input type="text" id="seoKeyword" placeholder="مطلوبہ لفظ" id="seoKeywordPlaceholder">
                 <textarea id="seoContent" rows="3" placeholder="اپنا آرٹیکل لکھیں..."></textarea>
-                <button onclick="optimizeSEO()">SEO Optimize کریں</button>
+                <button onclick="optimizeSEO()" id="seoOptimizeBtn">SEO Optimize کریں</button>
                 <div id="seoResult" class="result-box">📊 SEO تجاویز یہاں ہوں گی</div>
             </div>
         </div>
 
         <!-- Tool 4: Code Helper -->
         <div class="tool-card">
-            <h3>💻 Code Helper</h3>
-            <p>کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
+            <h3 id="tool4Title">💻 Code Helper</h3>
+            <p id="tool4Desc">کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
             <div class="tool-content">
                 <select id="codeLanguage">
                     <option value="html">HTML</option>
@@ -374,42 +414,267 @@
                     <option value="python">Python</option>
                 </select>
                 <textarea id="codeQuestion" rows="3" placeholder="اپنا سوال لکھیں..."></textarea>
-                <button onclick="generateCodeHelp()">Code Helper سے پوچھیں</button>
+                <button onclick="generateCodeHelp()" id="codeHelperBtn">Code Helper سے پوچھیں</button>
                 <div id="codeResult" class="result-box">⚙️ کوڈ کا جواب یہاں آئے گا</div>
             </div>
         </div>
-        
- </div>
+    </div>
 
-   <div class="tool-card" id="prompt-library-tool">
-        <h3>📚 Prompt Library</h3>
-        <p>سرچ کریں اور ایک کلک میں کاپی کریں!</p>
-        <input type="text" id="promptSearch" placeholder="مثلاً: Fiverr, SEO, Coding..." onkeyup="filterPrompts()" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 20px; border: 1px solid #ffcc00; background: #0c0f1a; color: white;">
-        <div id="promptList" class="tool-content">
+    <!-- ========== Tool 5: Prompt Library ========== -->
+    <div class="tools-container">
+        <div class="tool-card" style="grid-column: 1 / -1;">
+            <h3 id="promptLibTitle">📚 Prompt Library</h3>
+            <p id="promptLibDesc">اپنی پسند کا پرامپٹ سرچ کریں — Keyword اور Category دونوں سے فلٹر کریں</p>
+            <div class="tool-content">
+                <div class="flex-row">
+                    <input type="text" id="promptSearchKeyword" class="search-small" placeholder="🔍 Keyword مثلاً: SEO, Fiverr, Upwork..." style="flex: 2;">
+                    <select id="promptCategory" class="search-small" style="flex: 1;">
+                        <option value="all" id="catAll">📁 تمام Categories</option>
+                        <option value="SEO" id="catSEO">📈 SEO</option>
+                        <option value="Fiverr" id="catFiverr">🎵 Fiverr</option>
+                        <option value="Upwork" id="catUpwork">📘 Upwork</option>
+                        <option value="Coding" id="catCoding">💻 Coding</option>
+                        <option value="Marketing" id="catMarketing">📢 Marketing</option>
+                    </select>
+                    <button class="search-btn" onclick="filterPrompts()" id="searchPromptBtn" style="padding: 12px 24px;">🔍 سرچ کریں</button>
+                </div>
+                
+                <div id="promptResultsContainer" class="prompt-results-grid">
+                    <!-- یہاں جاوا اسکرپٹ سے نتائج آئیں گے -->
+                </div>
             </div>
-    </div> 
-        
+        </div>
+    </div>
+
     <footer>
-        <h3>Sanaullah Workspace</h3>
-        <p>AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation</p>
-        <p>© 2026 All Rights Reserved</p>
+        <h3 id="footerTitle">Sanaullah Workspace</h3>
+        <p id="footerText">AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation</p>
+        <p id="copyright">© 2026 All Rights Reserved</p>
     </footer>
 </div>
 
 <script>
-    // ========== GOOGLE TRANSLATE (مکمل زبانوں کے ساتھ) ==========
+    // ========== LANGUAGE TRANSLATIONS ==========
+    const translations = {
+        ur: {
+            siteTitle: "Sanaullah Workspace",
+            siteTagline: "🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools",
+            langSectionTitle: "🌐 اپنی زبان تلاش کریں",
+            searchLangBtn: "تلاش کریں",
+            translateNote: "💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔",
+            popularLangsTitle: "📚 مشہور زبانیں (کلک کریں)",
+            tool1Title: "🤖 Freelance Assistant",
+            tool1Desc: "AI کی مدد سے پروپوزل اور Gig ڈسکریشن لکھیں۔",
+            optUpwork: "📘 Upwork Proposal",
+            optFiverr: "🎵 Fiverr Gig Description",
+            optFreelancer: "💼 Freelancer.com Bid",
+            optLinkedin: "🔗 LinkedIn Connection Message",
+            userTopicPlaceholder: "کام کا نام لکھیں (مثال: Google Sheets Automation)",
+            generateProposalBtn: "Generate Proposal",
+            tool2Title: "✍️ Content Writer",
+            tool2Desc: "AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔",
+            contentPlaceholder: "اپنا مواد یہاں لکھیں...",
+            upperBtn: "UPPERCASE",
+            lowerBtn: "lowercase",
+            capitalizeBtn: "Capitalize",
+            tool3Title: "📈 SEO Optimizer",
+            tool3Desc: "اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔",
+            seoKeywordPlaceholder: "مطلوبہ لفظ",
+            seoContentPlaceholder: "اپنا آرٹیکل لکھیں...",
+            seoOptimizeBtn: "SEO Optimize کریں",
+            tool4Title: "💻 Code Helper",
+            tool4Desc: "کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔",
+            codeQuestionPlaceholder: "اپنا سوال لکھیں...",
+            codeHelperBtn: "Code Helper سے پوچھیں",
+            promptLibTitle: "📚 Prompt Library",
+            promptLibDesc: "اپنی پسند کا پرامپٹ سرچ کریں — Keyword اور Category دونوں سے فلٹر کریں",
+            promptSearchPlaceholder: "🔍 Keyword مثلاً: SEO, Fiverr, Upwork...",
+            catAll: "📁 تمام Categories",
+            catSEO: "📈 SEO",
+            catFiverr: "🎵 Fiverr",
+            catUpwork: "📘 Upwork",
+            catCoding: "💻 Coding",
+            catMarketing: "📢 Marketing",
+            searchPromptBtn: "🔍 سرچ کریں",
+            footerTitle: "Sanaullah Workspace",
+            footerText: "AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation",
+            copyright: "© 2026 All Rights Reserved",
+            copyBtn: "📋 کاپی کریں",
+            noPromptFound: "❌ کوئی Prompt نہیں ملا",
+            category: "Category:"
+        },
+        en: {
+            siteTitle: "Sanaullah Workspace",
+            siteTagline: "🤖 AI powered solution for every difficult task — Freelancing, Writing, SEO, Coding & Language Tools",
+            langSectionTitle: "🌐 Find Your Language",
+            searchLangBtn: "Search",
+            translateNote: "💡 Type the language in the box above, then select from the Google Translate box below.",
+            popularLangsTitle: "📚 Popular Languages (Click)",
+            tool1Title: "🤖 Freelance Assistant",
+            tool1Desc: "Write proposals and gig descriptions with AI assistance.",
+            optUpwork: "📘 Upwork Proposal",
+            optFiverr: "🎵 Fiverr Gig Description",
+            optFreelancer: "💼 Freelancer.com Bid",
+            optLinkedin: "🔗 LinkedIn Connection Message",
+            userTopicPlaceholder: "Enter task name (e.g., Google Sheets Automation)",
+            generateProposalBtn: "Generate Proposal",
+            tool2Title: "✍️ Content Writer",
+            tool2Desc: "Create the best articles and content with AI.",
+            contentPlaceholder: "Write your content here...",
+            upperBtn: "UPPERCASE",
+            lowerBtn: "lowercase",
+            capitalizeBtn: "Capitalize",
+            tool3Title: "📈 SEO Optimizer",
+            tool3Desc: "Make your articles and website SEO-friendly.",
+            seoKeywordPlaceholder: "Enter keyword",
+            seoContentPlaceholder: "Write your article here...",
+            seoOptimizeBtn: "Optimize SEO",
+            tool4Title: "💻 Code Helper",
+            tool4Desc: "Get help from an AI assistant in coding.",
+            codeQuestionPlaceholder: "Write your question here...",
+            codeHelperBtn: "Ask Code Helper",
+            promptLibTitle: "📚 Prompt Library",
+            promptLibDesc: "Search for prompts — Filter by Keyword and Category",
+            promptSearchPlaceholder: "🔍 Keyword e.g., SEO, Fiverr, Upwork...",
+            catAll: "📁 All Categories",
+            catSEO: "📈 SEO",
+            catFiverr: "🎵 Fiverr",
+            catUpwork: "📘 Upwork",
+            catCoding: "💻 Coding",
+            catMarketing: "📢 Marketing",
+            searchPromptBtn: "🔍 Search",
+            footerTitle: "Sanaullah Workspace",
+            footerText: "AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation",
+            copyright: "© 2026 All Rights Reserved",
+            copyBtn: "📋 Copy",
+            noPromptFound: "❌ No Prompt Found",
+            category: "Category:"
+        }
+    };
+
+    let currentLang = 'ur';
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        
+        // Change direction
+        const htmlTag = document.getElementById('mainHtml');
+        if (lang === 'en') {
+            htmlTag.setAttribute('dir', 'ltr');
+            htmlTag.setAttribute('lang', 'en');
+        } else {
+            htmlTag.setAttribute('dir', 'rtl');
+            htmlTag.setAttribute('lang', 'ur');
+        }
+        
+        // Update button active state
+        document.getElementById('btnUrdu').classList.remove('active');
+        document.getElementById('btnEnglish').classList.remove('active');
+        if (lang === 'ur') {
+            document.getElementById('btnUrdu').classList.add('active');
+        } else {
+            document.getElementById('btnEnglish').classList.add('active');
+        }
+        
+        const t = translations[lang];
+        
+        // Update all text elements
+        document.getElementById('siteTitle').innerText = t.siteTitle;
+        document.getElementById('siteTagline').innerText = t.siteTagline;
+        document.getElementById('langSectionTitle').innerHTML = t.langSectionTitle;
+        document.getElementById('searchLangBtn').innerText = t.searchLangBtn;
+        document.getElementById('translateNote').innerHTML = t.translateNote;
+        document.getElementById('popularLangsTitle').innerHTML = t.popularLangsTitle;
+        
+        document.getElementById('tool1Title').innerHTML = t.tool1Title;
+        document.getElementById('tool1Desc').innerText = t.tool1Desc;
+        document.getElementById('optUpwork').innerHTML = t.optUpwork;
+        document.getElementById('optFiverr').innerHTML = t.optFiverr;
+        document.getElementById('optFreelancer').innerHTML = t.optFreelancer;
+        document.getElementById('optLinkedin').innerHTML = t.optLinkedin;
+        document.getElementById('userTopic').placeholder = t.userTopicPlaceholder;
+        document.getElementById('generateProposalBtn').innerText = t.generateProposalBtn;
+        
+        document.getElementById('tool2Title').innerHTML = t.tool2Title;
+        document.getElementById('tool2Desc').innerText = t.tool2Desc;
+        document.getElementById('contentInput').placeholder = t.contentPlaceholder;
+        document.getElementById('upperBtn').innerText = t.upperBtn;
+        document.getElementById('lowerBtn').innerText = t.lowerBtn;
+        document.getElementById('capitalizeBtn').innerText = t.capitalizeBtn;
+        
+        document.getElementById('tool3Title').innerHTML = t.tool3Title;
+        document.getElementById('tool3Desc').innerText = t.tool3Desc;
+        document.getElementById('seoKeyword').placeholder = t.seoKeywordPlaceholder;
+        document.getElementById('seoContent').placeholder = t.seoContentPlaceholder;
+        document.getElementById('seoOptimizeBtn').innerText = t.seoOptimizeBtn;
+        
+        document.getElementById('tool4Title').innerHTML = t.tool4Title;
+        document.getElementById('tool4Desc').innerText = t.tool4Desc;
+        document.getElementById('codeQuestion').placeholder = t.codeQuestionPlaceholder;
+        document.getElementById('codeHelperBtn').innerText = t.codeHelperBtn;
+        
+        document.getElementById('promptLibTitle').innerHTML = t.promptLibTitle;
+        document.getElementById('promptLibDesc').innerText = t.promptLibDesc;
+        document.getElementById('promptSearchKeyword').placeholder = t.promptSearchPlaceholder;
+        document.getElementById('catAll').innerHTML = t.catAll;
+        document.getElementById('catSEO').innerHTML = t.catSEO;
+        document.getElementById('catFiverr').innerHTML = t.catFiverr;
+        document.getElementById('catUpwork').innerHTML = t.catUpwork;
+        document.getElementById('catCoding').innerHTML = t.catCoding;
+        document.getElementById('catMarketing').innerHTML = t.catMarketing;
+        document.getElementById('searchPromptBtn').innerText = t.searchPromptBtn;
+        
+        document.getElementById('footerTitle').innerHTML = t.footerTitle;
+        document.getElementById('footerText').innerText = t.footerText;
+        document.getElementById('copyright').innerText = t.copyright;
+        
+        // Update language tags
+        updateLanguageTags();
+        
+        // Re-run prompt filter to update copy buttons text
+        filterPrompts();
+    }
+    
+    function updateLanguageTags() {
+        const tagsContainer = document.getElementById('langTagsContainer');
+        const languages = [
+            { code: 'Urdu', name: '🇵🇰 اردو', enName: 'Urdu' },
+            { code: 'English', name: '🇬🇧 English', enName: 'English' },
+            { code: 'Arabic', name: '🇸🇦 العربية', enName: 'Arabic' },
+            { code: 'Hindi', name: '🇮🇳 हिन्दी', enName: 'Hindi' },
+            { code: 'Spanish', name: '🇪🇸 Español', enName: 'Spanish' },
+            { code: 'French', name: '🇫🇷 Français', enName: 'French' },
+            { code: 'German', name: '🇩🇪 Deutsch', enName: 'German' },
+            { code: 'Turkish', name: '🇹🇷 Türkçe', enName: 'Turkish' },
+            { code: 'Persian', name: '🇮🇷 فارسی', enName: 'Persian' },
+            { code: 'Bengali', name: '🇧🇩 বাংলা', enName: 'Bengali' },
+            { code: 'Russian', name: '🇷🇺 Русский', enName: 'Russian' },
+            { code: 'Chinese', name: '🇨🇳 中文', enName: 'Chinese' },
+            { code: 'Japanese', name: '🇯🇵 日本語', enName: 'Japanese' },
+            { code: 'Italian', name: '🇮🇹 Italiano', enName: 'Italian' },
+            { code: 'Portuguese', name: '🇵🇹 Português', enName: 'Portuguese' }
+        ];
+        
+        tagsContainer.innerHTML = '';
+        languages.forEach(lang => {
+            const displayName = currentLang === 'ur' ? lang.name : lang.enName;
+            tagsContainer.innerHTML += `<span class="lang-tag" onclick="quickSearch('${lang.code}')">${displayName}</span>`;
+        });
+    }
+
+    // ========== GOOGLE TRANSLATE ==========
     function googleTranslateElementInit() {
         new google.translate.TranslateElement({
             pageLanguage: 'ur',
             autoDisplay: false,
-            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk,hi,ta,te,ml,kn,gu,pa,ne,sd,ps,so,sw,am,az,ka,km,lo,my,mn,ne,si,tg,uz'
+            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk'
         }, 'google_translate_element');
     }
 
     function searchLanguage() {
         let searchLang = document.getElementById("language-search").value.trim();
         if (searchLang === "") {
-            alert("براہ کرم کوئی زبان لکھیں!");
+            alert(currentLang === 'ur' ? "براہ کرم کوئی زبان لکھیں!" : "Please enter a language!");
             return;
         }
         
@@ -427,10 +692,10 @@
                 }
             }
             if (!found) {
-                alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
+                alert(currentLang === 'ur' ? "⚠️ یہ زبان اس وقت دستیاب نہیں۔" : "⚠️ This language is not available.");
             }
         } else {
-            alert("⚠️ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔");
+            alert(currentLang === 'ur' ? "⚠️ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔" : "⚠️ Please wait for Google Translate to load.");
         }
     }
 
@@ -449,15 +714,15 @@
         temp.select();
         try { document.execCommand("copy"); } catch(e) {}
         document.body.removeChild(temp);
-        alert("✅ متن کاپی ہو گیا!");
+        alert(currentLang === 'ur' ? "✅ متن کاپی ہو گیا!" : "✅ Text copied!");
     }
 
-    // ========== TOOL 1: Freelance Assistant (تمام آپشنز کے ساتھ) ==========
+    // ========== TOOL 1: Freelance Assistant ==========
     function generateAIAnswer() {
         let task = document.getElementById("taskType").value;
         let topic = document.getElementById("userTopic").value.trim();
         if (!topic) {
-            document.getElementById("aiResponse").innerHTML = "⚠️ براہ کرم کام کا نام لکھیں!";
+            document.getElementById("aiResponse").innerHTML = currentLang === 'ur' ? "⚠️ براہ کرم کام کا نام لکھیں!" : "⚠️ Please enter task name!";
             return;
         }
         
@@ -470,35 +735,49 @@
         
         let result = responses[task];
         let uid = "freelance_" + Date.now();
-        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
+        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">${copyText}</button>`;
     }
 
     // ========== TOOL 2: Content Writer ==========
     function convertContent(type) {
         let txt = document.getElementById("contentInput").value;
-        if (!txt) { document.getElementById("contentResult").innerHTML = "⚠️ پہلے کچھ لکھیں!"; return; }
+        if (!txt) { 
+            document.getElementById("contentResult").innerHTML = currentLang === 'ur' ? "⚠️ پہلے کچھ لکھیں!" : "⚠️ Write something first!";
+            return; 
+        }
         let res = "";
         if (type === 'upper') res = txt.toUpperCase();
         else if (type === 'lower') res = txt.toLowerCase();
         else if (type === 'capitalize') res = txt.toLowerCase().replace(/(^|\s)\S/g, L => L.toUpperCase());
         let uid = "content_" + Date.now();
-        document.getElementById("contentResult").innerHTML = `<div id="${uid}">${res}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
+        document.getElementById("contentResult").innerHTML = `<div id="${uid}">${res}</div><button class="copy-btn" onclick="universalCopy('${uid}')">${copyText}</button>`;
     }
 
     // ========== TOOL 3: SEO Optimizer ==========
     function optimizeSEO() {
         let kw = document.getElementById("seoKeyword").value.trim();
-        if (!kw) { document.getElementById("seoResult").innerHTML = "⚠️ مطلوبہ لفظ لکھیں!"; return; }
-        let tips = `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔<br>✅ تصاویر میں alt text ${kw} رکھیں۔<br>✅ URLs میں ${kw} استعمال کریں۔`;
+        if (!kw) { 
+            document.getElementById("seoResult").innerHTML = currentLang === 'ur' ? "⚠️ مطلوبہ لفظ لکھیں!" : "⚠️ Enter keyword!";
+            return; 
+        }
+        let tips = currentLang === 'ur' 
+            ? `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔<br>✅ تصاویر میں alt text ${kw} رکھیں۔<br>✅ URLs میں ${kw} استعمال کریں۔`
+            : `🔍 SEO Tips for "${kw}":<br>✅ Add ${kw} in title.<br>✅ Use ${kw} within first 100 words.<br>✅ Write ${kw} in meta description.<br>✅ Add ${kw} in image alt text.<br>✅ Use ${kw} in URLs.`;
         let uid = "seo_" + Date.now();
-        document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
+        document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">${copyText}</button>`;
     }
 
     // ========== TOOL 4: Code Helper ==========
     function generateCodeHelp() {
         let lang = document.getElementById("codeLanguage").value;
         let q = document.getElementById("codeQuestion").value.trim();
-        if (!q) { document.getElementById("codeResult").innerHTML = "⚠️ اپنا سوال لکھیں!"; return; }
+        if (!q) { 
+            document.getElementById("codeResult").innerHTML = currentLang === 'ur' ? "⚠️ اپنا سوال لکھیں!" : "⚠️ Write your question!";
+            return; 
+        }
         let samples = {
             html: `<!-- ${q} کے لیے HTML -->\n<div class="card">\n  <h3>عنوان</h3>\n  <p>مواد یہاں لکھیں</p>\n</div>`,
             css: `/* ${q} کے لیے CSS */\n.card {\n  background: #111;\n  border-radius: 20px;\n  padding: 20px;\n}`,
@@ -507,39 +786,76 @@
         };
         let code = samples[lang];
         let uid = "code_" + Date.now();
-        document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace; text-align:left; direction:ltr;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">📋 کاپی کریں</button>`;
+        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
+        document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace; text-align:left; direction:ltr;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">${copyText}</button>`;
     }
-  
- function displayPrompts(filter = "") {
-    const list = document.getElementById("promptList");
-    list.innerHTML = "";
-    
-    promptsData.forEach((p, index) => {
-        if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
-            let id = "p_" + index;
-            
-            // یہ ہے وہ نیا ڈیزائن جو بالکل دوسرے ٹولز جیسا ہے
-            list.innerHTML += `
-                <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(255,204,0,0.3); padding: 15px; border-radius: 12px; margin-top: 15px; text-align: left;">
-                    <h4 style="color: #ffcc00; margin: 0 0 10px 0;">${p.title}</h4>
-                    <p style="font-size: 14px; color: #eee; margin-bottom: 15px; line-height: 1.4;">${p.text}</p>
-                    <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer;">📋 کاپی کریں</button>
-                    <div id="${id}" style="display:none;">${p.text}</div>
+
+    // ========== PROMPT LIBRARY ==========
+    const prompts = [
+        { title: "SEO Title Generator", category: "SEO", text: "Generate 5 SEO-friendly titles for a blog about [Topic]. Include primary keyword [Keyword] and keep under 60 characters." },
+        { title: "Meta Description Writer", category: "SEO", text: "Write a compelling meta description for a webpage about [Topic]. Include [Keyword] and a call-to-action within 160 characters." },
+        { title: "SEO Keywords Research", category: "SEO", text: "List 10 long-tail keywords for [Topic] with low competition and high search volume. Also suggest search intent." },
+        { title: "Fiverr Gig Description", category: "Fiverr", text: "Write a professional, SEO-optimized Fiverr gig description for [Service Name]. Include benefits, packages, and an FAQ section." },
+        { title: "Fiverr Profile Bio", category: "Fiverr", text: "Create a short, persuasive Fiverr profile bio for a freelancer specializing in [Skill]. Highlight experience and client satisfaction." },
+        { title: "Fiverr Gig Title", category: "Fiverr", text: "Generate 5 click-worthy Fiverr gig titles for [Service]. Use keywords and power words to attract buyers." },
+        { title: "Upwork Proposal", category: "Upwork", text: "Write a high-converting Upwork proposal for a job related to [Project Name]. Mention [Your Skills] and keep it under 250 words." },
+        { title: "Upwork Cover Letter", category: "Upwork", text: "Draft a professional Upwork cover letter for a client looking for [Service]. Include a brief portfolio link and availability." },
+        { title: "Upwork Bio", category: "Upwork", text: "Write an optimized Upwork freelancer bio for [Your Profession]. Focus on results, experience, and client testimonials." },
+        { title: "Code Debug Assistant", category: "Coding", text: "Act as a senior developer. Debug this [Language] code: [Paste Code]. Explain the issue and provide the corrected version." },
+        { title: "HTML Structure Generator", category: "Coding", text: "Generate a clean, semantic HTML5 structure for a webpage about [Topic]. Include header, main, section, and footer." },
+        { title: "CSS Styling Help", category: "Coding", text: "Write CSS code to style a [Component Name] with modern flexbox/grid. Make it responsive and visually appealing." },
+        { title: "Email Marketing Copy", category: "Marketing", text: "Write a promotional email for a product called [Product Name]. Highlight benefits, include urgency, and a clear CTA button." },
+        { title: "Social Media Caption", category: "Marketing", text: "Create an engaging Instagram caption for a brand launching [New Product]. Use 3 hashtags and a question to boost comments." },
+        { title: "Facebook Ad Copy", category: "Marketing", text: "Write a short, persuasive Facebook ad for [Service/Product]. Include headline, description, and a strong call-to-action." }
+    ];
+
+    function filterPrompts() {
+        const keyword = document.getElementById("promptSearchKeyword").value.trim().toLowerCase();
+        const category = document.getElementById("promptCategory").value;
+        const container = document.getElementById("promptResultsContainer");
+        
+        let filteredPrompts = prompts.filter(prompt => {
+            const matchesCategory = (category === "all" || prompt.category === category);
+            const matchesKeyword = (keyword === "" || 
+                prompt.title.toLowerCase().includes(keyword) || 
+                prompt.text.toLowerCase().includes(keyword));
+            return matchesCategory && matchesKeyword;
+        });
+        
+        const noPromptMsg = currentLang === 'ur' ? "❌ کوئی Prompt نہیں ملا" : "❌ No Prompt Found";
+        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
+        const categoryText = currentLang === 'ur' ? "Category:" : "Category:";
+        
+        if (filteredPrompts.length === 0) {
+            container.innerHTML = `<div class="result-box" style="text-align: center; color: #ffcc00;">${noPromptMsg}</div>`;
+            return;
+        }
+        
+        container.innerHTML = "";
+        filteredPrompts.forEach((prompt, index) => {
+            const uniqueId = "prompt_result_" + Date.now() + "_" + index;
+            container.innerHTML += `
+                <div class="tool-card" style="padding: 15px; text-align: ${currentLang === 'ur' ? 'right' : 'left'};">
+                    <h4 style="color: #ffcc00; margin-bottom: 5px;">📌 ${prompt.title}</h4>
+                    <p style="font-size: 13px; color: #aaa; margin-bottom: 8px;">${categoryText} ${prompt.category}</p>
+                    <p style="font-size: 14px; color: #ddd; margin-bottom: 15px;">${prompt.text}</p>
+                    <div id="${uniqueId}" style="display: none;">${prompt.text}</div>
+                    <button class="copy-btn" onclick="universalCopy('${uniqueId}')">${copyText}</button>
                 </div>
             `;
-        }
-    });
-}
-   
+        });
+    }
+
+    // Initialize
+    window.onload = function() {
+        updateLanguageTags();
+        filterPrompts();
+    };
 </script>
 
 <!-- Google Translate Script -->
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-
-
-    
-    
 <script>
     // ========== گولڈن ریت + چمکتی بلبیں (پس منظر) ==========
     const canvas = document.getElementById('sandCanvas');
@@ -592,171 +908,5 @@
     }
     draw();
 </script>
-    
-
-    <script>
-    const promptsData = [
-        { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills]." },
-        { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." },
-        { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." }
-    ];
-
-    function displayPrompts(filter = "") {
-        const list = document.getElementById("promptList");
-        list.innerHTML = "";
-        promptsData.forEach((p, index) => {
-            if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
-                let id = "p_" + index;
-                list.innerHTML += `
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left;">
-                        <h4 style="color: #ffcc00; margin: 0;">${p.title}</h4>
-                        <p style="font-size: 13px; color: #ccc; margin: 5px 0;">${p.text}</p>
-                        <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-weight: bold;">📋 کاپی کریں</button>
-                        <div id="${id}" style="display:none;">${p.text}</div>
-                    </div>
-                `;
-            }
-        });
-    }
-
-     function displayPrompts(filter = "") {
-    const list = document.getElementById("promptList");
-    list.innerHTML = "";
-    
-    promptsData.forEach((p, index) => {
-        if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
-            let id = "p_" + index;
-            let resultId = "res_" + index; // یہ وہ جگہ ہے جہاں جواب آئے گا
-            
-            list.innerHTML += `
-                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left;">
-                    <h4 style="color: #ffcc00; margin: 0 0 10px 0;">${p.title}</h4>
-                    <p style="font-size: 13px; color: #ccc; margin-bottom: 15px;">${p.text}</p>
-                    
-                    <button onclick="showPrompt('${p.text}', '${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s;">
-                        استعمال کریں
-                    </button>
-                    
-                    <div id="${resultId}" style="display:none; margin-top: 15px; padding: 10px; background: #0a0d18; border: 1px solid #ffcc00; border-radius: 8px; font-size: 14px;">
-                        <div id="text_${resultId}" style="margin-bottom: 10px; color: white;"></div>
-                        <button class="copy-btn" onclick="copyResult('text_${resultId}')" style="background: #ffcc00; color: black; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer;">📋 کاپی کریں</button>
-                    </div>
-                </div>
-            `;
-        }
-    });
-}
-
-// یہ فنکشن باکس کو ظاہر کرے گا
-function showPrompt(text, resId) {
-    const box = document.getElementById(resId);
-    const textBox = document.getElementById("text_" + resId);
-    textBox.innerText = text;
-    box.style.display = "block"; // باکس دکھا دیں
-}
-
-// یہ فنکشن کاپی کرے گا
-function copyResult(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text);
-    alert("✅ کاپی ہو گیا!");
-}
-        
-            `;
-        }
-    });
- }
-       
-            `;
-        }
-    });
-}
-
-function filterPrompts() {
-    displayPrompts(document.getElementById("promptSearch").value);
-}
-
-function copyPrompt(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        alert("پرامپٹ کاپی ہو گیا!");
-    });
-}
-
-displayPrompts();
-</script>
- <script>
-const promptsData = [
-    { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills]." },
-    { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." },
-    { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." }
-    // آپ یہاں کوما لگا کر اور بھی پرامپٹس بڑھا سکتے ہیں
-];
-
-function displayPrompts(filter = "") {
-    const list = document.getElementById("promptList");
-    if(!list) return; // یہ چیک کرتا ہے کہ کیا سرچ باکس موجود ہے
-    list.innerHTML = "";
-    promptsData.forEach((p, index) => {
-        if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
-            let id = "p_" + index;
-            list.innerHTML += `
-
-            {
-                
-}
-
-function filterPrompts() {
-    displayPrompts(document.getElementById("promptSearch").value);
-}
-
-function copyPrompt(id) {
-    const text = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(text).then(() => {
-        alert("پرامپٹ کاپی ہو گیا!");
-    });
-}
-
-displayPrompts();
-</script>
-
-    <script>
-    const promptsData = [
-        { title: "Upwork Proposal", category: "Freelancing", text: "Act as a professional freelancer. Write a high-converting, short, and persuasive Upwork proposal for a project related to [Project Name]. Highlight my skills in [Your Skills]." },
-        { title: "SEO Keywords", category: "SEO", text: "Generate 10 high-ranking long-tail keywords for a website about [Topic]. Focus on low competition." },
-        { title: "Fiverr Gig Description", category: "Freelancing", text: "Write a professional and SEO-friendly Fiverr gig description for [Service Name]. Include clear benefits and FAQs." }
-    ];
-
-    function displayPrompts(filter = "") {
-        const list = document.getElementById("promptList");
-        list.innerHTML = "";
-        promptsData.forEach((p, index) => {
-            if (p.title.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase())) {
-                let id = "p_" + index;
-                list.innerHTML += `
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 10px; text-align: left;">
-                        <h4 style="color: #ffcc00; margin: 0;">${p.title}</h4>
-                        <p style="font-size: 13px; color: #ccc; margin: 5px 0;">${p.text}</p>
-                        <button class="copy-btn" onclick="copyPrompt('${id}')" style="background: #ffcc00; border: none; padding: 5px 15px; border-radius: 15px; cursor: pointer; font-weight: bold;">📋 کاپی کریں</button>
-                        <div id="${id}" style="display:none;">${p.text}</div>
-                    </div>
-                `;
-            }
-        });
-    }
-
-    function filterPrompts() {
-        displayPrompts(document.getElementById("promptSearch").value);
-    }
-
-    function copyPrompt(id) {
-        const text = document.getElementById(id).innerText;
-        navigator.clipboard.writeText(text).then(() => {
-            alert("پرامپٹ کاپی ہو گیا!");
-        });
-    }
-
-    displayPrompts();
-    </script>
-</body>    
+</body>
 </html>
