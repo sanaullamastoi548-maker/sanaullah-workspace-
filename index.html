@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanaullah Workspace | AI Tools & Productivity</title>
+    <title>Sanaullah Workspace | Free AI Tools & Productivity</title>
     
     <style>
-        /* ========== ویب سائٹ کا مکمل ڈیزائن ========== */
         * {
             margin: 0;
             padding: 0;
@@ -21,7 +20,6 @@
             min-height: 100vh;
         }
 
-        /* چمکتی ریت والا کینوس */
         canvas {
             position: fixed;
             top: 0;
@@ -35,12 +33,11 @@
         .container {
             position: relative;
             z-index: 2;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
 
-        /* Header */
         .header {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
@@ -71,7 +68,6 @@
             box-shadow: 0 0 10px #ffcc00;
         }
 
-        /* Language Switcher Buttons */
         .lang-switcher {
             display: flex;
             justify-content: center;
@@ -93,7 +89,6 @@
             color: black;
         }
 
-        /* ========== زبان اور سرچ بار ========== */
         .language-section {
             background: rgba(255,255,255,0.08);
             backdrop-filter: blur(12px);
@@ -126,10 +121,6 @@
             background: rgba(0,0,0,0.6);
             color: white;
             outline: none;
-        }
-        #language-search:focus {
-            border-color: #fff;
-            box-shadow: 0 0 15px rgba(255,204,0,0.3);
         }
         .search-btn {
             background: #ffcc00;
@@ -187,7 +178,6 @@
             transform: translateY(-2px);
         }
 
-        /* ========== ٹولز کا کنٹینر ========== */
         .tools-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -211,13 +201,14 @@
         }
         .tool-card h3 {
             color: #ffcc00;
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 12px;
         }
         .tool-card p {
             color: #ccc;
             margin-bottom: 20px;
             line-height: 1.5;
+            font-size: 14px;
         }
         .tool-card button {
             background: #ffcc00;
@@ -228,13 +219,13 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 14px;
         }
         .tool-card button:hover {
             background: #ffaa00;
             transform: scale(0.98);
         }
 
-        /* Tool Content (for each tool's inner functionality) */
         .tool-content {
             margin-top: 20px;
             padding-top: 15px;
@@ -249,6 +240,7 @@
             border-radius: 12px;
             color: white;
             outline: none;
+            font-size: 14px;
         }
         textarea:focus, input:focus, select:focus {
             border-color: #ffcc00;
@@ -260,6 +252,12 @@
             margin-top: 15px;
             border: 1px solid rgba(255,204,0,0.3);
             font-size: 14px;
+            min-height: 50px;
+            word-wrap: break-word;
+            text-align: left;
+        }
+        .result-box[dir="rtl"] {
+            text-align: right;
         }
         .copy-btn {
             background: #ffcc00;
@@ -269,9 +267,12 @@
             border-radius: 20px;
             cursor: pointer;
             margin-top: 10px;
+            font-size: 13px;
+        }
+        .copy-btn:hover {
+            background: #ffaa00;
         }
 
-        /* Prompt Library کے لیے اضافی CSS */
         .prompt-results-grid {
             display: flex;
             flex-direction: column;
@@ -284,6 +285,7 @@
             border: 1px solid #ffcc00;
             color: white;
             outline: none;
+            font-size: 14px;
         }
         .flex-row {
             display: flex;
@@ -291,10 +293,60 @@
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
-        @media (max-width: 768px) {
-            .flex-row {
-                flex-direction: column;
-            }
+        .prompt-counter {
+            text-align: center;
+            font-size: 18px;
+            color: #ffcc00;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(255,204,0,0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255,204,0,0.2);
+        }
+        .trending-section {
+            background: rgba(255,204,0,0.05);
+            border: 1px solid rgba(255,204,0,0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .trending-section h4 {
+            color: #ff6b00;
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .trending-tag {
+            display: inline-block;
+            background: rgba(255,204,0,0.15);
+            border: 1px solid #ffcc00;
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .trending-tag:hover {
+            background: #ffcc00;
+            color: black;
+        }
+        .loading-text {
+            text-align: center;
+            color: #ffcc00;
+            padding: 30px;
+            font-size: 18px;
+        }
+
+        .tool-grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .tool-grid-3col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
         }
 
         footer {
@@ -311,8 +363,14 @@
         }
 
         @media (max-width: 700px) {
-            .header h1 { font-size: 32px; }
+            .header h1 { font-size: 28px; }
             .language-section h3 { font-size: 20px; }
+            .tools-container { grid-template-columns: 1fr; }
+            .tool-grid-2col { grid-template-columns: 1fr; }
+            .tool-grid-3col { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .flex-row { flex-direction: column; }
         }
     </style>
 </head>
@@ -325,230 +383,491 @@
     <div class="header">
         <h1 id="siteTitle">Sanaullah Workspace</h1>
         <div class="glow-line"></div>
-        <p id="siteTagline">🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools</p>
+        <p id="siteTagline">🛠️ 100% Free Tools — SEO, Writing, Coding, Design, Finance & Productivity</p>
         
-        <!-- Language Switcher Buttons -->
         <div class="lang-switcher">
             <button class="lang-btn active" id="btnUrdu" onclick="setLanguage('ur')">🇵🇰 اردو</button>
             <button class="lang-btn" id="btnEnglish" onclick="setLanguage('en')">🇬🇧 English</button>
         </div>
     </div>
 
-    <!-- ========== زبان اور سرچ بار ========== -->
+    <!-- Language Section -->
     <div class="language-section">
         <h3 id="langSectionTitle">🌐 اپنی زبان تلاش کریں</h3>
         <div class="search-box">
-            <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic, French, Turkish...">
+            <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic...">
             <button class="search-btn" onclick="searchLanguage()" id="searchLangBtn">تلاش کریں</button>
         </div>
-        
         <div class="translate-container">
-            <div id="google_translate_element"></div>
-            <div class="translate-note" id="translateNote">
-                💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔
-            </div>
+            <div class="translate-note" id="translateNote">💡 براہ کرم اپنی پسندیدہ زبان لکھیں اور انٹرنیٹ براؤزر کا ترجمہ استعمال کریں۔</div>
         </div>
-
-        <!-- Popular Languages Quick Access -->
         <div class="popular-langs">
             <h4 id="popularLangsTitle">📚 مشہور زبانیں (کلک کریں)</h4>
-            <div class="lang-tags" id="langTagsContainer">
-                <!-- Dynamic language tags will be here -->
+            <div class="lang-tags" id="langTagsContainer"></div>
+        </div>
+    </div>
+
+    <!-- ========== TOOLS CONTAINER ========== -->
+    <div class="tools-container" id="toolsContainer">
+        <!-- Tool 1: Word Counter -->
+        <div class="tool-card">
+            <h3>📝 Word Counter</h3>
+            <p>Count words, characters, sentences and paragraphs</p>
+            <div class="tool-content">
+                <textarea id="wordCountInput" rows="4" placeholder="Type or paste your text here..."></textarea>
+                <button onclick="countWords()">Count Words</button>
+                <div id="wordCountResult" class="result-box">📊 Words: 0 | Characters: 0 | Sentences: 0 | Paragraphs: 0</div>
+            </div>
+        </div>
+
+        <!-- Tool 2: Character Counter -->
+        <div class="tool-card">
+            <h3>🔤 Character Counter</h3>
+            <p>Count characters with and without spaces</p>
+            <div class="tool-content">
+                <textarea id="charCountInput" rows="4" placeholder="Type or paste your text here..."></textarea>
+                <button onclick="countCharacters()">Count Characters</button>
+                <div id="charCountResult" class="result-box">📊 Total: 0 | Without Spaces: 0</div>
+            </div>
+        </div>
+
+        <!-- Tool 3: Keyword Density Checker -->
+        <div class="tool-card">
+            <h3>🔍 Keyword Density Checker</h3>
+            <p>Check keyword frequency and density in text</p>
+            <div class="tool-content">
+                <textarea id="densityInput" rows="3" placeholder="Enter your text here..."></textarea>
+                <input type="text" id="densityKeyword" placeholder="Enter keyword to check">
+                <button onclick="checkDensity()">Check Density</button>
+                <div id="densityResult" class="result-box">📊 Keyword density will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 4: Meta Description Generator -->
+        <div class="tool-card">
+            <h3>📄 Meta Description Generator</h3>
+            <p>Generate SEO meta descriptions under 160 characters</p>
+            <div class="tool-content">
+                <input type="text" id="metaTopic" placeholder="Enter topic or keyword">
+                <button onclick="generateMetaDescription()">Generate Meta</button>
+                <div id="metaResult" class="result-box">📝 Meta description will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 5: SEO Title Generator -->
+        <div class="tool-card">
+            <h3>📈 SEO Title Generator</h3>
+            <p>Generate click-worthy SEO titles under 60 characters</p>
+            <div class="tool-content">
+                <input type="text" id="seoTopic" placeholder="Enter topic or keyword">
+                <button onclick="generateSEOTitles()">Generate Titles</button>
+                <div id="seoTitleResult" class="result-box">📌 SEO titles will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 6: Hashtag Generator -->
+        <div class="tool-card">
+            <h3>#️⃣ Hashtag Generator</h3>
+            <p>Generate relevant hashtags for social media</p>
+            <div class="tool-content">
+                <input type="text" id="hashtagTopic" placeholder="Enter topic (e.g., SEO, Marketing)">
+                <button onclick="generateHashtags()">Generate Hashtags</button>
+                <div id="hashtagResult" class="result-box">#️⃣ Hashtags will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 7: Text Case Converter -->
+        <div class="tool-card">
+            <h3>🔠 Text Case Converter</h3>
+            <p>Convert text to UPPERCASE, lowercase, Capitalize, Title Case</p>
+            <div class="tool-content">
+                <textarea id="caseInput" rows="3" placeholder="Enter your text here..."></textarea>
+                <div style="display:flex; flex-wrap:wrap; gap:5px; justify-content:center;">
+                    <button onclick="convertCase('upper')">UPPER</button>
+                    <button onclick="convertCase('lower')">lower</button>
+                    <button onclick="convertCase('capitalize')">Capitalize</button>
+                    <button onclick="convertCase('title')">Title Case</button>
+                </div>
+                <div id="caseResult" class="result-box">📝 Converted text will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 8: HTML Formatter -->
+        <div class="tool-card">
+            <h3>🌐 HTML Formatter</h3>
+            <p>Format and beautify HTML code</p>
+            <div class="tool-content">
+                <textarea id="htmlFormatInput" rows="4" placeholder="Paste HTML code here..."></textarea>
+                <button onclick="formatHTML()">Format HTML</button>
+                <div id="htmlFormatResult" class="result-box">💻 Formatted HTML will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 9: CSS Minifier -->
+        <div class="tool-card">
+            <h3>🎨 CSS Minifier</h3>
+            <p>Minify CSS code to reduce file size</p>
+            <div class="tool-content">
+                <textarea id="cssMinifyInput" rows="4" placeholder="Paste CSS code here..."></textarea>
+                <button onclick="minifyCSS()">Minify CSS</button>
+                <div id="cssMinifyResult" class="result-box">📦 Minified CSS will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 10: JavaScript Minifier -->
+        <div class="tool-card">
+            <h3>⚡ JavaScript Minifier</h3>
+            <p>Minify JavaScript code to reduce file size</p>
+            <div class="tool-content">
+                <textarea id="jsMinifyInput" rows="4" placeholder="Paste JavaScript code here..."></textarea>
+                <button onclick="minifyJS()">Minify JS</button>
+                <div id="jsMinifyResult" class="result-box">📦 Minified JS will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 11: JSON Formatter -->
+        <div class="tool-card">
+            <h3>📋 JSON Formatter</h3>
+            <p>Format and validate JSON data</p>
+            <div class="tool-content">
+                <textarea id="jsonFormatInput" rows="4" placeholder='Paste JSON here...'></textarea>
+                <button onclick="formatJSON()">Format JSON</button>
+                <div id="jsonFormatResult" class="result-box">📊 Formatted JSON will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 12: Base64 Encoder/Decoder -->
+        <div class="tool-card">
+            <h3>🔐 Base64 Encoder/Decoder</h3>
+            <p>Encode or decode text to Base64</p>
+            <div class="tool-content">
+                <textarea id="base64Input" rows="3" placeholder="Enter text to encode/decode..."></textarea>
+                <div style="display:flex; flex-wrap:wrap; gap:5px; justify-content:center;">
+                    <button onclick="encodeBase64()">Encode</button>
+                    <button onclick="decodeBase64()">Decode</button>
+                </div>
+                <div id="base64Result" class="result-box">🔑 Result will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 13: URL Encoder/Decoder -->
+        <div class="tool-card">
+            <h3>🔗 URL Encoder/Decoder</h3>
+            <p>Encode or decode URL strings</p>
+            <div class="tool-content">
+                <input type="text" id="urlInput" placeholder="Enter URL or text...">
+                <div style="display:flex; flex-wrap:wrap; gap:5px; justify-content:center;">
+                    <button onclick="encodeURL()">Encode URL</button>
+                    <button onclick="decodeURL()">Decode URL</button>
+                </div>
+                <div id="urlResult" class="result-box">🔗 Result will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 14: QR Code Generator -->
+        <div class="tool-card">
+            <h3>📱 QR Code Generator</h3>
+            <p>Generate QR code from any text or URL</p>
+            <div class="tool-content">
+                <input type="text" id="qrInput" placeholder="Enter text or URL">
+                <button onclick="generateQR()">Generate QR</button>
+                <div id="qrResult" class="result-box" style="text-align:center;">📱 QR Code will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 15: Password Generator -->
+        <div class="tool-card">
+            <h3>🔑 Password Generator</h3>
+            <p>Generate strong, secure passwords</p>
+            <div class="tool-content">
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <input type="number" id="passLength" value="12" min="6" max="50" style="flex:1; min-width:80px;">
+                    <select id="passType" style="flex:1; min-width:100px;">
+                        <option value="alphanumeric">Alphanumeric</option>
+                        <option value="special">With Special Chars</option>
+                        <option value="numeric">Only Numbers</option>
+                    </select>
+                </div>
+                <button onclick="generatePassword()">Generate Password</button>
+                <div id="passResult" class="result-box">🔑 Password will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 16: Strong Password Checker -->
+        <div class="tool-card">
+            <h3>🛡️ Password Strength Checker</h3>
+            <p>Check how strong your password is</p>
+            <div class="tool-content">
+                <input type="text" id="strengthInput" placeholder="Enter password to check">
+                <button onclick="checkPasswordStrength()">Check Strength</button>
+                <div id="strengthResult" class="result-box">🛡️ Strength: Weak/Medium/Strong</div>
+            </div>
+        </div>
+
+        <!-- Tool 17: Age Calculator -->
+        <div class="tool-card">
+            <h3>📅 Age Calculator</h3>
+            <p>Calculate exact age from date of birth</p>
+            <div class="tool-content">
+                <input type="date" id="dobInput">
+                <button onclick="calculateAge()">Calculate Age</button>
+                <div id="ageResult" class="result-box">📅 Age will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 18: EMI Loan Calculator -->
+        <div class="tool-card">
+            <h3>💰 EMI Loan Calculator</h3>
+            <p>Calculate monthly EMI for loans</p>
+            <div class="tool-content">
+                <input type="number" id="loanAmount" placeholder="Loan Amount">
+                <input type="number" id="loanRate" placeholder="Interest Rate %">
+                <input type="number" id="loanTenure" placeholder="Tenure (months)">
+                <button onclick="calculateEMI()">Calculate EMI</button>
+                <div id="emiResult" class="result-box">💰 EMI: Rs. 0 | Total: Rs. 0</div>
+            </div>
+        </div>
+
+        <!-- Tool 19: Percentage Calculator -->
+        <div class="tool-card">
+            <h3>📊 Percentage Calculator</h3>
+            <p>Calculate percentage of a number</p>
+            <div class="tool-content">
+                <input type="number" id="percentValue" placeholder="Enter number">
+                <input type="number" id="percentPercent" placeholder="Percentage %">
+                <button onclick="calculatePercentage()">Calculate</button>
+                <div id="percentResult" class="result-box">📊 Result: 0</div>
+            </div>
+        </div>
+
+        <!-- Tool 20: GST/VAT Calculator -->
+        <div class="tool-card">
+            <h3>🧾 GST/VAT Calculator</h3>
+            <p>Calculate GST/VAT amount</p>
+            <div class="tool-content">
+                <input type="number" id="gstAmount" placeholder="Original Amount">
+                <input type="number" id="gstRate" placeholder="GST Rate %">
+                <button onclick="calculateGST()">Calculate GST</button>
+                <div id="gstResult" class="result-box">🧾 GST: 0 | Total: 0</div>
+            </div>
+        </div>
+
+        <!-- Tool 21: BMI Calculator -->
+        <div class="tool-card">
+            <h3>⚖️ BMI Calculator</h3>
+            <p>Calculate Body Mass Index</p>
+            <div class="tool-content">
+                <input type="number" id="bmiWeight" placeholder="Weight (kg)">
+                <input type="number" id="bmiHeight" placeholder="Height (cm)">
+                <button onclick="calculateBMI()">Calculate BMI</button>
+                <div id="bmiResult" class="result-box">⚖️ BMI: 0 | Category: Normal</div>
+            </div>
+        </div>
+
+        <!-- Tool 22: Unit Converter -->
+        <div class="tool-card">
+            <h3>📏 Unit Converter</h3>
+            <p>Convert between different units</p>
+            <div class="tool-content">
+                <select id="unitType" style="margin-bottom:10px;">
+                    <option value="length">Length (cm ↔ inches)</option>
+                    <option value="weight">Weight (kg ↔ lbs)</option>
+                    <option value="temperature">Temperature (°C ↔ °F)</option>
+                    <option value="area">Area (m² ↔ ft²)</option>
+                </select>
+                <input type="number" id="unitInput" placeholder="Enter value">
+                <button onclick="convertUnits()">Convert</button>
+                <div id="unitResult" class="result-box">📏 Result will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 23: Color Picker -->
+        <div class="tool-card">
+            <h3>🎨 Color Picker</h3>
+            <p>Pick colors and get hex/rgb codes</p>
+            <div class="tool-content">
+                <input type="color" id="colorPicker" value="#ffcc00" style="width:100%; height:60px; cursor:pointer;">
+                <button onclick="getColorInfo()">Get Color Info</button>
+                <div id="colorResult" class="result-box">🎨 Hex: #ffcc00 | RGB: 255, 204, 0</div>
+            </div>
+        </div>
+
+        <!-- Tool 24: Gradient Generator -->
+        <div class="tool-card">
+            <h3>🌈 Gradient Generator</h3>
+            <p>Generate CSS gradient codes</p>
+            <div class="tool-content">
+                <input type="color" id="gradientColor1" value="#ffcc00" style="width:48%;">
+                <input type="color" id="gradientColor2" value="#ff6b00" style="width:48%;">
+                <button onclick="generateGradient()">Generate Gradient</button>
+                <div id="gradientResult" class="result-box" style="min-height:80px;">🌈 Gradient CSS will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 25: Lorem Ipsum Generator -->
+        <div class="tool-card">
+            <h3>📝 Lorem Ipsum Generator</h3>
+            <p>Generate placeholder text</p>
+            <div class="tool-content">
+                <input type="number" id="loremCount" value="3" min="1" max="20">
+                <button onclick="generateLorem()">Generate</button>
+                <div id="loremResult" class="result-box">📝 Lorem ipsum text will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 26: Invoice Generator -->
+        <div class="tool-card">
+            <h3>🧾 Invoice Generator</h3>
+            <p>Generate simple invoice template</p>
+            <div class="tool-content">
+                <input type="text" id="invoiceClient" placeholder="Client Name">
+                <input type="text" id="invoiceAmount" placeholder="Amount">
+                <button onclick="generateInvoice()">Generate Invoice</button>
+                <div id="invoiceResult" class="result-box">🧾 Invoice will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 27: Template Generator (Formerly Freelance Assistant) -->
+        <div class="tool-card">
+            <h3>📝 Template Generator</h3>
+            <p>Generate templates for Upwork, Fiverr, Freelancer, LinkedIn</p>
+            <div class="tool-content">
+                <select id="templateType">
+                    <option value="upwork">📘 Upwork Proposal</option>
+                    <option value="fiverr">🎵 Fiverr Gig</option>
+                    <option value="freelancer">💼 Freelancer.com Bid</option>
+                    <option value="linkedin">🔗 LinkedIn Message</option>
+                </select>
+                <input type="text" id="templateTopic" placeholder="Enter project/topic name">
+                <button onclick="generateTemplate()">Generate Template</button>
+                <div id="templateResult" class="result-box">📝 Template will appear here</div>
+            </div>
+        </div>
+
+        <!-- Tool 28: Code Snippets Library (Formerly Code Helper) -->
+        <div class="tool-card">
+            <h3>💻 Code Snippets Library</h3>
+            <p>Get code snippets for HTML, CSS, JS, Python</p>
+            <div class="tool-content">
+                <select id="snippetType">
+                    <option value="html">🌐 HTML Snippet</option>
+                    <option value="css">🎨 CSS Snippet</option>
+                    <option value="javascript">⚡ JavaScript Snippet</option>
+                    <option value="python">🐍 Python Snippet</option>
+                </select>
+                <input type="text" id="snippetTopic" placeholder="Enter topic (e.g., button, form, function)">
+                <button onclick="generateSnippet()">Get Snippet</button>
+                <div id="snippetResult" class="result-box">💻 Code snippet will appear here</div>
             </div>
         </div>
     </div>
 
-    <!-- ========== ٹولز کا کنٹینر ========== -->
-    <div class="tools-container">
-        <!-- Tool 1: Freelance Assistant -->
-        <div class="tool-card">
-            <h3 id="tool1Title">🤖 Freelance Assistant</h3>
-            <p id="tool1Desc">AI کی مدد سے پروپوزل اور Gig ڈسکریشن لکھیں۔</p>
-            <div class="tool-content">
-                <select id="taskType">
-                    <option value="upwork" id="optUpwork">📘 Upwork Proposal</option>
-                    <option value="fiverr" id="optFiverr">🎵 Fiverr Gig Description</option>
-                    <option value="freelancer" id="optFreelancer">💼 Freelancer.com Bid</option>
-                    <option value="linkedin" id="optLinkedin">🔗 LinkedIn Connection Message</option>
-                </select>
-                <input type="text" id="userTopic" placeholder="کام کا نام لکھیں (مثال: Google Sheets Automation)">
-                <button onclick="generateAIAnswer()" id="generateProposalBtn">Generate Proposal</button>
-                <div id="aiResponse" class="result-box">✨ جواب یہاں آئے گا</div>
-            </div>
-        </div>
-
-        <!-- Tool 2: Content Writer -->
-        <div class="tool-card">
-            <h3 id="tool2Title">✍️ Content Writer</h3>
-            <p id="tool2Desc">AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔</p>
-            <div class="tool-content">
-                <textarea id="contentInput" rows="3" placeholder="اپنا مواد یہاں لکھیں..."></textarea>
-                <button onclick="convertContent('upper')" id="upperBtn">UPPERCASE</button>
-                <button onclick="convertContent('lower')" id="lowerBtn">lowercase</button>
-                <button onclick="convertContent('capitalize')" id="capitalizeBtn">Capitalize</button>
-                <div id="contentResult" class="result-box">📝 نتیجہ یہاں آئے گا</div>
-            </div>
-        </div>
-
-        <!-- Tool 3: SEO Optimizer -->
-        <div class="tool-card">
-            <h3 id="tool3Title">📈 SEO Optimizer</h3>
-            <p id="tool3Desc">اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔</p>
-            <div class="tool-content">
-                <input type="text" id="seoKeyword" placeholder="مطلوبہ لفظ" id="seoKeywordPlaceholder">
-                <textarea id="seoContent" rows="3" placeholder="اپنا آرٹیکل لکھیں..."></textarea>
-                <button onclick="optimizeSEO()" id="seoOptimizeBtn">SEO Optimize کریں</button>
-                <div id="seoResult" class="result-box">📊 SEO تجاویز یہاں ہوں گی</div>
-            </div>
-        </div>
-
-        <!-- Tool 4: Code Helper -->
-        <div class="tool-card">
-            <h3 id="tool4Title">💻 Code Helper</h3>
-            <p id="tool4Desc">کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔</p>
-            <div class="tool-content">
-                <select id="codeLanguage">
-                    <option value="html">HTML</option>
-                    <option value="css">CSS</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="python">Python</option>
-                </select>
-                <textarea id="codeQuestion" rows="3" placeholder="اپنا سوال لکھیں..."></textarea>
-                <button onclick="generateCodeHelp()" id="codeHelperBtn">Code Helper سے پوچھیں</button>
-                <div id="codeResult" class="result-box">⚙️ کوڈ کا جواب یہاں آئے گا</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========== Tool 5: Prompt Library ========== -->
+    <!-- ========== PROMPT LIBRARY ========== -->
     <div class="tools-container">
         <div class="tool-card" style="grid-column: 1 / -1;">
             <h3 id="promptLibTitle">📚 Prompt Library</h3>
             <p id="promptLibDesc">اپنی پسند کا پرامپٹ سرچ کریں — Keyword اور Category دونوں سے فلٹر کریں</p>
+            
+            <div class="prompt-counter" id="promptCounter">📚 کل Prompts: 50</div>
+            
+            <div class="trending-section" id="trendingSection">
+                <h4>🔥 نمایاں Prompts</h4>
+                <div id="trendingTags"></div>
+            </div>
+            
             <div class="tool-content">
                 <div class="flex-row">
                     <input type="text" id="promptSearchKeyword" class="search-small" placeholder="🔍 Keyword مثلاً: SEO, Fiverr, Upwork..." style="flex: 2;">
                     <select id="promptCategory" class="search-small" style="flex: 1;">
                         <option value="all" id="catAll">📁 تمام Categories</option>
+                        <option value="ChatGPT" id="catChatGPT">🤖 ChatGPT</option>
                         <option value="SEO" id="catSEO">📈 SEO</option>
+                        <option value="Blogging" id="catBlogging">✍️ Blogging</option>
                         <option value="Fiverr" id="catFiverr">🎵 Fiverr</option>
                         <option value="Upwork" id="catUpwork">📘 Upwork</option>
-                        <option value="Coding" id="catCoding">💻 Coding</option>
                         <option value="Marketing" id="catMarketing">📢 Marketing</option>
+                        <option value="YouTube" id="catYouTube">▶️ YouTube</option>
+                        <option value="Facebook Ads" id="catFacebookAds">📱 Facebook Ads</option>
+                        <option value="Coding" id="catCoding">💻 Coding</option>
+                        <option value="Business" id="catBusiness">💼 Business</option>
                     </select>
                     <button class="search-btn" onclick="filterPrompts()" id="searchPromptBtn" style="padding: 12px 24px;">🔍 سرچ کریں</button>
                 </div>
                 
-                <div id="promptResultsContainer" class="prompt-results-grid">
-                    <!-- یہاں جاوا اسکرپٹ سے نتائج آئیں گے -->
-                </div>
+                <div id="promptResultsContainer" class="prompt-results-grid"></div>
             </div>
         </div>
     </div>
 
     <footer>
         <h3 id="footerTitle">Sanaullah Workspace</h3>
-        <p id="footerText">AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation</p>
+        <p id="footerText">100% Free Tools Platform — SEO | Writing | Coding | Design | Finance | Productivity</p>
         <p id="copyright">© 2026 All Rights Reserved</p>
     </footer>
 </div>
 
 <script>
-    // ========== LANGUAGE TRANSLATIONS ==========
+    // ========== LANGUAGE SUPPORT ==========
     const translations = {
         ur: {
             siteTitle: "Sanaullah Workspace",
-            siteTagline: "🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools",
+            siteTagline: "🛠️ 100% مفت ٹولز — SEO, تحریر, کوڈنگ, ڈیزائن, فنانس اور پیداواریت",
             langSectionTitle: "🌐 اپنی زبان تلاش کریں",
             searchLangBtn: "تلاش کریں",
-            translateNote: "💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔",
+            translateNote: "💡 براہ کرم اپنی پسندیدہ زبان لکھیں اور انٹرنیٹ براؤزر کا ترجمہ استعمال کریں۔",
             popularLangsTitle: "📚 مشہور زبانیں (کلک کریں)",
-            tool1Title: "🤖 Freelance Assistant",
-            tool1Desc: "AI کی مدد سے پروپوزل اور Gig ڈسکریشن لکھیں۔",
-            optUpwork: "📘 Upwork Proposal",
-            optFiverr: "🎵 Fiverr Gig Description",
-            optFreelancer: "💼 Freelancer.com Bid",
-            optLinkedin: "🔗 LinkedIn Connection Message",
-            userTopicPlaceholder: "کام کا نام لکھیں (مثال: Google Sheets Automation)",
-            generateProposalBtn: "Generate Proposal",
-            tool2Title: "✍️ Content Writer",
-            tool2Desc: "AI کے ساتھ بہترین آرٹیکل اور مواد تیار کریں۔",
-            contentPlaceholder: "اپنا مواد یہاں لکھیں...",
-            upperBtn: "UPPERCASE",
-            lowerBtn: "lowercase",
-            capitalizeBtn: "Capitalize",
-            tool3Title: "📈 SEO Optimizer",
-            tool3Desc: "اپنے آرٹیکل اور ویب سائٹ SEO کے مطابق بنائیں۔",
-            seoKeywordPlaceholder: "مطلوبہ لفظ",
-            seoContentPlaceholder: "اپنا آرٹیکل لکھیں...",
-            seoOptimizeBtn: "SEO Optimize کریں",
-            tool4Title: "💻 Code Helper",
-            tool4Desc: "کوڈنگ میں AI اسسٹنٹ سے مدد حاصل کریں۔",
-            codeQuestionPlaceholder: "اپنا سوال لکھیں...",
-            codeHelperBtn: "Code Helper سے پوچھیں",
-            promptLibTitle: "📚 Prompt Library",
+            promptLibTitle: "📚 پرامپٹ لائبریری",
             promptLibDesc: "اپنی پسند کا پرامپٹ سرچ کریں — Keyword اور Category دونوں سے فلٹر کریں",
-            promptSearchPlaceholder: "🔍 Keyword مثلاً: SEO, Fiverr, Upwork...",
             catAll: "📁 تمام Categories",
+            catChatGPT: "🤖 ChatGPT",
             catSEO: "📈 SEO",
+            catBlogging: "✍️ Blogging",
             catFiverr: "🎵 Fiverr",
             catUpwork: "📘 Upwork",
-            catCoding: "💻 Coding",
             catMarketing: "📢 Marketing",
+            catYouTube: "▶️ YouTube",
+            catFacebookAds: "📱 Facebook Ads",
+            catCoding: "💻 Coding",
+            catBusiness: "💼 Business",
             searchPromptBtn: "🔍 سرچ کریں",
-            footerTitle: "Sanaullah Workspace",
-            footerText: "AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation",
-            copyright: "© 2026 All Rights Reserved",
-            copyBtn: "📋 کاپی کریں",
             noPromptFound: "❌ کوئی Prompt نہیں ملا",
-            category: "Category:"
+            category: "Category:",
+            counter: "📚 کل Prompts: ",
+            trending: "🔥 نمایاں Prompts",
+            loading: "⏳ تلاش جاری ہے...",
+            footerTitle: "Sanaullah Workspace",
+            footerText: "100% مفت ٹولز پلیٹ فارم — SEO | تحریر | کوڈنگ | ڈیزائن | فنانس | پیداواریت",
+            copyright: "© 2026 جملہ حقوق محفوظ ہیں"
         },
         en: {
             siteTitle: "Sanaullah Workspace",
-            siteTagline: "🤖 AI powered solution for every difficult task — Freelancing, Writing, SEO, Coding & Language Tools",
+            siteTagline: "🛠️ 100% Free Tools — SEO, Writing, Coding, Design, Finance & Productivity",
             langSectionTitle: "🌐 Find Your Language",
             searchLangBtn: "Search",
-            translateNote: "💡 Type the language in the box above, then select from the Google Translate box below.",
+            translateNote: "💡 Please enter your preferred language and use your browser's translation feature.",
             popularLangsTitle: "📚 Popular Languages (Click)",
-            tool1Title: "🤖 Freelance Assistant",
-            tool1Desc: "Write proposals and gig descriptions with AI assistance.",
-            optUpwork: "📘 Upwork Proposal",
-            optFiverr: "🎵 Fiverr Gig Description",
-            optFreelancer: "💼 Freelancer.com Bid",
-            optLinkedin: "🔗 LinkedIn Connection Message",
-            userTopicPlaceholder: "Enter task name (e.g., Google Sheets Automation)",
-            generateProposalBtn: "Generate Proposal",
-            tool2Title: "✍️ Content Writer",
-            tool2Desc: "Create the best articles and content with AI.",
-            contentPlaceholder: "Write your content here...",
-            upperBtn: "UPPERCASE",
-            lowerBtn: "lowercase",
-            capitalizeBtn: "Capitalize",
-            tool3Title: "📈 SEO Optimizer",
-            tool3Desc: "Make your articles and website SEO-friendly.",
-            seoKeywordPlaceholder: "Enter keyword",
-            seoContentPlaceholder: "Write your article here...",
-            seoOptimizeBtn: "Optimize SEO",
-            tool4Title: "💻 Code Helper",
-            tool4Desc: "Get help from an AI assistant in coding.",
-            codeQuestionPlaceholder: "Write your question here...",
-            codeHelperBtn: "Ask Code Helper",
             promptLibTitle: "📚 Prompt Library",
             promptLibDesc: "Search for prompts — Filter by Keyword and Category",
-            promptSearchPlaceholder: "🔍 Keyword e.g., SEO, Fiverr, Upwork...",
             catAll: "📁 All Categories",
+            catChatGPT: "🤖 ChatGPT",
             catSEO: "📈 SEO",
+            catBlogging: "✍️ Blogging",
             catFiverr: "🎵 Fiverr",
             catUpwork: "📘 Upwork",
-            catCoding: "💻 Coding",
             catMarketing: "📢 Marketing",
+            catYouTube: "▶️ YouTube",
+            catFacebookAds: "📱 Facebook Ads",
+            catCoding: "💻 Coding",
+            catBusiness: "💼 Business",
             searchPromptBtn: "🔍 Search",
-            footerTitle: "Sanaullah Workspace",
-            footerText: "AI Powered Digital Platform — Freelance | Content | SEO | Code | Translation",
-            copyright: "© 2026 All Rights Reserved",
-            copyBtn: "📋 Copy",
             noPromptFound: "❌ No Prompt Found",
-            category: "Category:"
+            category: "Category:",
+            counter: "📚 Total Prompts: ",
+            trending: "🔥 Trending Prompts",
+            loading: "⏳ Searching...",
+            footerTitle: "Sanaullah Workspace",
+            footerText: "100% Free Tools Platform — SEO | Writing | Coding | Design | Finance | Productivity",
+            copyright: "© 2026 All Rights Reserved"
         }
     };
 
@@ -556,85 +875,44 @@
 
     function setLanguage(lang) {
         currentLang = lang;
-        
-        // Change direction
         const htmlTag = document.getElementById('mainHtml');
-        if (lang === 'en') {
-            htmlTag.setAttribute('dir', 'ltr');
-            htmlTag.setAttribute('lang', 'en');
-        } else {
-            htmlTag.setAttribute('dir', 'rtl');
-            htmlTag.setAttribute('lang', 'ur');
-        }
+        htmlTag.setAttribute('dir', lang === 'en' ? 'ltr' : 'rtl');
+        htmlTag.setAttribute('lang', lang);
         
-        // Update button active state
-        document.getElementById('btnUrdu').classList.remove('active');
-        document.getElementById('btnEnglish').classList.remove('active');
-        if (lang === 'ur') {
-            document.getElementById('btnUrdu').classList.add('active');
-        } else {
-            document.getElementById('btnEnglish').classList.add('active');
-        }
+        document.getElementById('btnUrdu').classList.toggle('active', lang === 'ur');
+        document.getElementById('btnEnglish').classList.toggle('active', lang === 'en');
         
         const t = translations[lang];
+        document.getElementById('siteTitle').textContent = t.siteTitle;
+        document.getElementById('siteTagline').textContent = t.siteTagline;
+        document.getElementById('langSectionTitle').textContent = t.langSectionTitle;
+        document.getElementById('searchLangBtn').textContent = t.searchLangBtn;
+        document.getElementById('translateNote').textContent = t.translateNote;
+        document.getElementById('popularLangsTitle').textContent = t.popularLangsTitle;
+        document.getElementById('promptLibTitle').textContent = t.promptLibTitle;
+        document.getElementById('promptLibDesc').textContent = t.promptLibDesc;
+        document.getElementById('catAll').textContent = t.catAll;
+        document.getElementById('catChatGPT').textContent = t.catChatGPT;
+        document.getElementById('catSEO').textContent = t.catSEO;
+        document.getElementById('catBlogging').textContent = t.catBlogging;
+        document.getElementById('catFiverr').textContent = t.catFiverr;
+        document.getElementById('catUpwork').textContent = t.catUpwork;
+        document.getElementById('catMarketing').textContent = t.catMarketing;
+        document.getElementById('catYouTube').textContent = t.catYouTube;
+        document.getElementById('catFacebookAds').textContent = t.catFacebookAds;
+        document.getElementById('catCoding').textContent = t.catCoding;
+        document.getElementById('catBusiness').textContent = t.catBusiness;
+        document.getElementById('searchPromptBtn').textContent = t.searchPromptBtn;
+        document.getElementById('footerTitle').textContent = t.footerTitle;
+        document.getElementById('footerText').textContent = t.footerText;
+        document.getElementById('copyright').textContent = t.copyright;
+        document.getElementById('promptCounter').textContent = t.counter + prompts.length;
+        document.querySelector('#trendingSection h4').textContent = t.trending;
         
-        // Update all text elements
-        document.getElementById('siteTitle').innerText = t.siteTitle;
-        document.getElementById('siteTagline').innerText = t.siteTagline;
-        document.getElementById('langSectionTitle').innerHTML = t.langSectionTitle;
-        document.getElementById('searchLangBtn').innerText = t.searchLangBtn;
-        document.getElementById('translateNote').innerHTML = t.translateNote;
-        document.getElementById('popularLangsTitle').innerHTML = t.popularLangsTitle;
-        
-        document.getElementById('tool1Title').innerHTML = t.tool1Title;
-        document.getElementById('tool1Desc').innerText = t.tool1Desc;
-        document.getElementById('optUpwork').innerHTML = t.optUpwork;
-        document.getElementById('optFiverr').innerHTML = t.optFiverr;
-        document.getElementById('optFreelancer').innerHTML = t.optFreelancer;
-        document.getElementById('optLinkedin').innerHTML = t.optLinkedin;
-        document.getElementById('userTopic').placeholder = t.userTopicPlaceholder;
-        document.getElementById('generateProposalBtn').innerText = t.generateProposalBtn;
-        
-        document.getElementById('tool2Title').innerHTML = t.tool2Title;
-        document.getElementById('tool2Desc').innerText = t.tool2Desc;
-        document.getElementById('contentInput').placeholder = t.contentPlaceholder;
-        document.getElementById('upperBtn').innerText = t.upperBtn;
-        document.getElementById('lowerBtn').innerText = t.lowerBtn;
-        document.getElementById('capitalizeBtn').innerText = t.capitalizeBtn;
-        
-        document.getElementById('tool3Title').innerHTML = t.tool3Title;
-        document.getElementById('tool3Desc').innerText = t.tool3Desc;
-        document.getElementById('seoKeyword').placeholder = t.seoKeywordPlaceholder;
-        document.getElementById('seoContent').placeholder = t.seoContentPlaceholder;
-        document.getElementById('seoOptimizeBtn').innerText = t.seoOptimizeBtn;
-        
-        document.getElementById('tool4Title').innerHTML = t.tool4Title;
-        document.getElementById('tool4Desc').innerText = t.tool4Desc;
-        document.getElementById('codeQuestion').placeholder = t.codeQuestionPlaceholder;
-        document.getElementById('codeHelperBtn').innerText = t.codeHelperBtn;
-        
-        document.getElementById('promptLibTitle').innerHTML = t.promptLibTitle;
-        document.getElementById('promptLibDesc').innerText = t.promptLibDesc;
-        document.getElementById('promptSearchKeyword').placeholder = t.promptSearchPlaceholder;
-        document.getElementById('catAll').innerHTML = t.catAll;
-        document.getElementById('catSEO').innerHTML = t.catSEO;
-        document.getElementById('catFiverr').innerHTML = t.catFiverr;
-        document.getElementById('catUpwork').innerHTML = t.catUpwork;
-        document.getElementById('catCoding').innerHTML = t.catCoding;
-        document.getElementById('catMarketing').innerHTML = t.catMarketing;
-        document.getElementById('searchPromptBtn').innerText = t.searchPromptBtn;
-        
-        document.getElementById('footerTitle').innerHTML = t.footerTitle;
-        document.getElementById('footerText').innerText = t.footerText;
-        document.getElementById('copyright').innerText = t.copyright;
-        
-        // Update language tags
         updateLanguageTags();
-        
-        // Re-run prompt filter to update copy buttons text
         filterPrompts();
     }
-    
+
     function updateLanguageTags() {
         const tagsContainer = document.getElementById('langTagsContainer');
         const languages = [
@@ -646,15 +924,8 @@
             { code: 'French', name: '🇫🇷 Français', enName: 'French' },
             { code: 'German', name: '🇩🇪 Deutsch', enName: 'German' },
             { code: 'Turkish', name: '🇹🇷 Türkçe', enName: 'Turkish' },
-            { code: 'Persian', name: '🇮🇷 فارسی', enName: 'Persian' },
-            { code: 'Bengali', name: '🇧🇩 বাংলা', enName: 'Bengali' },
-            { code: 'Russian', name: '🇷🇺 Русский', enName: 'Russian' },
-            { code: 'Chinese', name: '🇨🇳 中文', enName: 'Chinese' },
-            { code: 'Japanese', name: '🇯🇵 日本語', enName: 'Japanese' },
-            { code: 'Italian', name: '🇮🇹 Italiano', enName: 'Italian' },
-            { code: 'Portuguese', name: '🇵🇹 Português', enName: 'Portuguese' }
+            { code: 'Persian', name: '🇮🇷 فارسی', enName: 'Persian' }
         ];
-        
         tagsContainer.innerHTML = '';
         languages.forEach(lang => {
             const displayName = currentLang === 'ur' ? lang.name : lang.enName;
@@ -662,41 +933,15 @@
         });
     }
 
-    // ========== GOOGLE TRANSLATE ==========
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'ur',
-            autoDisplay: false,
-            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk'
-        }, 'google_translate_element');
-    }
-
     function searchLanguage() {
         let searchLang = document.getElementById("language-search").value.trim();
-        if (searchLang === "") {
+        if (!searchLang) {
             alert(currentLang === 'ur' ? "براہ کرم کوئی زبان لکھیں!" : "Please enter a language!");
             return;
         }
-        
-        let select = document.querySelector('.goog-te-combo');
-        if (select) {
-            let found = false;
-            for (let i = 0; i < select.options.length; i++) {
-                let optionText = select.options[i].text.toLowerCase();
-                let searchLower = searchLang.toLowerCase();
-                if (optionText.includes(searchLower) || searchLower.includes(optionText.split(' ')[0])) {
-                    select.selectedIndex = i;
-                    select.dispatchEvent(new Event('change'));
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                alert(currentLang === 'ur' ? "⚠️ یہ زبان اس وقت دستیاب نہیں۔" : "⚠️ This language is not available.");
-            }
-        } else {
-            alert(currentLang === 'ur' ? "⚠️ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔" : "⚠️ Please wait for Google Translate to load.");
-        }
+        alert(currentLang === 'ur' 
+            ? `💡 "${searchLang}" کے لیے براہ کرم اپنے براؤزر کا ترجمہ فیچر استعمال کریں۔` 
+            : `💡 Please use your browser's translation feature for "${searchLang}".`);
     }
 
     function quickSearch(lang) {
@@ -704,179 +949,592 @@
         searchLanguage();
     }
 
-    // ========== HELPER: COPY FUNCTION ==========
-    function universalCopy(elementId) {
-        let el = document.getElementById(elementId);
-        let text = el.innerText || el.textContent;
-        let temp = document.createElement("textarea");
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        try { document.execCommand("copy"); } catch(e) {}
-        document.body.removeChild(temp);
-        alert(currentLang === 'ur' ? "✅ متن کاپی ہو گیا!" : "✅ Text copied!");
+    // ========== SAFE COPY FUNCTION ==========
+    function safeCopy(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(currentLang === 'ur' ? "✅ کاپی ہو گیا!" : "✅ Copied!");
+            }).catch(() => {
+                fallbackCopy(text);
+            });
+        } else {
+            fallbackCopy(text);
+        }
     }
 
-    // ========== TOOL 1: Freelance Assistant ==========
-    function generateAIAnswer() {
-        let task = document.getElementById("taskType").value;
-        let topic = document.getElementById("userTopic").value.trim();
-        if (!topic) {
-            document.getElementById("aiResponse").innerHTML = currentLang === 'ur' ? "⚠️ براہ کرم کام کا نام لکھیں!" : "⚠️ Please enter task name!";
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            alert(currentLang === 'ur' ? "✅ کاپی ہو گیا!" : "✅ Copied!");
+        } catch (e) {
+            alert(currentLang === 'ur' ? "⚠️ کاپی نہیں ہو سکی۔ براہ کرم دستی طور پر کاپی کریں۔" : "⚠️ Could not copy. Please copy manually.");
+        }
+        document.body.removeChild(textarea);
+    }
+
+    function generateUniqueId() {
+        return 'id_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // ========== TOOL 1: WORD COUNTER ==========
+    function countWords() {
+        const text = document.getElementById('wordCountInput').value;
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        const chars = text.length;
+        const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+        const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
+        document.getElementById('wordCountResult').textContent = 
+            `📊 Words: ${words} | Characters: ${chars} | Sentences: ${sentences} | Paragraphs: ${paragraphs}`;
+    }
+
+    // ========== TOOL 2: CHARACTER COUNTER ==========
+    function countCharacters() {
+        const text = document.getElementById('charCountInput').value;
+        const total = text.length;
+        const withoutSpaces = text.replace(/\s/g, '').length;
+        document.getElementById('charCountResult').textContent = 
+            `📊 Total: ${total} | Without Spaces: ${withoutSpaces}`;
+    }
+
+    // ========== TOOL 3: KEYWORD DENSITY ==========
+    function checkDensity() {
+        const text = document.getElementById('densityInput').value.toLowerCase();
+        const keyword = document.getElementById('densityKeyword').value.toLowerCase().trim();
+        if (!text || !keyword) {
+            document.getElementById('densityResult').textContent = "⚠️ Please enter both text and keyword.";
             return;
         }
+        const words = text.split(/\s+/);
+        const totalWords = words.length;
+        const count = words.filter(w => w === keyword).length;
+        const density = (count / totalWords * 100).toFixed(2);
+        document.getElementById('densityResult').textContent = 
+            `📊 Keyword: "${keyword}" | Count: ${count} | Density: ${density}% | Total Words: ${totalWords}`;
+    }
+
+    // ========== TOOL 4: META DESCRIPTION GENERATOR ==========
+    function generateMetaDescription() {
+        const topic = document.getElementById('metaTopic').value.trim();
+        if (!topic) {
+            document.getElementById('metaResult').textContent = "⚠️ Please enter a topic.";
+            return;
+        }
+        const descriptions = [
+            `Learn everything about ${topic} with our comprehensive guide. Get expert tips, strategies, and tools to master ${topic} today.`,
+            `Discover the best ${topic} techniques and strategies. Our guide covers everything you need to know about ${topic} in 2026.`,
+            `Looking for the ultimate ${topic} resource? Explore our detailed guide with practical tips, examples, and actionable insights.`
+        ];
+        const result = descriptions[Math.floor(Math.random() * descriptions.length)];
+        document.getElementById('metaResult').textContent = `📝 ${result} (${result.length} chars)`;
+    }
+
+    // ========== TOOL 5: SEO TITLE GENERATOR ==========
+    function generateSEOTitles() {
+        const topic = document.getElementById('seoTopic').value.trim();
+        if (!topic) {
+            document.getElementById('seoTitleResult').textContent = "⚠️ Please enter a topic.";
+            return;
+        }
+        const titles = [
+            `10 Best ${topic} Tips for Beginners`,
+            `The Ultimate ${topic} Guide 2026`,
+            `How to Master ${topic} in 30 Days`,
+            `${topic} Made Simple: A Step-by-Step Guide`,
+            `Top 5 ${topic} Strategies That Actually Work`
+        ];
+        document.getElementById('seoTitleResult').textContent = `📌 ${titles.join('\n📌 ')}`;
+    }
+
+    // ========== TOOL 6: HASHTAG GENERATOR ==========
+    function generateHashtags() {
+        const topic = document.getElementById('hashtagTopic').value.trim();
+        if (!topic) {
+            document.getElementById('hashtagResult').textContent = "⚠️ Please enter a topic.";
+            return;
+        }
+        const hashtags = [
+            `#${topic.replace(/\s/g,'')}`, `#${topic}Tips`, `#${topic}Guide`, 
+            `#Learn${topic}`, `#${topic}Strategy`, `#${topic}2026`,
+            `#${topic}Expert`, `#${topic}Mastery`, `#${topic}Skills`,
+            `#${topic}Success`, `#${topic}Growth`
+        ];
+        document.getElementById('hashtagResult').textContent = `#️⃣ ${hashtags.join(' ')}`;
+    }
+
+    // ========== TOOL 7: TEXT CASE CONVERTER ==========
+    function convertCase(type) {
+        const text = document.getElementById('caseInput').value;
+        if (!text) {
+            document.getElementById('caseResult').textContent = "⚠️ Please enter text.";
+            return;
+        }
+        let result = '';
+        switch(type) {
+            case 'upper': result = text.toUpperCase(); break;
+            case 'lower': result = text.toLowerCase(); break;
+            case 'capitalize': result = text.replace(/\b\w/g, l => l.toUpperCase()); break;
+            case 'title': result = text.replace(/\w\S*/g, w => w[0].toUpperCase() + w.slice(1).toLowerCase()); break;
+        }
+        document.getElementById('caseResult').textContent = result;
+    }
+
+    // ========== TOOL 8: HTML FORMATTER ==========
+    function formatHTML() {
+        const text = document.getElementById('htmlFormatInput').value;
+        if (!text) {
+            document.getElementById('htmlFormatResult').textContent = "⚠️ Please paste HTML code.";
+            return;
+        }
+        try {
+            const formatted = text
+                .replace(/>\s+</g, '><')
+                .replace(/</g, '\n<')
+                .replace(/>/g, '>\n')
+                .split('\n')
+                .filter(line => line.trim())
+                .join('\n');
+            document.getElementById('htmlFormatResult').textContent = formatted;
+        } catch(e) {
+            document.getElementById('htmlFormatResult').textContent = "⚠️ Invalid HTML format.";
+        }
+    }
+
+    // ========== TOOL 9: CSS MINIFIER ==========
+    function minifyCSS() {
+        const text = document.getElementById('cssMinifyInput').value;
+        if (!text) {
+            document.getElementById('cssMinifyResult').textContent = "⚠️ Please paste CSS code.";
+            return;
+        }
+        const minified = text
+            .replace(/\/\*[\s\S]*?\*\//g, '')
+            .replace(/\s*([{}:;,])\s*/g, '$1')
+            .replace(/\s+/g, ' ')
+            .replace(/;\s*}/g, '}')
+            .trim();
+        document.getElementById('cssMinifyResult').textContent = minified;
+    }
+
+    // ========== TOOL 10: JS MINIFIER ==========
+    function minifyJS() {
+        const text = document.getElementById('jsMinifyInput').value;
+        if (!text) {
+            document.getElementById('jsMinifyResult').textContent = "⚠️ Please paste JavaScript code.";
+            return;
+        }
+        const minified = text
+            .replace(/\/\/.*$/gm, '')
+            .replace(/\/\*[\s\S]*?\*\//g, '')
+            .replace(/\s+/g, ' ')
+            .replace(/;\s*}/g, '}')
+            .replace(/{\s*/g, '{')
+            .replace(/}\s*/g, '}')
+            .trim();
+        document.getElementById('jsMinifyResult').textContent = minified;
+    }
+
+    // ========== TOOL 11: JSON FORMATTER ==========
+    function formatJSON() {
+        const text = document.getElementById('jsonFormatInput').value;
+        if (!text) {
+            document.getElementById('jsonFormatResult').textContent = "⚠️ Please paste JSON.";
+            return;
+        }
+        try {
+            const parsed = JSON.parse(text);
+            const formatted = JSON.stringify(parsed, null, 2);
+            document.getElementById('jsonFormatResult').textContent = formatted;
+        } catch(e) {
+            document.getElementById('jsonFormatResult').textContent = "⚠️ Invalid JSON format.";
+        }
+    }
+
+    // ========== TOOL 12: BASE64 ==========
+    function encodeBase64() {
+        const text = document.getElementById('base64Input').value;
+        if (!text) { document.getElementById('base64Result').textContent = "⚠️ Enter text."; return; }
+        const encoded = btoa(unescape(encodeURIComponent(text)));
+        document.getElementById('base64Result').textContent = encoded;
+    }
+
+    function decodeBase64() {
+        const text = document.getElementById('base64Input').value;
+        if (!text) { document.getElementById('base64Result').textContent = "⚠️ Enter Base64 text."; return; }
+        try {
+            const decoded = decodeURIComponent(escape(atob(text)));
+            document.getElementById('base64Result').textContent = decoded;
+        } catch(e) {
+            document.getElementById('base64Result').textContent = "⚠️ Invalid Base64.";
+        }
+    }
+
+    // ========== TOOL 13: URL ENCODER/DECODER ==========
+    function encodeURL() {
+        const text = document.getElementById('urlInput').value;
+        if (!text) { document.getElementById('urlResult').textContent = "⚠️ Enter text."; return; }
+        document.getElementById('urlResult').textContent = encodeURIComponent(text);
+    }
+
+    function decodeURL() {
+        const text = document.getElementById('urlInput').value;
+        if (!text) { document.getElementById('urlResult').textContent = "⚠️ Enter text."; return; }
+        try {
+            document.getElementById('urlResult').textContent = decodeURIComponent(text);
+        } catch(e) {
+            document.getElementById('urlResult').textContent = "⚠️ Invalid URL encoding.";
+        }
+    }
+
+    // ========== TOOL 14: QR CODE ==========
+    function generateQR() {
+        const text = document.getElementById('qrInput').value.trim();
+        if (!text) {
+            document.getElementById('qrResult').textContent = "⚠️ Please enter text or URL.";
+            return;
+        }
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
+        document.getElementById('qrResult').innerHTML = `<img src="${qrUrl}" alt="QR Code" style="max-width:200px; margin:0 auto; display:block;">`;
+    }
+
+    // ========== TOOL 15: PASSWORD GENERATOR ==========
+    function generatePassword() {
+        const length = parseInt(document.getElementById('passLength').value) || 12;
+        const type = document.getElementById('passType').value;
+        let chars = '';
+        if (type === 'numeric') chars = '0123456789';
+        else if (type === 'alphanumeric') chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        else chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=';
         
-        let responses = {
-            upwork: `Hi Client, I have reviewed your project requirements for ${topic}. I am an expert in this field and can deliver efficiently. I have completed similar projects successfully. Let's discuss your specific needs.\n\nBest regards,\nSanaullah`,
-            fiverr: `Are you looking for high-quality ${topic} services? I specialize in delivering professional results with fast turnaround. Satisfaction guaranteed!\n\nOrder now and let's get started.\n\nRegards,\nSanaullah`,
-            freelancer: `Hi, I am interested in your project about ${topic}. I can complete this task within your budget and timeline. Please check my profile for similar work. Ready to start immediately!\n\nThanks,\nSanaullah`,
-            linkedin: `Hi, I noticed you are working on ${topic}. I specialize in automation and productivity solutions. Would love to connect and discuss how we can collaborate.\n\nBest,\nSanaullah`
-        };
+        let password = '';
+        for (let i = 0; i < length; i++) {
+            password += chars[Math.floor(Math.random() * chars.length)];
+        }
+        document.getElementById('passResult').textContent = password;
+    }
+
+    // ========== TOOL 16: PASSWORD STRENGTH ==========
+    function checkPasswordStrength() {
+        const password = document.getElementById('strengthInput').value;
+        if (!password) {
+            document.getElementById('strengthResult').textContent = "⚠️ Enter password.";
+            return;
+        }
+        let strength = 0;
+        if (password.length >= 8) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^a-zA-Z0-9]/.test(password)) strength++;
         
-        let result = responses[task];
-        let uid = "freelance_" + Date.now();
-        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
-        document.getElementById("aiResponse").innerHTML = `<div id="${uid}" style="text-align:left; direction:ltr; white-space:pre-wrap;">${result.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">${copyText}</button>`;
+        const levels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
+        const colors = ['#ff4444', '#ff8844', '#ffcc00', '#88cc44', '#44ff88'];
+        const level = Math.min(strength, 4);
+        document.getElementById('strengthResult').innerHTML = 
+            `🛡️ Strength: <strong style="color:${colors[level]}">${levels[level]}</strong> (Score: ${strength}/5)`;
     }
 
-    // ========== TOOL 2: Content Writer ==========
-    function convertContent(type) {
-        let txt = document.getElementById("contentInput").value;
-        if (!txt) { 
-            document.getElementById("contentResult").innerHTML = currentLang === 'ur' ? "⚠️ پہلے کچھ لکھیں!" : "⚠️ Write something first!";
-            return; 
+    // ========== TOOL 17: AGE CALCULATOR ==========
+    function calculateAge() {
+        const dob = document.getElementById('dobInput').value;
+        if (!dob) {
+            document.getElementById('ageResult').textContent = "⚠️ Please select date of birth.";
+            return;
         }
-        let res = "";
-        if (type === 'upper') res = txt.toUpperCase();
-        else if (type === 'lower') res = txt.toLowerCase();
-        else if (type === 'capitalize') res = txt.toLowerCase().replace(/(^|\s)\S/g, L => L.toUpperCase());
-        let uid = "content_" + Date.now();
-        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
-        document.getElementById("contentResult").innerHTML = `<div id="${uid}">${res}</div><button class="copy-btn" onclick="universalCopy('${uid}')">${copyText}</button>`;
+        const birthDate = new Date(dob);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) age--;
+        document.getElementById('ageResult').textContent = `📅 Your Age: ${age} years`;
     }
 
-    // ========== TOOL 3: SEO Optimizer ==========
-    function optimizeSEO() {
-        let kw = document.getElementById("seoKeyword").value.trim();
-        if (!kw) { 
-            document.getElementById("seoResult").innerHTML = currentLang === 'ur' ? "⚠️ مطلوبہ لفظ لکھیں!" : "⚠️ Enter keyword!";
-            return; 
+    // ========== TOOL 18: EMI CALCULATOR ==========
+    function calculateEMI() {
+        const amount = parseFloat(document.getElementById('loanAmount').value);
+        const rate = parseFloat(document.getElementById('loanRate').value) / 100 / 12;
+        const tenure = parseInt(document.getElementById('loanTenure').value);
+        if (!amount || !rate || !tenure) {
+            document.getElementById('emiResult').textContent = "⚠️ Please fill all fields.";
+            return;
         }
-        let tips = currentLang === 'ur' 
-            ? `🔍 SEO تجاویز "${kw}":<br>✅ عنوان میں ${kw} ڈالیں۔<br>✅ پہلے 100 الفاظ میں ${kw} لائیں۔<br>✅ Meta description میں ${kw} لکھیں۔<br>✅ تصاویر میں alt text ${kw} رکھیں۔<br>✅ URLs میں ${kw} استعمال کریں۔`
-            : `🔍 SEO Tips for "${kw}":<br>✅ Add ${kw} in title.<br>✅ Use ${kw} within first 100 words.<br>✅ Write ${kw} in meta description.<br>✅ Add ${kw} in image alt text.<br>✅ Use ${kw} in URLs.`;
-        let uid = "seo_" + Date.now();
-        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
-        document.getElementById("seoResult").innerHTML = `<div id="${uid}">${tips}</div><button class="copy-btn" onclick="universalCopy('${uid}')">${copyText}</button>`;
+        const emi = amount * rate * Math.pow(1 + rate, tenure) / (Math.pow(1 + rate, tenure) - 1);
+        const total = emi * tenure;
+        document.getElementById('emiResult').textContent = 
+            `💰 Monthly EMI: Rs. ${emi.toFixed(2)} | Total Payment: Rs. ${total.toFixed(2)} | Interest: Rs. ${(total - amount).toFixed(2)}`;
     }
 
-    // ========== TOOL 4: Code Helper ==========
-    function generateCodeHelp() {
-        let lang = document.getElementById("codeLanguage").value;
-        let q = document.getElementById("codeQuestion").value.trim();
-        if (!q) { 
-            document.getElementById("codeResult").innerHTML = currentLang === 'ur' ? "⚠️ اپنا سوال لکھیں!" : "⚠️ Write your question!";
-            return; 
+    // ========== TOOL 19: PERCENTAGE CALCULATOR ==========
+    function calculatePercentage() {
+        const value = parseFloat(document.getElementById('percentValue').value);
+        const percent = parseFloat(document.getElementById('percentPercent').value);
+        if (isNaN(value) || isNaN(percent)) {
+            document.getElementById('percentResult').textContent = "⚠️ Please enter valid numbers.";
+            return;
         }
-        let samples = {
-            html: `<!-- ${q} کے لیے HTML -->\n<div class="card">\n  <h3>عنوان</h3>\n  <p>مواد یہاں لکھیں</p>\n</div>`,
-            css: `/* ${q} کے لیے CSS */\n.card {\n  background: #111;\n  border-radius: 20px;\n  padding: 20px;\n}`,
-            javascript: `// ${q} کے لیے JavaScript\nfunction handleClick() {\n  alert("ہیلو ورلڈ");\n}`,
-            python: `# ${q} کے لیے Python\ndef my_function():\n    print("ہیلو ورلڈ")\n    return True`
+        const result = (value * percent) / 100;
+        document.getElementById('percentResult').textContent = `📊 ${percent}% of ${value} = ${result}`;
+    }
+
+    // ========== TOOL 20: GST CALCULATOR ==========
+    function calculateGST() {
+        const amount = parseFloat(document.getElementById('gstAmount').value);
+        const rate = parseFloat(document.getElementById('gstRate').value);
+        if (isNaN(amount) || isNaN(rate)) {
+            document.getElementById('gstResult').textContent = "⚠️ Please fill all fields.";
+            return;
+        }
+        const gst = (amount * rate) / 100;
+        const total = amount + gst;
+        document.getElementById('gstResult').textContent = `🧾 GST: ${gst.toFixed(2)} | Total: ${total.toFixed(2)}`;
+    }
+
+    // ========== TOOL 21: BMI CALCULATOR ==========
+    function calculateBMI() {
+        const weight = parseFloat(document.getElementById('bmiWeight').value);
+        const height = parseFloat(document.getElementById('bmiHeight').value) / 100;
+        if (!weight || !height) {
+            document.getElementById('bmiResult').textContent = "⚠️ Please enter valid values.";
+            return;
+        }
+        const bmi = weight / (height * height);
+        let category = '';
+        if (bmi < 18.5) category = 'Underweight';
+        else if (bmi < 25) category = 'Normal';
+        else if (bmi < 30) category = 'Overweight';
+        else category = 'Obese';
+        document.getElementById('bmiResult').textContent = `⚖️ BMI: ${bmi.toFixed(1)} | Category: ${category}`;
+    }
+
+    // ========== TOOL 22: UNIT CONVERTER ==========
+    function convertUnits() {
+        const type = document.getElementById('unitType').value;
+        const value = parseFloat(document.getElementById('unitInput').value);
+        if (isNaN(value)) {
+            document.getElementById('unitResult').textContent = "⚠️ Please enter a value.";
+            return;
+        }
+        let result = '';
+        switch(type) {
+            case 'length': result = `${value} cm = ${(value / 2.54).toFixed(2)} inches | ${value} inches = ${(value * 2.54).toFixed(2)} cm`; break;
+            case 'weight': result = `${value} kg = ${(value * 2.20462).toFixed(2)} lbs | ${value} lbs = ${(value / 2.20462).toFixed(2)} kg`; break;
+            case 'temperature': result = `${value}°C = ${(value * 9/5 + 32).toFixed(1)}°F | ${value}°F = ${((value - 32) * 5/9).toFixed(1)}°C`; break;
+            case 'area': result = `${value} m² = ${(value * 10.7639).toFixed(2)} ft² | ${value} ft² = ${(value / 10.7639).toFixed(2)} m²`; break;
+        }
+        document.getElementById('unitResult').textContent = result;
+    }
+
+    // ========== TOOL 23: COLOR PICKER ==========
+    function getColorInfo() {
+        const color = document.getElementById('colorPicker').value;
+        const rgb = parseInt(color.slice(1), 16);
+        const r = (rgb >> 16) & 255;
+        const g = (rgb >> 8) & 255;
+        const b = rgb & 255;
+        document.getElementById('colorResult').textContent = `🎨 Hex: ${color} | RGB: ${r}, ${g}, ${b}`;
+    }
+
+    // ========== TOOL 24: GRADIENT GENERATOR ==========
+    function generateGradient() {
+        const c1 = document.getElementById('gradientColor1').value;
+        const c2 = document.getElementById('gradientColor2').value;
+        const css = `background: linear-gradient(135deg, ${c1}, ${c2});`;
+        document.getElementById('gradientResult').innerHTML = 
+            `🌈 ${css}<br><br><div style="width:100%; height:60px; border-radius:12px; background:linear-gradient(135deg, ${c1}, ${c2});"></div>`;
+    }
+
+    // ========== TOOL 25: LOREM IPSUM ==========
+    function generateLorem() {
+        const count = parseInt(document.getElementById('loremCount').value) || 3;
+        const words = ['Lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua'];
+        let result = [];
+        for (let i = 0; i < count; i++) {
+            let sentence = [];
+            const len = 5 + Math.floor(Math.random() * 8);
+            for (let j = 0; j < len; j++) {
+                sentence.push(words[Math.floor(Math.random() * words.length)]);
+            }
+            sentence[0] = sentence[0][0].toUpperCase() + sentence[0].slice(1);
+            result.push(sentence.join(' ') + '.');
+        }
+        document.getElementById('loremResult').textContent = result.join(' ');
+    }
+
+    // ========== TOOL 26: INVOICE GENERATOR ==========
+    function generateInvoice() {
+        const client = document.getElementById('invoiceClient').value || 'Client';
+        const amount = document.getElementById('invoiceAmount').value || '0';
+        const invoice = `🧾 INVOICE\n━━━━━━━━━━━━━━━━\nClient: ${client}\nAmount: $${amount}\nDate: ${new Date().toLocaleDateString()}\nStatus: Pending\n━━━━━━━━━━━━━━━━\nThank you for your business!`;
+        document.getElementById('invoiceResult').textContent = invoice;
+    }
+
+    // ========== TOOL 27: TEMPLATE GENERATOR ==========
+    function generateTemplate() {
+        const type = document.getElementById('templateType').value;
+        const topic = document.getElementById('templateTopic').value.trim() || '[Your Project]';
+        
+        const templates = {
+            upwork: `📘 Upwork Proposal\n━━━━━━━━━━━━━━━━\nHi Client,\n\nI have reviewed your project requirements for ${topic}. I am an expert in this field with 5+ years of experience. I can deliver high-quality work within your timeline.\n\nLet's discuss the details.\n\nBest regards,\n[Your Name]`,
+            fiverr: `🎵 Fiverr Gig\n━━━━━━━━━━━━━━━━\nTitle: I will provide professional ${topic} services\n\nDescription: I specialize in delivering high-quality ${topic} results. Satisfaction guaranteed. Order now!\n\nPackages:\nBasic: $50\nStandard: $100\nPremium: $200`,
+            freelancer: `💼 Freelancer.com Bid\n━━━━━━━━━━━━━━━━\nHi, I'm interested in your project about ${topic}. I can complete this within your budget and timeline. Check my portfolio for similar work.\n\nReady to start immediately.\n\nThanks,\n[Your Name]`,
+            linkedin: `🔗 LinkedIn Message\n━━━━━━━━━━━━━━━━\nHi, I noticed you're working on ${topic}. I specialize in this area and would love to connect. Let's discuss how we can collaborate.\n\nBest,\n[Your Name]`
         };
-        let code = samples[lang];
-        let uid = "code_" + Date.now();
-        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
-        document.getElementById("codeResult").innerHTML = `<div id="${uid}" style="background:#05080f; padding:12px; border-radius:12px; font-family:monospace; text-align:left; direction:ltr;">${code.replace(/\n/g,'<br>')}</div><button class="copy-btn" onclick="universalCopy('${uid}')">${copyText}</button>`;
+        document.getElementById('templateResult').textContent = templates[type] || templates.upwork;
+    }
+
+    // ========== TOOL 28: CODE SNIPPETS ==========
+    function generateSnippet() {
+        const type = document.getElementById('snippetType').value;
+        const topic = document.getElementById('snippetTopic').value.trim() || 'button';
+        
+        const snippets = {
+            html: `🌐 HTML Snippet\n━━━━━━━━━━━━━━━━\n<!-- ${topic} -->\n<div class="${topic}">\n  <h3>${topic} Component</h3>\n  <p>Content goes here</p>\n</div>`,
+            css: `🎨 CSS Snippet\n━━━━━━━━━━━━━━━━\n/* ${topic} Styling */\n.${topic} {\n  background: #111;\n  color: #fff;\n  padding: 20px;\n  border-radius: 12px;\n  border: 1px solid #ffcc00;\n}`,
+            javascript: `⚡ JavaScript Snippet\n━━━━━━━━━━━━━━━━\n// ${topic} Function\nfunction handle${topic.charAt(0).toUpperCase() + topic.slice(1)}() {\n  console.log("${topic} clicked!");\n  // Your code here\n}`,
+            python: `🐍 Python Snippet\n━━━━━━━━━━━━━━━━\n# ${topic} Function\ndef handle_${topic.replace(/\s/g, '_')}():\n    print("${topic} executed")\n    # Your code here\n    return True`
+        };
+        document.getElementById('snippetResult').textContent = snippets[type] || snippets.html;
     }
 
     // ========== PROMPT LIBRARY ==========
     const prompts = [
+        { title: "ChatGPT for Coding", category: "ChatGPT", text: "Act as a senior developer. Help me debug this [Language] code: [Paste Code]. Explain the issue and provide a fix." },
+        { title: "ChatGPT for Content", category: "ChatGPT", text: "Write a 1000-word blog post on [Topic] with introduction, 5 headings, and conclusion." },
+        { title: "ChatGPT for Marketing", category: "ChatGPT", text: "Create a complete marketing strategy for [Product] including target audience, channels, and budget." },
         { title: "SEO Title Generator", category: "SEO", text: "Generate 5 SEO-friendly titles for a blog about [Topic]. Include primary keyword [Keyword] and keep under 60 characters." },
         { title: "Meta Description Writer", category: "SEO", text: "Write a compelling meta description for a webpage about [Topic]. Include [Keyword] and a call-to-action within 160 characters." },
-        { title: "SEO Keywords Research", category: "SEO", text: "List 10 long-tail keywords for [Topic] with low competition and high search volume. Also suggest search intent." },
+        { title: "SEO Keywords Research", category: "SEO", text: "List 10 long-tail keywords for [Topic] with low competition and high search volume." },
+        { title: "Blog Post Idea", category: "Blogging", text: "Generate 10 unique blog post ideas for a blog about [Niche]. Focus on trending topics." },
+        { title: "Blog Introduction", category: "Blogging", text: "Write a hook-based introduction for a blog post about [Topic]. Include a question and a statistic." },
+        { title: "Blog Conclusion", category: "Blogging", text: "Write a powerful conclusion for [Topic]. Summarize key points and include a call-to-action." },
         { title: "Fiverr Gig Description", category: "Fiverr", text: "Write a professional, SEO-optimized Fiverr gig description for [Service Name]. Include benefits, packages, and an FAQ section." },
-        { title: "Fiverr Profile Bio", category: "Fiverr", text: "Create a short, persuasive Fiverr profile bio for a freelancer specializing in [Skill]. Highlight experience and client satisfaction." },
-        { title: "Fiverr Gig Title", category: "Fiverr", text: "Generate 5 click-worthy Fiverr gig titles for [Service]. Use keywords and power words to attract buyers." },
+        { title: "Fiverr Profile Bio", category: "Fiverr", text: "Create a short, persuasive Fiverr profile bio for a freelancer specializing in [Skill]." },
+        { title: "Fiverr Gig Title", category: "Fiverr", text: "Generate 5 click-worthy Fiverr gig titles for [Service]. Use keywords and power words." },
         { title: "Upwork Proposal", category: "Upwork", text: "Write a high-converting Upwork proposal for a job related to [Project Name]. Mention [Your Skills] and keep it under 250 words." },
-        { title: "Upwork Cover Letter", category: "Upwork", text: "Draft a professional Upwork cover letter for a client looking for [Service]. Include a brief portfolio link and availability." },
-        { title: "Upwork Bio", category: "Upwork", text: "Write an optimized Upwork freelancer bio for [Your Profession]. Focus on results, experience, and client testimonials." },
+        { title: "Upwork Cover Letter", category: "Upwork", text: "Draft a professional Upwork cover letter for a client looking for [Service]." },
+        { title: "Upwork Bio", category: "Upwork", text: "Write an optimized Upwork freelancer bio for [Your Profession]. Focus on results and experience." },
+        { title: "Email Marketing Copy", category: "Marketing", text: "Write a promotional email for a product called [Product Name]. Highlight benefits and include a clear CTA." },
+        { title: "Social Media Caption", category: "Marketing", text: "Create an engaging Instagram caption for a brand launching [New Product]. Use 3 hashtags." },
+        { title: "Facebook Ad Copy", category: "Marketing", text: "Write a short, persuasive Facebook ad for [Service/Product]. Include headline and description." },
+        { title: "YouTube Title Generator", category: "YouTube", text: "Generate 10 click-worthy YouTube titles for a video about [Topic]. Use power words and numbers." },
+        { title: "YouTube Description", category: "YouTube", text: "Write a complete YouTube video description for [Video Title]. Include summary and keywords." },
+        { title: "YouTube Script", category: "YouTube", text: "Write a 5-minute YouTube script for [Topic]. Include hook, intro, body, and call-to-action." },
+        { title: "Facebook Ad Headline", category: "Facebook Ads", text: "Generate 10 attention-grabbing headlines for a Facebook ad about [Product]." },
+        { title: "Facebook Ad Creative", category: "Facebook Ads", text: "Describe a high-converting Facebook ad creative for [Product] including image and copy." },
+        { title: "Facebook Ad Audience", category: "Facebook Ads", text: "Define the ideal Facebook ad audience for [Product]. Include demographics and interests." },
         { title: "Code Debug Assistant", category: "Coding", text: "Act as a senior developer. Debug this [Language] code: [Paste Code]. Explain the issue and provide the corrected version." },
-        { title: "HTML Structure Generator", category: "Coding", text: "Generate a clean, semantic HTML5 structure for a webpage about [Topic]. Include header, main, section, and footer." },
-        { title: "CSS Styling Help", category: "Coding", text: "Write CSS code to style a [Component Name] with modern flexbox/grid. Make it responsive and visually appealing." },
-        { title: "Email Marketing Copy", category: "Marketing", text: "Write a promotional email for a product called [Product Name]. Highlight benefits, include urgency, and a clear CTA button." },
-        { title: "Social Media Caption", category: "Marketing", text: "Create an engaging Instagram caption for a brand launching [New Product]. Use 3 hashtags and a question to boost comments." },
-        { title: "Facebook Ad Copy", category: "Marketing", text: "Write a short, persuasive Facebook ad for [Service/Product]. Include headline, description, and a strong call-to-action." }
+        { title: "HTML Structure Generator", category: "Coding", text: "Generate a clean, semantic HTML5 structure for a webpage about [Topic]." },
+        { title: "CSS Styling Help", category: "Coding", text: "Write CSS code to style a [Component Name] with modern flexbox/grid." },
+        { title: "Business Plan", category: "Business", text: "Create a simple business plan for [Business Name]. Include mission, goals, and target audience." },
+        { title: "SWOT Analysis", category: "Business", text: "Perform a SWOT analysis for [Company]. List strengths, weaknesses, opportunities, and threats." },
+        { title: "Client Proposal", category: "Business", text: "Write a professional client proposal for [Service]. Include overview, pricing, and timeline." }
     ];
 
     function filterPrompts() {
+        const container = document.getElementById("promptResultsContainer");
         const keyword = document.getElementById("promptSearchKeyword").value.trim().toLowerCase();
         const category = document.getElementById("promptCategory").value;
-        const container = document.getElementById("promptResultsContainer");
         
-        let filteredPrompts = prompts.filter(prompt => {
-            const matchesCategory = (category === "all" || prompt.category === category);
-            const matchesKeyword = (keyword === "" || 
-                prompt.title.toLowerCase().includes(keyword) || 
-                prompt.text.toLowerCase().includes(keyword));
-            return matchesCategory && matchesKeyword;
+        const filtered = prompts.filter(p => {
+            const matchCategory = category === "all" || p.category === category;
+            const matchKeyword = keyword === "" || p.title.toLowerCase().includes(keyword) || p.text.toLowerCase().includes(keyword);
+            return matchCategory && matchKeyword;
         });
         
         const noPromptMsg = currentLang === 'ur' ? "❌ کوئی Prompt نہیں ملا" : "❌ No Prompt Found";
-        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
         const categoryText = currentLang === 'ur' ? "Category:" : "Category:";
+        const copyText = currentLang === 'ur' ? "📋 کاپی کریں" : "📋 Copy";
         
-        if (filteredPrompts.length === 0) {
+        if (filtered.length === 0) {
             container.innerHTML = `<div class="result-box" style="text-align: center; color: #ffcc00;">${noPromptMsg}</div>`;
             return;
         }
         
         container.innerHTML = "";
-        filteredPrompts.forEach((prompt, index) => {
-            const uniqueId = "prompt_result_" + Date.now() + "_" + index;
+        filtered.forEach((p) => {
+            const uid = generateUniqueId();
             container.innerHTML += `
                 <div class="tool-card" style="padding: 15px; text-align: ${currentLang === 'ur' ? 'right' : 'left'};">
-                    <h4 style="color: #ffcc00; margin-bottom: 5px;">📌 ${prompt.title}</h4>
-                    <p style="font-size: 13px; color: #aaa; margin-bottom: 8px;">${categoryText} ${prompt.category}</p>
-                    <p style="font-size: 14px; color: #ddd; margin-bottom: 15px;">${prompt.text}</p>
-                    <div id="${uniqueId}" style="display: none;">${prompt.text}</div>
-                    <button class="copy-btn" onclick="universalCopy('${uniqueId}')">${copyText}</button>
+                    <h4 style="color: #ffcc00; margin-bottom: 5px;">📌 ${p.title}</h4>
+                    <p style="font-size: 13px; color: #aaa; margin-bottom: 8px;">${categoryText} ${p.category}</p>
+                    <p style="font-size: 14px; color: #ddd; margin-bottom: 15px;">${p.text}</p>
+                    <div id="${uid}" style="display: none;">${p.text}</div>
+                    <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">${copyText}</button>
                 </div>
             `;
         });
     }
 
-    // Initialize
-    window.onload = function() {
-        updateLanguageTags();
-        filterPrompts();
-    };
-</script>
-
-<!-- Google Translate Script -->
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-<script>
-    // ========== گولڈن ریت + چمکتی بلبیں (پس منظر) ==========
-    const canvas = document.getElementById('sandCanvas');
-    const ctx = canvas.getContext('2d');
-    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    let particles = [];
-    for (let i = 0; i < 180; i++) {
-        particles.push({
-            x: Math.random() * canvas.width, y: Math.random() * canvas.height,
-            size: Math.random() * 3 + 1, dx: (Math.random() - 0.5) * 0.5, dy: (Math.random() - 0.5) * 0.3 + 0.2,
-            alpha: Math.random() * 0.5 + 0.3, glow: Math.random() * 0.8 + 0.3
+    function loadTrending() {
+        const trending = [
+            "Best Fiverr Gig Description",
+            "Best SEO Title Generator",
+            "Best Upwork Proposal"
+        ];
+        const container = document.getElementById("trendingTags");
+        container.innerHTML = "";
+        trending.forEach(tag => {
+            container.innerHTML += `<span class="trending-tag" onclick="searchTrending('${tag}')">${tag}</span>`;
         });
     }
+
+    function searchTrending(text) {
+        document.getElementById("promptSearchKeyword").value = text;
+        filterPrompts();
+    }
+
+    // ========== CANVAS ANIMATION ==========
+    const canvas = document.getElementById('sandCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let bulbs = [];
     let time = 0;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initParticles();
+    }
+
+    function initParticles() {
+        const isMobile = window.innerWidth < 768;
+        const particleCount = isMobile ? 40 : 100;
+        const bulbCount = isMobile ? 15 : 30;
+        
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 3 + 1,
+                dx: (Math.random() - 0.5) * 0.5,
+                dy: (Math.random() - 0.5) * 0.3 + 0.2,
+                alpha: Math.random() * 0.5 + 0.3,
+                glow: Math.random() * 0.8 + 0.3
+            });
+        }
+        
+        bulbs = [];
+        for (let i = 0; i < bulbCount; i++) {
+            bulbs.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 5 + 2,
+                speed: 0.5 + Math.random() * 1.5
+            });
+        }
+    }
+
     function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         time += 0.02;
         let pulse = Math.sin(time) * 0.3 + 0.7;
+        
         for (let p of particles) {
             let bright = (Math.sin(time * 2 + p.x * 0.01) * 0.3 + 0.7) * p.glow * pulse;
             ctx.beginPath();
@@ -885,19 +1543,16 @@
             ctx.shadowBlur = 12 * bright;
             ctx.shadowColor = `rgba(255, 200, 40, 0.9)`;
             ctx.fill();
-            p.x += p.dx; p.y += p.dy;
+            p.x += p.dx;
+            p.y += p.dy;
             if (p.x < -50) p.x = canvas.width + 40;
             if (p.x > canvas.width + 50) p.x = -40;
             if (p.y < -50) p.y = canvas.height + 40;
             if (p.y > canvas.height + 50) p.y = -40;
         }
-        if (!window.bulbs) {
-            window.bulbs = [];
-            for (let i = 0; i < 40; i++) window.bulbs.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, radius: Math.random() * 5 + 2, speed: 0.5 + Math.random() * 1.5 });
-        }
-        for (let i = 0; i < window.bulbs.length; i++) {
-            let b = window.bulbs[i];
-            let flick = Math.sin(time * b.speed + i) * 0.5 + 0.5;
+        
+        for (let b of bulbs) {
+            let flick = Math.sin(time * b.speed) * 0.5 + 0.5;
             ctx.beginPath();
             ctx.arc(b.x, b.y, b.radius * (0.7 + flick * 0.6), 0, Math.PI * 2);
             ctx.fillStyle = `rgba(255, 210, 70, ${0.25 + flick * 0.4})`;
@@ -906,7 +1561,17 @@
         }
         requestAnimationFrame(draw);
     }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
     draw();
+
+    // ========== INIT ==========
+    window.onload = function() {
+        setLanguage('ur');
+        loadTrending();
+        filterPrompts();
+    };
 </script>
 </body>
 </html>
