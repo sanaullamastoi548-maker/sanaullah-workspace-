@@ -71,16 +71,31 @@
             box-shadow: 0 0 10px #ffcc00;
         }
 
-        /* ============================================================
-   LANGUAGE SWITCHER BUTTONS
-   ============================================================ */
-.lang-switcher {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
+   lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .lang-btn {
+            background: rgba(255,204,0,0.15);
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            padding: 10px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(255,204,0,0.3);
+        }
+        .lang-btn.active {
+            background: #ffcc00;
+            color: black;
+        } 
 
 .lang-btn {
     background: rgba(255, 204, 0, 0.15);
@@ -319,13 +334,11 @@
         <div class="glow-line"></div>
       <p id="siteTagline">🛠️ 40+ Free Tools — SEO, Writing, Coding, Design, Finance &amp; Productivity</p>
 
-       <!-- ============================================================
-     LANGUAGE SWITCHER - Urdu / English
-     ============================================================ -->
-<div class="lang-switcher">
-    <button class="lang-btn active" id="btnUrdu" onclick="setLanguage('ur')">🇵🇰 اردو</button>
-    <button class="lang-btn" id="btnEnglish" onclick="setLanguage('en')">🇬🇧 English</button>
-</div>
+       <!-- ===== LANGUAGE BUTTONS ===== -->
+        <div class="lang-switcher">
+            <button class="lang-btn active" id="btnUrdu" onclick="setLanguage('ur')">🇵🇰 اردو</button>
+            <button class="lang-btn" id="btnEnglish" onclick="setLanguage('en')">🇬🇧 English</button>
+        </div> 
 
    <!-- ========== BROWSER TRANSLATION OPTION ========== -->
 <div class="translate-container" style="background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; margin-top: 15px;">
@@ -983,30 +996,26 @@
 
 <script>
 
-    // =============================================================
-// LANGUAGE SWITCHER - Simple RTL/LTR Toggle
-// =============================================================
+    / =============================================================
+        // LANGUAGE SWITCHER - FULL WORKING SOLUTION
+        // =============================================================
 
-function setLanguage(lang) {
-    const html = document.documentElement;
-    
-    if (lang === 'ur') {
-        html.setAttribute('dir', 'rtl');
-        html.setAttribute('lang', 'ur');
-        document.getElementById('btnUrdu').style.background = '#ffcc00';
-        document.getElementById('btnUrdu').style.color = 'black';
-        document.getElementById('btnEnglish').style.background = 'rgba(255,204,0,0.2)';
-        document.getElementById('btnEnglish').style.color = '#ffcc00';
-    } else {
-        html.setAttribute('dir', 'ltr');
-        html.setAttribute('lang', 'en');
-        document.getElementById('btnEnglish').style.background = '#ffcc00';
-        document.getElementById('btnEnglish').style.color = 'black';
-        document.getElementById('btnUrdu').style.background = 'rgba(255,204,0,0.2)';
-        document.getElementById('btnUrdu').style.color = '#ffcc00';
-    }
-}
+        // ========== TRANSLATIONS ==========
+        const translations = {
+         // ========== MAIN FUNCTION ==========
+        function setLanguage(lang) {
+            // 1. Change direction
+            if (lang === 'en') {
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            } else {
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ur');
+            }
 
+            // 2. Update button styles
+            const btnUrdu = document.getElementById('btnUrdu');
+            const btnEnglish = document.getElementById('btnEnglish');   
 // =============================================================
 // LANGUAGE SWITCHER - Only Script
 // =============================================================
