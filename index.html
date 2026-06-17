@@ -388,39 +388,44 @@
     </button>
 </div>
 
-    <!-- Language Section -->
-    <section class="language-section" aria-label="Language Selection">
-        <h3 id="langSectionTitle">🌐 اپنی زبان تلاش کریں</h3>
-        <div class="search-box">
-            <label for="language-search" class="sr-only">زبان تلاش کریں</label>
-            <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic...">
-            <button class="search-btn" onclick="searchLanguage()" id="searchLangBtn">تلاش کریں</button>
-        </div>
-        <div class="translate-container">
-            <div id="google_translate_element"></div>
-            <div class="translate-note" id="translateNote">💡 اوپر والے باکس میں زبان لکھیں، پھر نیچے والے Google Translate باکس سے منتخب کریں۔</div>
-        </div>
-        <div class="popular-langs">
-            <h4 id="popularLangsTitle">📚 مشہور زبانیں (کلک کریں)</h4>
-            <div class="lang-tags" id="langTagsContainer">
-                <span class="lang-tag" onclick="quickSearch('Urdu')">🇵🇰 اردو</span>
-                <span class="lang-tag" onclick="quickSearch('English')">🇬🇧 English</span>
-                <span class="lang-tag" onclick="quickSearch('Arabic')">🇸🇦 العربية</span>
-                <span class="lang-tag" onclick="quickSearch('Hindi')">🇮🇳 हिन्दी</span>
-                <span class="lang-tag" onclick="quickSearch('Spanish')">🇪🇸 Español</span>
-                <span class="lang-tag" onclick="quickSearch('French')">🇫🇷 Français</span>
-                <span class="lang-tag" onclick="quickSearch('German')">🇩🇪 Deutsch</span>
-                <span class="lang-tag" onclick="quickSearch('Turkish')">🇹🇷 Türkçe</span>
-                <span class="lang-tag" onclick="quickSearch('Persian')">🇮🇷 فارسی</span>
-                <span class="lang-tag" onclick="quickSearch('Bengali')">🇧🇩 বাংলা</span>
-                <span class="lang-tag" onclick="quickSearch('Russian')">🇷🇺 Русский</span>
-                <span class="lang-tag" onclick="quickSearch('Chinese')">🇨🇳 中文</span>
-                <span class="lang-tag" onclick="quickSearch('Japanese')">🇯🇵 日本語</span>
-                <span class="lang-tag" onclick="quickSearch('Italian')">🇮🇹 Italiano</span>
-                <span class="lang-tag" onclick="quickSearch('Portuguese')">🇵🇹 Português</span>
-            </div>
-        </div>
-    </section>
+   <!-- ========== BROWSER TRANSLATION OPTION ========== -->
+<div class="translate-container" style="background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; margin-top: 15px;">
+    <div style="text-align: center; color: #ffcc00; font-size: 18px; margin-bottom: 10px;">
+        🌐 Browser Translation
+    </div>
+    <p style="color: #ccc; font-size: 14px; text-align: center; margin-bottom: 15px;">
+        💡 اس ویب سائٹ کو اپنی پسندیدہ زبان میں دیکھنے کے لیے اپنے براؤزر کا ترجمہ فیچر استعمال کریں۔
+    </p>
+    <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+        <button onclick="translateBrowser('ur')" style="background: rgba(255,204,0,0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.3s; font-size: 14px;">
+            🇵🇰 اردو
+        </button>
+        <button onclick="translateBrowser('en')" style="background: rgba(255,204,0,0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.3s; font-size: 14px;">
+            🇬🇧 English
+        </button>
+        <button onclick="translateBrowser('ar')" style="background: rgba(255,204,0,0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.3s; font-size: 14px;">
+            🇸🇦 العربية
+        </button>
+        <button onclick="translateBrowser('fr')" style="background: rgba(255,204,0,0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.3s; font-size: 14px;">
+            🇫🇷 Français
+        </button>
+        <button onclick="translateBrowser('es')" style="background: rgba(255,204,0,0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.3s; font-size: 14px;">
+            🇪🇸 Español
+        </button>
+        <button onclick="translateBrowser('de')" style="background: rgba(255,204,0,0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.3s; font-size: 14px;">
+            🇩🇪 Deutsch
+        </button>
+        <button onclick="translateBrowser('tr')" style="background: rgba(255,204,0,0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.3s; font-size: 14px;">
+            🇹🇷 Türkçe
+        </button>
+        <button onclick="translateBrowser('hi')" style="background: rgba(255,204,0,0.15); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.3s; font-size: 14px;">
+            🇮🇳 हिन्दी
+        </button>
+    </div>
+    <p style="color: #888; font-size: 12px; text-align: center; margin-top: 15px;">
+        ⚠️ براہ کرم اپنے براؤزر کی سیٹنگز میں ترجمہ کو فعال کریں۔
+    </p>
+</div> 
 
     <!-- ========== TOOLS CONTAINER ========== -->
     <main class="tools-container" id="toolsContainer" role="main">
@@ -1072,52 +1077,82 @@
             // =============================================================
 // LANGUAGE SWITCHER (Urdu / English)
 // =============================================================
+// =============================================================
+// BROWSER TRANSLATION FUNCTION
+// =============================================================
 
-function setLanguage(lang) {
-    const html = document.documentElement;
-    const btnUrdu = document.getElementById('btnUrdu');
-    const btnEnglish = document.getElementById('btnEnglish');
+function translateBrowser(lang) {
+    // Try to use Google Translate API (if available)
+    try {
+        const select = document.querySelector('.goog-te-combo');
+        if (select) {
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === lang) {
+                    select.selectedIndex = i;
+                    select.dispatchEvent(new Event('change'));
+                    showToast('✅ ترجمہ ہو رہا ہے...');
+                    return;
+                }
+            }
+        }
+    } catch(e) {}
     
-    if (lang === 'ur') {
-        html.setAttribute('dir', 'rtl');
-        html.setAttribute('lang', 'ur');
-        btnUrdu.style.background = '#ffcc00';
-        btnUrdu.style.color = 'black';
-        btnEnglish.style.background = 'rgba(255,204,0,0.2)';
-        btnEnglish.style.color = '#ffcc00';
-        // Change text content to Urdu
-        document.querySelector('.header h1').textContent = 'Sanaullah Workspace';
-        document.querySelector('.header p').textContent = '🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools';
-    } else {
-        html.setAttribute('dir', 'ltr');
-        html.setAttribute('lang', 'en');
-        btnEnglish.style.background = '#ffcc00';
-        btnEnglish.style.color = 'black';
-        btnUrdu.style.background = 'rgba(255,204,0,0.2)';
-        btnUrdu.style.color = '#ffcc00';
-        // Change text content to English
-        document.querySelector('.header h1').textContent = 'Sanaullah Workspace';
-        document.querySelector('.header p').textContent = '🤖 AI powered solution for every difficult task — Freelancing, Writing, SEO, Coding & Language Tools';
-    }
+    // Fallback: Show browser translation instructions
+    const langNames = {
+        'ur': 'اردو (Urdu)',
+        'en': 'English',
+        'ar': 'العربية (Arabic)',
+        'fr': 'Français (French)',
+        'es': 'Español (Spanish)',
+        'de': 'Deutsch (German)',
+        'tr': 'Türkçe (Turkish)',
+        'hi': 'हिन्दी (Hindi)'
+    };
+    
+    const langName = langNames[lang] || lang;
+    
+    showToast(`💡 "${langName}" کے لیے براہ کرم اپنے براؤزر کا ترجمہ فیچر استعمال کریں۔`);
+    
+    // Also try to open browser's translate page
+    try {
+        if (typeof google !== 'undefined' && google.translate) {
+            google.translate.TranslateElement({
+                pageLanguage: 'ur',
+                includedLanguages: lang
+            }, 'google_translate_element');
+        }
+    } catch(e) {}
 }
 
-// Set default language (Urdu) on load
-window.onload = function() {
-    setLanguage('ur');
-};
-            
-            if (!found) {
-                alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
-            }
-        } else {
-            alert("⚠️ براہ کرم Google Translate کے لوڈ ہونے کا انتظار کریں۔");
-        }
-    }
+// =============================================================
+// TOAST NOTIFICATION (if not already present)
+// =============================================================
 
-    function quickSearch(lang) {
-        document.getElementById("language-search").value = lang;
-        searchLanguage();
-    }
+function showToast(message) {
+    // Remove existing toast
+    const existing = document.querySelector('.toast-notification');
+    if (existing) existing.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+        background: #222; color: #ffcc00; padding: 12px 24px;
+        border-radius: 12px; border: 1px solid #ffcc00;
+        z-index: 9999; font-size: 16px;
+        box-shadow: 0 0 30px rgba(255,204,0,0.3);
+        max-width: 90%; text-align: center;
+        animation: fadeInUp 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.5s';
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
+        }
 
     // =============================================================
     // COPY FUNCTIONS
