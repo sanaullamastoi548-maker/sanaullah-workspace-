@@ -71,99 +71,40 @@
             box-shadow: 0 0 10px #ffcc00;
         }
 
-        /* ========== زبان اور سرچ بار ========== */
-        .language-section {
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            margin: 30px auto;
-            padding: 30px 20px;
-            max-width: 800px;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .language-section h3 {
-            color: #ffcc00;
-            font-size: 26px;
-            margin-bottom: 20px;
-        }
-        .search-box {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
-        }
-        #language-search {
-            flex: 2;
-            min-width: 250px;
-            padding: 14px 20px;
-            border: 2px solid #ffcc00;
-            border-radius: 60px;
-            font-size: 16px;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            outline: none;
-        }
-        #language-search:focus {
-            border-color: #fff;
-            box-shadow: 0 0 15px rgba(255,204,0,0.3);
-        }
-        .search-btn {
-            background: #ffcc00;
-            color: black;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 60px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .search-btn:hover {
-            background: #ffaa00;
-            transform: scale(0.98);
-        }
-        .translate-container {
-            background: rgba(0,0,0,0.4);
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 15px;
-        }
-        .translate-note {
-            font-size: 13px;
-            opacity: 0.7;
-            margin-top: 15px;
-        }
-        .popular-langs {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
-        .popular-langs h4 {
-            color: #ffcc00;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
-        .lang-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
-        .lang-tag {
-            background: rgba(255,204,0,0.15);
-            border: 1px solid rgba(255,204,0,0.4);
-            border-radius: 40px;
-            padding: 8px 20px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 14px;
-        }
-        .lang-tag:hover {
-            background: #ffcc00;
-            color: black;
-            transform: translateY(-2px);
-        }
+        /* ============================================================
+   LANGUAGE SWITCHER BUTTONS
+   ============================================================ */
+.lang-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.lang-btn {
+    background: rgba(255, 204, 0, 0.15);
+    border: 1px solid #ffcc00;
+    color: #ffcc00;
+    padding: 10px 28px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(255, 204, 0, 0.3);
+}
+
+.lang-btn.active {
+    background: #ffcc00;
+    color: #000000;
+    border-color: #ffcc00;
+    box-shadow: 0 0 25px rgba(255, 204, 0, 0.4);
+}
 
         /* ========== ٹولز کا کنٹینر ========== */
         .tools-container {
@@ -364,12 +305,8 @@
         @media (max-width: 768px) {
             .flex-row { flex-direction: column; }
         }
-    </style>
-
-    <p id="siteTagline">🛠️ 40+ Free Tools — SEO, Writing, Coding, Design, Finance &amp; Productivity</p>
-        <div class="lang-switcher">
-            
-            
+                </style>
+    
 </head>
 <body>
     
@@ -382,11 +319,13 @@
         <div class="glow-line"></div>
       <p id="siteTagline">🛠️ 40+ Free Tools — SEO, Writing, Coding, Design, Finance &amp; Productivity</p>
 
-       <div class="lang-switcher">
-            <button class="lang-btn active" id="btnUrdu" onclick="setLanguage('ur')">🇵🇰 اردو</button>
-            <button class="lang-btn" id="btnEnglish" onclick="setLanguage('en')">🇬🇧 English</button>
-       </div> 
-    </header>
+       <!-- ============================================================
+     LANGUAGE SWITCHER - Urdu / English
+     ============================================================ -->
+<div class="lang-switcher">
+    <button class="lang-btn active" id="btnUrdu" onclick="setLanguage('ur')">🇵🇰 اردو</button>
+    <button class="lang-btn" id="btnEnglish" onclick="setLanguage('en')">🇬🇧 English</button>
+</div>
 
    <!-- ========== BROWSER TRANSLATION OPTION ========== -->
 <div class="translate-container" style="background: rgba(0,0,0,0.4); border-radius: 20px; padding: 20px; margin-top: 15px;">
@@ -1068,19 +1007,41 @@ function setLanguage(lang) {
     }
 }
 
-// Default language on load
+// =============================================================
+// LANGUAGE SWITCHER - Only Script
+// =============================================================
+
+function setLanguage(lang) {
+    // Change direction
+    if (lang === 'en') {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.documentElement.setAttribute('lang', 'en');
+    } else {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.documentElement.setAttribute('lang', 'ur');
+    }
+
+    // Update button styles
+    const btnUrdu = document.getElementById('btnUrdu');
+    const btnEnglish = document.getElementById('btnEnglish');
+    
+    if (lang === 'ur') {
+        btnUrdu.style.background = '#ffcc00';
+        btnUrdu.style.color = 'black';
+        btnEnglish.style.background = 'rgba(255,204,0,0.2)';
+        btnEnglish.style.color = '#ffcc00';
+    } else {
+        btnEnglish.style.background = '#ffcc00';
+        btnEnglish.style.color = 'black';
+        btnUrdu.style.background = 'rgba(255,204,0,0.2)';
+        btnUrdu.style.color = '#ffcc00';
+    }
+}
+
+// ========== DEFAULT LANGUAGE ==========
 window.onload = function() {
     setLanguage('ur');
 };
-    // =============================================================
-    // GOOGLE TRANSLATE
-    // =============================================================
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'ur',
-            autoDisplay: false,
-            includedLanguages: 'ur,en,ar,hi,es,fr,de,tr,fa,bn,ru,zh-CN,ja,ko,it,pt,nl,sv,pl,th,he,id,ms,vi,ro,el,cs,hu,no,da,fi,hr,sk,sr,bg,uk'
-        }, 'google_translate_element');
     }
 
     function searchLanguage() {
