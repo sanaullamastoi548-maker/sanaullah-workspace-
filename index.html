@@ -367,6 +367,10 @@
     </style>
 </head>
 <body>
+    <div class="lang-switch">
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('ur')">اردو</button>
+    </div>
 
 <canvas id="sandCanvas"></canvas>
 
@@ -1527,8 +1531,7 @@ function checkPasswordStrength() {
 
     const level = Math.min(strength, 4);
 
-    const resultText = `🛡️ Strength: ${levels[level]} (Score: ${strength}/5)`;
-
+    const resultText = `Password Strength: ${levels[level]}\nScore: ${strength}/5`; 
     resultBox.innerHTML = `
         <div id="${generateUniqueId()}">
             🛡️ Strength:
