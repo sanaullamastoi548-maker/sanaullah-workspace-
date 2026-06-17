@@ -453,17 +453,112 @@
             </div>
         </div>
 
-        <!-- Tool 4: Meta Description Generator -->
-        <div class="tool-card">
-            <h3>📄 Meta Description Generator</h3>
-            <p>Generate SEO meta descriptions under 160 characters</p>
-            <div class="tool-content">
-                <label for="metaTopic" class="sr-only">Enter topic</label>
-                <input type="text" id="metaTopic" placeholder="Enter topic or keyword">
-                <button onclick="generateMetaDescription()">Generate Meta</button>
-                <div id="metaResult" class="result-box">📝 Meta description will appear here</div>
-            </div>
+        // =============================================================
+// TOOL 4: META DESCRIPTION GENERATOR (FIXED - 120-160 chars)
+// =============================================================
+function generateMetaDescription() {
+    // Get and clean the topic
+    let topic = document.getElementById('metaTopic').value.trim();
+    
+    if (!topic) {
+        document.getElementById('metaResult').innerHTML = "⚠️ Please enter a topic.";
+        return;
+    }
+    
+    // Remove common SEO-related words that cause duplication
+    const cleanTopic = topic
+        .replace(/generate|seo|meta description|generator|tool|free|create|make|best|top|ultimate/gi, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    
+    // If nothing left after cleaning, use original
+    const finalTopic = cleanTopic || topic;
+    
+    // Professional SEO meta description templates (120-160 chars range)
+    const templates = [
+        `Learn about ${finalTopic}. Get expert tips, strategies and tools to improve your results.`,
+        `Discover proven strategies for ${finalTopic}. Step-by-step guide with actionable insights.`,
+        `${finalTopic} guide: tips, tools and best practices to help you get better results fast.`,
+        `Master ${finalTopic} with our comprehensive guide. Expert advice for beginners and pros.`,
+        `Everything you need to know about ${finalTopic}. Practical tips and proven strategies.`,
+        `Explore ${finalTopic} with our detailed guide. Learn tips, tools and techniques for success.`,
+        `Your complete resource for ${finalTopic}. Expert insights, practical tips, and proven methods.`,
+        `Learn how to master ${finalTopic} with our expert guide. Actionable tips and strategies.`,
+        `Discover the best ${finalTopic} strategies. Our guide covers everything you need to know.`,
+        `Get started with ${finalTopic}. Easy-to-follow guide with practical examples and tips.`
+    ];
+    
+    // Pick a random template
+    let result = templates[Math.floor(Math.random() * templates.length)];
+    
+    // =============================================================
+    // ENFORCE 120-160 CHARACTER LIMIT
+    // =============================================================
+    
+    // If too short (<120), expand it
+    while (result.length < 120) {
+        const expansions = [
+            ` Learn more about ${finalTopic} and how to get better results.`,
+            ` Discover the best strategies, tips, and tools for ${finalTopic}.`,
+            ` Start your journey to master ${finalTopic} with our expert advice.`
+        ];
+        result += expansions[Math.floor(Math.random() * expansions.length)];
+    }
+    
+    // If too long (>160), trim intelligently
+    if (result.length > 160) {
+        // Try to cut at the last space within limit
+        let trimmed = result.slice(0, 157);
+        const lastSpace = trimmed.lastIndexOf(' ');
+        if (lastSpace > 120) {
+            trimmed = trimmed.slice(0, lastSpace) + '...';
+        } else {
+            trimmed = result.slice(0, 157) + '...';
+        }
+        result = trimmed;
+    }
+    
+    // Final safety check - ensure result is within 120-160 chars
+    if (result.length > 160) {
+        result = result.slice(0, 157) + '...';
+    }
+    if (result.length < 120) {
+        result += ` Learn more about ${finalTopic} and get started today.`;
+        if (result.length > 160) {
+            result = result.slice(0, 157) + '...';
+        }
+    }
+    
+    // =============================================================
+    // CHARACTER COUNT & STATUS
+    // =============================================================
+    const charCount = result.length;
+    let statusColor = '';
+    let statusText = '';
+    
+    if (charCount >= 120 && charCount <= 160) {
+        statusColor = '#44ff88';
+        statusText = '✅ Valid (Perfect length)';
+    } else if (charCount > 160) {
+        statusColor = '#ff4444';
+        statusText = '❌ Too Long (>160)';
+    } else {
+        statusColor = '#ff8844';
+        statusText = '⚠️ Too Short (<120)';
+    }
+    
+    // =============================================================
+    // DISPLAY RESULT WITH COPY BUTTON
+    // =============================================================
+    const uid = generateUniqueId();
+    document.getElementById('metaResult').innerHTML = `
+        <div id="${uid}">📝 ${result}</div>
+        <div style="margin-top: 8px; font-size: 12px; color: ${statusColor};">
+            ${statusText} — ${charCount} characters
         </div>
+        <button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent.replace('📝 ', ''))">📋 کاپی کریں</button>
+    `;
+}
 
         <!-- Tool 5: SEO Title Generator -->
         <div class="tool-card">
