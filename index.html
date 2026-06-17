@@ -3357,6 +3357,189 @@
             console.log(`📚 Total prompts loaded: ${prompts.length}`);
             console.log(`🛠️ Total tools available: 35+`);
         });
+        
+// ============================================================
+// COPY FUNCTIONS
+// ============================================================
+
+function generateUniqueId() {
+    return 'id_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+function safeCopy(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast("✅ کاپی ہو گیا!");
+        }).catch(() => {
+            fallbackCopy(text);
+        });
+    } else {
+        fallbackCopy(text);
+    }
+}
+
+function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+        document.execCommand('copy');
+        showToast("✅ کاپی ہو گیا!");
+    } catch (e) {
+        showToast("⚠️ کاپی نہیں ہو سکی۔");
+    }
+    document.body.removeChild(textarea);
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+        background: #222; color: #ffcc00; padding: 12px 24px;
+        border-radius: 12px; border: 1px solid #ffcc00;
+        z-index: 9999; font-size: 16px;
+        box-shadow: 0 0 30px rgba(255,204,0,0.3);
+        animation: fadeInUp 0.3s ease;
+        max-width: 90%;
+        text-align: center;
+    `;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.5s';
+        setTimeout(() => toast.remove(), 500);
+    }, 2500);
+}
+
+        function countWords() {
+    const text = document.getElementById('wordCountInput').value;
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    const chars = text.length;
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+    const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 0).length;
+    const result = `📊 Words: ${words} | Characters: ${chars} | Sentences: ${sentences} | Paragraphs: ${paragraphs}`;
+    const uid = generateUniqueId();
+    document.getElementById('wordCountResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
+        function countCharacters() {
+    const text = document.getElementById('charCountInput').value;
+    const result = `📊 Total: ${text.length} | Without Spaces: ${text.replace(/\s/g, '').length}`;
+    const uid = generateUniqueId();
+    document.getElementById('charCountResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
+        function checkDensity() {
+    const text = document.getElementById('densityInput').value.toLowerCase();
+    const keyword = document.getElementById('densityKeyword').value.toLowerCase().trim();
+    if (!text || !keyword) {
+        document.getElementById('densityResult').textContent = "⚠️ Please enter both text and keyword.";
+        return;
+    }
+    const words = text.split(/\s+/);
+    const totalWords = words.length;
+    const count = words.filter(w => w === keyword).length;
+    const density = (count / totalWords * 100).toFixed(2);
+    const result = `📊 Keyword: "${keyword}" | Count: ${count} | Density: ${density}% | Total Words: ${totalWords}`;
+    const uid = generateUniqueId();
+    document.getElementById('densityResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
+        function calculateEMI() {
+    const amount = parseFloat(document.getElementById('loanAmount').value);
+    const rate = parseFloat(document.getElementById('loanRate').value) / 100 / 12;
+    const tenure = parseInt(document.getElementById('loanTenure').value);
+    if (!amount || !rate || !tenure) {
+        document.getElementById('emiResult').textContent = "⚠️ Please fill all fields.";
+        return;
+    }
+    const emi = amount * rate * Math.pow(1 + rate, tenure) / (Math.pow(1 + rate, tenure) - 1);
+    const total = emi * tenure;
+    const result = `💰 Monthly EMI: Rs. ${emi.toFixed(2)} | Total Payment: Rs. ${total.toFixed(2)} | Interest: Rs. ${(total - amount).toFixed(2)}`;
+    const uid = generateUniqueId();
+    document.getElementById('emiResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
+        function calculateGST() {
+    const amount = parseFloat(document.getElementById('gstAmount').value);
+    const rate = parseFloat(document.getElementById('gstRate').value);
+    if (isNaN(amount) || isNaN(rate)) {
+        document.getElementById('gstResult').textContent = "⚠️ Please fill all fields.";
+        return;
+    }
+    const gst = (amount * rate) / 100;
+    const result = `🧾 GST: ${gst.toFixed(2)} | Total: ${(amount + gst).toFixed(2)}`;
+    const uid = generateUniqueId();
+    document.getElementById('gstResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
+        function calculateBMI() {
+    const weight = parseFloat(document.getElementById('bmiWeight').value);
+    const height = parseFloat(document.getElementById('bmiHeight').value) / 100;
+    if (!weight || !height) {
+        document.getElementById('bmiResult').textContent = "⚠️ Please enter valid values.";
+        return;
+    }
+    const bmi = weight / (height * height);
+    let category = '';
+    if (bmi < 18.5) category = 'Underweight';
+    else if (bmi < 25) category = 'Normal';
+    else if (bmi < 30) category = 'Overweight';
+    else category = 'Obese';
+    const result = `⚖️ BMI: ${bmi.toFixed(1)} | Category: ${category}`;
+    const uid = generateUniqueId();
+    document.getElementById('bmiResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
+
+        function calculatePercentage() {
+    const value = parseFloat(document.getElementById('percentValue').value);
+    const percent = parseFloat(document.getElementById('percentPercent').value);
+    if (isNaN(value) || isNaN(percent)) {
+        document.getElementById('percentResult').textContent = "⚠️ Please enter valid numbers.";
+        return;
+    }
+    const result = `📊 ${percent}% of ${value} = ${(value * percent) / 100}`;
+    const uid = generateUniqueId();
+    document.getElementById('percentResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
+
+        function convertUnits() {
+    const type = document.getElementById('unitType').value;
+    const direction = document.getElementById('unitDirection').value;
+    const value = parseFloat(document.getElementById('unitInput').value);
+    if (isNaN(value)) {
+        document.getElementById('unitResult').textContent = "⚠️ Please enter a value.";
+        return;
+    }
+    let result = '';
+    switch(type) {
+        case 'length':
+            result = direction === 'to' ? `${value} cm = ${(value / 2.54).toFixed(2)} in` : `${value} in = ${(value * 2.54).toFixed(2)} cm`;
+            break;
+        case 'weight':
+            result = direction === 'to' ? `${value} kg = ${(value * 2.20462).toFixed(2)} lbs` : `${value} lbs = ${(value / 2.20462).toFixed(2)} kg`;
+            break;
+        case 'temperature':
+            result = direction === 'to' ? `${value}°C = ${(value * 9/5 + 32).toFixed(1)}°F` : `${value}°F = ${((value - 32) * 5/9).toFixed(1)}°C`;
+            break;
+        case 'area':
+            result = direction === 'to' ? `${value} m² = ${(value * 10.7639).toFixed(2)} ft²` : `${value} ft² = ${(value / 10.7639).toFixed(2)} m²`;
+            break;
+    }
+    const uid = generateUniqueId();
+    document.getElementById('unitResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
+
+        function getColorInfo() {
+    const color = document.getElementById('colorPicker').value;
+    const rgb = parseInt(color.slice(1), 16);
+    const r = (rgb >> 16) & 255;
+    const g = (rgb >> 8) & 255;
+    const b = rgb & 255;
+    const result = `🎨 Hex: ${color} | RGB: ${r}, ${g}, ${b}`;
+    const uid = generateUniqueId();
+    document.getElementById('colorResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        }
     </script>
 </body>
 </html>
