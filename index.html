@@ -367,11 +367,7 @@
     </style>
 </head>
 <body>
-    <div class="lang-switch">
-    <button onclick="setLanguage('en')">English</button>
-    <button onclick="setLanguage('ur')">اردو</button>
-    </div>
-
+    
 <canvas id="sandCanvas"></canvas>
 
 <div class="container">
@@ -381,6 +377,16 @@
         <div class="glow-line"></div>
         <p id="siteTagline">🛠️ 40+ Free Tools — SEO, Writing, Coding, Design, Finance &amp; Productivity</p>
     </header>
+
+    <!-- ========== LANGUAGE SWITCHER BUTTONS ========== -->
+<div class="lang-switcher" style="display: flex; justify-content: center; gap: 15px; margin: 20px 0;">
+    <button onclick="setLanguage('ur')" id="btnUrdu" style="background: rgba(255,204,0,0.2); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 25px; border-radius: 40px; cursor: pointer; font-weight: bold; transition: 0.3s;">
+        🇵🇰 اردو
+    </button>
+    <button onclick="setLanguage('en')" id="btnEnglish" style="background: rgba(255,204,0,0.2); border: 1px solid #ffcc00; color: #ffcc00; padding: 8px 25px; border-radius: 40px; cursor: pointer; font-weight: bold; transition: 0.3s;">
+        🇬🇧 English
+    </button>
+</div>
 
     <!-- Language Section -->
     <section class="language-section" aria-label="Language Selection">
@@ -1062,6 +1068,44 @@
                     break;
                 }
             }
+
+            // =============================================================
+// LANGUAGE SWITCHER (Urdu / English)
+// =============================================================
+
+function setLanguage(lang) {
+    const html = document.documentElement;
+    const btnUrdu = document.getElementById('btnUrdu');
+    const btnEnglish = document.getElementById('btnEnglish');
+    
+    if (lang === 'ur') {
+        html.setAttribute('dir', 'rtl');
+        html.setAttribute('lang', 'ur');
+        btnUrdu.style.background = '#ffcc00';
+        btnUrdu.style.color = 'black';
+        btnEnglish.style.background = 'rgba(255,204,0,0.2)';
+        btnEnglish.style.color = '#ffcc00';
+        // Change text content to Urdu
+        document.querySelector('.header h1').textContent = 'Sanaullah Workspace';
+        document.querySelector('.header p').textContent = '🤖 AI سے ہر مشکل کام کا آسان حل — Freelancing, Writing, SEO, Coding & Language Tools';
+    } else {
+        html.setAttribute('dir', 'ltr');
+        html.setAttribute('lang', 'en');
+        btnEnglish.style.background = '#ffcc00';
+        btnEnglish.style.color = 'black';
+        btnUrdu.style.background = 'rgba(255,204,0,0.2)';
+        btnUrdu.style.color = '#ffcc00';
+        // Change text content to English
+        document.querySelector('.header h1').textContent = 'Sanaullah Workspace';
+        document.querySelector('.header p').textContent = '🤖 AI powered solution for every difficult task — Freelancing, Writing, SEO, Coding & Language Tools';
+    }
+}
+
+// Set default language (Urdu) on load
+window.onload = function() {
+    setLanguage('ur');
+};
+            
             if (!found) {
                 alert("⚠️ یہ زبان اس وقت دستیاب نہیں۔");
             }
