@@ -623,16 +623,22 @@
 
         <!-- Tool 16: Password Strength Checker -->
         <div class="tool-card">
-            <h3>🛡️ Password Strength Checker</h3>
-            <p>Check how strong your password is</p>
-            <div class="tool-content">
-                <label for="strengthInput" class="sr-only">Enter password</label>
-                <input type="text" id="strengthInput" placeholder="Enter password to check">
-                <button onclick="checkPasswordStrength()">Check Strength</button>
-                <div id="strengthResult" class="result-box">🛡️ Strength: Weak/Medium/Strong</div>
-            </div>
-        </div>
+    <h3>🛡️ Password Strength Checker</h3>
+    <p>Check how strong your password is</p>
 
+    <div class="tool-content">
+        <label for="strengthInput" class="sr-only">Enter password</label>
+
+        <input type="text" id="strengthInput" placeholder="Enter password to check">
+
+        <button onclick="checkPasswordStrength()">Check Strength</button>
+
+        <div id="strengthResult" class="result-box">
+            🛡️ Strength: Weak/Medium/Strong
+        </div>
+    </div>
+        </div>
+        
         <!-- Tool 17: Age Calculator -->
         <div class="tool-card">
             <h3>📅 Age Calculator</h3>
@@ -1485,22 +1491,59 @@ function generateMetaDescription() {
     }
 
     // Tool 16: Password Strength
-    function StrengthPassword() {
+    function generateUniqueId() {
+    return 'id-' + Math.random().toString(36).substr(2, 9);
+}
 
-    const uid = generateUniqueId();
+function safeCopy(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            alert("Copied successfully ✅");
+        })
+        .catch(() => {
+            alert("Copy failed ❌");
+        });
+}
 
-document.getElementById('strengthResult').innerHTML = `
-    <div id="${uid}">
-        🛡️ Strength:
-        <strong style="color:${colors[level]}">${levels[level]}</strong>
-        (Score: ${strength}/5)
-    </div>
+function checkPasswordStrength() {
+    const password = document.getElementById('strengthInput').value;
+    const resultBox = document.getElementById('strengthResult');
 
-    <button class="copy-btn"
-        onclick="safeCopy(document.getElementById('${uid}').textContent)">
-        📋 کاپی کریں
-    </button>
+    if (!password) {
+        resultBox.textContent = "⚠️ Enter password.";
+        return;
+    }
 
+    let strength = 0;
+
+    if (password.length >= 8) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+    const levels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
+    const colors = ['#ff4444', '#ff8844', '#ffcc00', '#88cc44', '#44ff88'];
+
+    const level = Math.min(strength, 4);
+
+    const resultText = `🛡️ Strength: ${levels[level]} (Score: ${strength}/5)`;
+
+    resultBox.innerHTML = `
+        <div id="${generateUniqueId()}">
+            🛡️ Strength:
+            <strong style="color:${colors[level]}">${levels[level]}</strong>
+            (Score: ${strength}/5)
+        </div>
+        <br>
+        <button id="copyBtn">📋 Copy Result</button>
+    `;
+
+    // ✅ SAFE EVENT LISTENER (THIS FIXES YOUR ISSUE)
+    document.getElementById("copyBtn").addEventListener("click", function () {
+        safeCopy(resultText);
+    });
+}
     // Tool 17: Age Calculator
     function calculateAge() {
         const dob = document.getElementById('dobInput').value;
