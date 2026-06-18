@@ -1311,53 +1311,45 @@ if (!text) {
     return;
 }
 
-try {
-    let indent = 0;
+let indent = 0;
 
-    let formatted = text
-        .replace(/>\s+</g, '><')
-        .replace(/</g, '\n<')
-        .split('\n')
-        .filter(line => line.trim())
-        .map(line => {
-            const trimmed = line.trim();
+let formatted = text
+    .replace(/>\s+</g, '><')
+    .replace(/</g, '\n<')
+    .split('\n')
+    .filter(line => line.trim())
+    .map(line => {
+        const trimmed = line.trim();
 
-            if (trimmed.match(/^<\/[^>]+>/)) {
-                indent--;
-            }
+        if (trimmed.match(/^<\/[^>]+>/)) indent--;
 
-            const result =
-                '  '.repeat(Math.max(0, indent)) + trimmed;
+        const result =
+            '  '.repeat(Math.max(0, indent)) + trimmed;
 
-            if (
-                trimmed.match(/^<[^>]+[^\/>]>$/) &&
-                !trimmed.match(/^<[^>]+\/>$/)
-            ) {
-                indent++;
-            }
+        if (
+            trimmed.match(/^<[^>]+[^\/>]>$/) &&
+            !trimmed.match(/^<[^>]+\/>$/)
+        ) {
+            indent++;
+        }
 
-            return result;
-        })
-        .join('\n');
+        return result;
+    })
+    .join('\n');
 
-    const uid = generateUniqueId();
+const uid = generateUniqueId();
 
-    document.getElementById('htmlFormatResult').innerHTML = `
-        <div id="${uid}"
-             style="white-space:pre-wrap;font-family:monospace;font-size:12px;"></div>
+document.getElementById('htmlFormatResult').innerHTML = `
+    <div id="${uid}"
+         style="white-space:pre-wrap;font-family:monospace;font-size:12px;"></div>
 
-        <button class="copy-btn"
-            onclick="safeCopy(document.getElementById('${uid}').textContent)">
-            📋 کاپی کریں
-        </button>
-    `;
+    <button class="copy-btn"
+        onclick="safeCopy(document.getElementById('${uid}').textContent)">
+        📋 کاپی کریں
+    </button>
+`;
 
-    document.getElementById(uid).textContent = formatted;
-
-} catch (e) {
-    document.getElementById('htmlFormatResult').textContent =
-        "⚠️ Invalid HTML format.";
-}
+document.getElementById(uid).textContent = formatted;
 
     }
     
