@@ -333,51 +333,45 @@
         }
 
         .translate-note {
-            font-size: 13px;
-            opacity: 0.7;
-            margin-top: 15px;
-        }
+       /* =========================
+       CSS
+        ========================= */
+.language-section{
+max-width:800px;
+margin:30px auto;
+padding:25px;
+text-align:center;
+background:rgba(0,0,0,0.5);
+border-radius:20px;
+border:1px solid rgba(255,204,0,0.3);
+}
 
-        .popular-langs {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-        }
+.language-section h3{
+color:#ffcc00;
+margin-bottom:20px;
+}
 
-        .popular-langs h4 {
-            color: var(--color-gold);
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
+.lang-tags{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:12px;
+margin-top:20px;
+}
 
-        .lang-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
+.lang-tag{
+background:#ffcc00;
+color:#000;
+border:none;
+padding:10px 18px;
+border-radius:30px;
+cursor:pointer;
+font-weight:bold;
+}
 
-        .lang-tag {
-            background: var(--color-gold-dim);
-            border: 1px solid rgba(255,204,0,0.4);
-            border-radius: var(--radius-full);
-            padding: 8px 20px;
-            cursor: pointer;
-            transition: all var(--transition-speed);
-            font-size: 14px;
-            color: var(--color-text-primary);
-        }
-
-        .lang-tag:hover {
-            background: var(--color-gold);
-            color: black;
-            transform: translateY(-2px);
-        }
-
-        .lang-tag:focus-visible {
-            outline: 2px solid var(--color-gold);
-            outline-offset: 2px;
-        }
+.lang-tag:hover{
+transform:translateY(-2px);
+}
 
         /* ============================================================
            TOOLS GRID
@@ -994,24 +988,28 @@
             </div>
         </header>
 
-        <!-- ============================================================
-        LANGUAGE SECTION
-        ============================================================ -->
-        <section class="language-section" aria-label="Language Selection">
-            <h3 id="langSectionTitle">🌐 اپنی زبان تلاش کریں</h3>
-            <div class="search-box" role="search">
-                <label for="language-search" class="sr-only">زبان تلاش کریں / Search Language</label>
-                <input type="text" id="language-search" placeholder="مثال: Urdu, English, Arabic...">
-                <button class="search-btn" onclick="searchLanguage()" id="searchLangBtn">تلاش کریں</button>
-            </div>
-            <div class="translate-container">
-                <div class="translate-note" id="translateNote">💡 براہ کرم اپنی پسندیدہ زبان لکھیں اور انٹرنیٹ براؤزر کا ترجمہ استعمال کریں۔</div>
-            </div>
-            <div class="popular-langs">
-                <h4 id="popularLangsTitle">📚 مشہور زبانیں (کلک کریں)</h4>
-                <div class="lang-tags" id="langTagsContainer" role="list"></div>
-            </div>
-        </section>
+        <!-- =========================
+HTML
+========================= --><section class="language-section">
+    <h3>🌐 Select Language</h3><div id="google_translate_element"></div>
+
+<div class="lang-tags">
+    <button class="lang-tag" onclick="changeLanguage('ur')">🇵🇰 Urdu</button>
+    <button class="lang-tag" onclick="changeLanguage('en')">🇬🇧 English</button>
+    <button class="lang-tag" onclick="changeLanguage('ar')">🇸🇦 Arabic</button>
+    <button class="lang-tag" onclick="changeLanguage('hi')">🇮🇳 Hindi</button>
+    <button class="lang-tag" onclick="changeLanguage('tr')">🇹🇷 Turkish</button>
+</div>
+
+</section><!-- Google Translate --><script>
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ur,ar,hi,tr',
+        autoDisplay: false
+    }, 'google_translate_element');
+}
+</script><script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
         <!-- ============================================================
         TOOLS GRID
@@ -1881,62 +1879,21 @@
             updateLanguageTags();
             filterPrompts();
         }
+ /* =========================
+JavaScript
+========================= */
 
-        /**
-         * Update language tag buttons with current language.
-         */
-        function updateLanguageTags() {
-            const tagsContainer = document.getElementById('langTagsContainer');
-            const languages = [
-                { code: 'Urdu', name: '🇵🇰 اردو', enName: 'Urdu' },
-                { code: 'English', name: '🇬🇧 English', enName: 'English' },
-                { code: 'Arabic', name: '🇸🇦 العربية', enName: 'Arabic' },
-                { code: 'Hindi', name: '🇮🇳 हिन्दी', enName: 'Hindi' },
-                { code: 'Spanish', name: '🇪🇸 Español', enName: 'Spanish' },
-                { code: 'French', name: '🇫🇷 Français', enName: 'French' },
-                { code: 'German', name: '🇩🇪 Deutsch', enName: 'German' },
-                { code: 'Turkish', name: '🇹🇷 Türkçe', enName: 'Turkish' },
-                { code: 'Persian', name: '🇮🇷 فارسی', enName: 'Persian' }
-            ];
+function changeLanguage(langCode){
 
-            tagsContainer.innerHTML = '';
-            languages.forEach(lang => {
-                const displayName = currentLang === 'ur' ? lang.name : lang.enName;
-                const tag = document.createElement('span');
-                tag.className = 'lang-tag';
-                tag.textContent = displayName;
-                tag.setAttribute('role', 'listitem');
-                tag.setAttribute('tabindex', '0');
-                tag.addEventListener('click', () => quickSearch(lang.code));
-                tag.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') quickSearch(lang.code);
-                });
-                tagsContainer.appendChild(tag);
-            });
-        }
+const combo = document.querySelector('.goog-te-combo');
 
-        /**
-         * Search for a language using Google Translate.
-         */
-        function searchLanguage() {
-            const searchLang = document.getElementById('language-search').value.trim();
-            if (!searchLang) {
-                showToast(currentLang === 'ur' ? 'براہ کرم کوئی زبان لکھیں!' : 'Please enter a language!');
-                return;
-            }
-            showToast(currentLang === 'ur' ?
-                `💡 "${searchLang}" کے لیے براہ کرم اپنے براؤزر کا ترجمہ فیچر استعمال کریں۔` :
-                `💡 Please use your browser's translation feature for "${searchLang}".`);
-        }
+if(combo){
+    combo.value = langCode;
+    combo.dispatchEvent(new Event('change'));
+}else{
+    alert("Google Translate is still loading...");
+}
 
-        /**
-         * Quick search for popular languages.
-         * @param {string} lang - Language name
-         */
-        function quickSearch(lang) {
-            document.getElementById('language-search').value = lang;
-            searchLanguage();
-        }
 
         // =============================================================
         // PROMPT LIBRARY DATA
