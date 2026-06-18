@@ -1303,41 +1303,71 @@ document.getElementById('metaResult').innerHTML = `
 
     // Tool 8: HTML Beautifier
     function formatHTML() {
-        const text = document.getElementById('htmlFormatInput').value;
-        if (!text) {
-            document.getElementById('htmlFormatResult').textContent = "⚠️ Please paste HTML code.";
-            return;
-        }
-        try {
-            let indent = 0;
-            let formatted = text
-                .replace(/>\s+</g, '><')
-                .replace(/</g, '\n<')
-                .split('\n')
-                .filter(line => line.trim())
-                .map(line => {
-                    const trimmed = line.trim();
-                    if (trimmed.match(/^<\/[^>]+>/)) indent--;
-                    const result = '  '.repeat(Math.max(0, indent)) + trimmed;
-                    if (trimmed.match(/^<[^>]+[^\/>]>$/) && !trimmed.match(/^<[^>]+\/>$/)) indent++;
-                    return result;
-                })
-                .join('\n');
-            const uid = generateUniqueId();
-            document.getElementById('htmlFormatResult').innerHTML = `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${formatted}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
-        } catch(e) {
-            document.getElementById('htmlFormatResult').textContent = "⚠️ Invalid HTML format.";
-        }
-    }
+const text = document.getElementById('htmlFormatInput').value;
 
+if (!text) {
+    document.getElementById('htmlFormatResult').textContent =
+        "⚠️ Please paste HTML code.";
+    return;
+}
+
+try {
+    let indent = 0;
+
+    let formatted = text
+        .replace(/>\s+</g, '><')
+        .replace(/</g, '\n<')
+        .split('\n')
+        .filter(line => line.trim())
+        .map(line => {
+            const trimmed = line.trim();
+
+            if (trimmed.match(/^<\/[^>]+>/)) {
+                indent--;
+            }
+
+            const result =
+                '  '.repeat(Math.max(0, indent)) + trimmed;
+
+            if (
+                trimmed.match(/^<[^>]+[^\/>]>$/) &&
+                !trimmed.match(/^<[^>]+\/>$/)
+            ) {
+                indent++;
+            }
+
+            return result;
+        })
+        .join('\n');
+
+    const uid = generateUniqueId();
+
+    document.getElementById('htmlFormatResult').innerHTML = `
+        <div id="${uid}"
+             style="white-space:pre-wrap;font-family:monospace;font-size:12px;"></div>
+
+        <button class="copy-btn"
+            onclick="safeCopy(document.getElementById('${uid}').textContent)">
+            📋 کاپی کریں
+        </button>
+    `;
+
+    document.getElementById(uid).textContent = formatted;
+
+} catch (e) {
+    document.getElementById('htmlFormatResult').textContent =
+        "⚠️ Invalid HTML format.";
+}
+
+    }
+    
     // Tool 9: CSS Minifier
     function minifyCSS() {
         const text = document.getElementById('cssMinifyInput').value;
-        if (!text) {
-            document.getElementById('cssMinifyResult').textContent = "⚠️ Please paste CSS code.";
+                    document.getElementById('cssMinifyResult').textContent = "⚠️ Please paste CSS code.";
             return;
         }
-        try {
+        
             const minified = text
                 .replace(/\/\*[\s\S]*?\*\//g, '')
                 .replace(/\s*([{}:;,])\s*/g, '$1')
