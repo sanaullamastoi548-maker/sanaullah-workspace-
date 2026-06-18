@@ -1438,10 +1438,12 @@ function formatHTML() {
         if (/[A-Z]/.test(password)) strength++;
         if (/[0-9]/.test(password)) strength++;
         if (/[^a-zA-Z0-9]/.test(password)) strength++;
-        const levels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
+                const levels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
         const colors = ['#ff4444', '#ff8844', '#ffcc00', '#88cc44', '#44ff88'];
         const level = Math.min(strength, 4);
-        document.getElementById('strengthResult').innerHTML = `🛡️ Strength: <strong style="color:${colors[level]}">${levels[level]}</strong> (Score: ${strength}/5)`;
+        
+        // یہ رہی نئی لائن جس میں کاپی بٹن شامل ہے:
+        document.getElementById('strengthResult').innerHTML = `🛡️ Strength: <strong style="color:${colors[level]}">${levels[level]}</strong> (Score: ${strength}/5) <button onclick="copyToClipboard('${levels[level]}')">📋</button>`;
     }
 
     // Tool 17: Age Calculator
