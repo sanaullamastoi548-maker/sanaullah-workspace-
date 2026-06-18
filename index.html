@@ -1310,6 +1310,7 @@ if (!text) {
         "⚠️ Please paste HTML code.";
     return;
 }
+        try {
 
 let indent = 0;
 
@@ -1354,11 +1355,11 @@ document.getElementById(uid).textContent = formatted;
     }
     
     // Tool 9: CSS Minifier
-    function minifyCSS() {
-        const text = document.getElementById('cssMinifyInput').value;
-                    document.getElementById('cssMinifyResult').textContent = "⚠️ Please paste CSS code.";
+    function minifyCSS() 
+   {const text = document.getElementById('cssMinifyInput').value;
+            if (!text) {document.getElementById('cssMinifyResult').textContent = "⚠️ Please paste CSS code.";
             return;
-        }
+          }
         
             const minified = text
                 .replace(/\/\*[\s\S]*?\*\//g, '')
