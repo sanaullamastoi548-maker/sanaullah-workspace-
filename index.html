@@ -1425,27 +1425,43 @@ function formatHTML() {
         document.getElementById('passResult').innerHTML = `<div id="${uid}" style="font-family:monospace;font-size:16px;">${password}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
     }
 
-    // Tool 16: Password Strength
-    function checkPasswordStrength() {
-        const password = document.getElementById('strengthInput').value;
-        if (!password) {
-            document.getElementById('strengthResult').textContent = "⚠️ Enter password.";
-            return;
-        }
-        let strength = 0;
-        if (password.length >= 8) strength++;
-        if (/[a-z]/.test(password)) strength++;
-        if (/[A-Z]/.test(password)) strength++;
-        if (/[0-9]/.test(password)) strength++;
-        if (/[^a-zA-Z0-9]/.test(password)) strength++;
-                const levels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
-        const colors = ['#ff4444', '#ff8844', '#ffcc00', '#88cc44', '#44ff88'];
-        const level = Math.min(strength, 4);
-        
-        // یہ رہی نئی لائن جس میں کاپی بٹن شامل ہے:
-        document.getElementById('strengthResult').innerHTML = `🛡️ Strength: <strong style="color:${colors[level]}">${levels[level]}</strong> (Score: ${strength}/5) <button onclick="copyToClipboard('${levels[level]}')">📋</button>`;
+    // Tool 16: // Password Strength Checker کے لیے مکمل کوڈ
+function checkPasswordStrength() {
+    const password = document.getElementById('strengthInput').value;
+    const resultDiv = document.getElementById('strengthResult');
+    
+    if (!password) {
+        resultDiv.textContent = "⚠️ Enter password.";
+        return;
     }
+    
+    let strength = 0;
+    if (password.length >= 8) strength++;
+    if (/[a-z]/.test(password)) strength++;
+    if (/[A-Z]/.test(password)) strength++;
+    if (/[0-9]/.test(password)) strength++;
+    if (/[^a-zA-Z0-9]/.test(password)) strength++;
+    
+    const levels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
+    const colors = ['#ff4444', '#ff8844', '#ffcc00', '#88cc44', '#44ff88'];
+    const level = Math.min(strength, 4);
+    
+    // یہاں وہ ٹیکسٹ تیار کیا جا رہا ہے جو کاپی ہوگا
+    const textToCopy = `Strength: ${levels[level]} (Score: ${strength}/5)`;
+    
+    // آپ کی ویب سائٹ کے باقی ٹولز جیسا بٹن (یہی کوڈ کاپی کریں)
+    resultDiv.innerHTML = `🛡️ <strong style="color:${colors[level]}">${textToCopy}</strong> 
+    <button onclick="copyToClipboard('${textToCopy}')">📋 کاپی کریں</button>`;
+}
 
+// یہ وہ فنکشن ہے جو باقی ویب سائٹ میں بھی استعمال ہو رہا ہوگا
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        alert("کاپی ہو گیا! ✅"); // یا اگر آپ کا کوئی اپنا نوٹیفکیشن سسٹم ہے تو وہ یہاں لگا لیں
+    });
+}
+
+    
     // Tool 17: Age Calculator
     function calculateAge() {
         const dob = document.getElementById('dobInput').value;
