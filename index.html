@@ -1846,12 +1846,15 @@ function googleTranslateElementInit() {
         function setLanguage(lang) {
             currentLang = lang;
             const htmlTag = document.getElementById('mainHtml');
-            htmlTag.setAttribute('dir', lang === 'en' ? 'ltr' : 'rtl');
-            htmlTag.setAttribute('lang', lang);
 
-            document.getElementById('btnUrdu').classList.toggle('active', lang === 'ur');
-            document.getElementById('btnEnglish').classList.toggle('active', lang === 'en');
+if (htmlTag) {
+htmlTag.setAttribute('dir', lang === 'en' ? 'ltr' : 'rtl');
+            const htmlTag = document.getElementById('mainHtml');
 
+if (htmlTag) {
+htmlTag.setAttribute('dir', lang === 'en' ? 'ltr' : 'rtl');
+htmlTag.setAttribute('lang', lang);
+}
             const t = translations[lang];
             const elements = [
                 'siteTitle', 'siteTagline', 'langSectionTitle', 'searchLangBtn',
