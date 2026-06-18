@@ -1879,20 +1879,7 @@ function googleTranslateElementInit() {
             updateLanguageTags();
             filterPrompts();
         }
- /* =========================
-JavaScript
-========================= */
-
-function changeLanguage(langCode){
-
-const combo = document.querySelector('.goog-te-combo');
-
-if(combo){
-    combo.value = langCode;
-    combo.dispatchEvent(new Event('change'));
-}else{
-    alert("Google Translate is still loading...");
-}
+ 
 
 
         // =============================================================
