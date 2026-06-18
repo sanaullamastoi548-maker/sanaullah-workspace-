@@ -1235,35 +1235,41 @@
         const uid = generateUniqueId();
         document.getElementById('caseResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
     }
-
-    // Tool 8: HTML Beautifier
-    function formatHTML() {
-        const text = document.getElementById('htmlFormatInput').value;
-        if (!text) {
-            document.getElementById('htmlFormatResult').textContent = "⚠️ Please paste HTML code.";
-            return;
-        }
-        try {
-            let indent = 0;
-            let formatted = text
-                .replace(/>\s+</g, '><')
-                .replace(/</g, '\n<')
-                .split('\n')
-                .filter(line => line.trim())
-                .map(line => {
-                    const trimmed = line.trim();
-                    if (trimmed.match(/^<\/[^>]+>/)) indent--;
-                    const result = '  '.repeat(Math.max(0, indent)) + trimmed;
-                    if (trimmed.match(/^<[^>]+[^\/>]>$/) && !trimmed.match(/^<[^>]+\/>$/)) indent++;
-                    return result;
-                })
-                .join('\n');
-            const uid = generateUniqueId();
-            document.getElementById('htmlFormatResult').innerHTML = `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${formatted}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
-        } catch(e) {
-            document.getElementById('htmlFormatResult').textContent = "⚠️ Invalid HTML format.";
-        }
+ 
+    // Tool 8: HTML Beautifier (اسے تبدیل کریں)
+function formatHTML() {
+    const text = document.getElementById('htmlFormatInput').value;
+    if (!text) {
+        document.getElementById('htmlFormatResult').textContent = "⚠️ Please paste HTML code.";
+        return;
     }
+    try {
+        let indent = 0;
+        let formatted = text
+            .replace(/>\s+</g, '><')
+            .replace(/</g, '\n<')
+            .split('\n')
+            .filter(line => line.trim())
+            .map(line => {
+                const trimmed = line.trim();
+                if (trimmed.match(/^<\/[^>]+>/)) indent--;
+                const result = '  '.repeat(Math.max(0, indent)) + trimmed;
+                if (trimmed.match(/^<[^>]+[^\/>]>$/) && !trimmed.match(/^<[^>]+\/>$/)) indent++;
+                return result;
+            })
+            .join('\n');
+        
+        const uid = generateUniqueId();
+        
+        // یہاں تبدیلی ہے: innerHTML کی جگہ textContent استعمال کیا گیا ہے تاکہ ٹیگز نظر آئیں
+        const resultBox = document.getElementById('htmlFormatResult');
+        resultBox.innerHTML = `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;"></div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        document.getElementById(uid).textContent = formatted; 
+        
+    } catch(e) {
+        document.getElementById('htmlFormatResult').textContent = "⚠️ Invalid HTML format.";
+    }
+}
 
     // Tool 9: CSS Minifier
     function minifyCSS() {
