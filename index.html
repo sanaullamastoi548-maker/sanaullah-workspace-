@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
@@ -1235,41 +1236,35 @@
         const uid = generateUniqueId();
         document.getElementById('caseResult').innerHTML = `<div id="${uid}">${result}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
     }
- 
-    // Tool 8: HTML Beautifier (اسے تبدیل کریں)
-function formatHTML() {
-    const text = document.getElementById('htmlFormatInput').value;
-    if (!text) {
-        document.getElementById('htmlFormatResult').textContent = "⚠️ Please paste HTML code.";
-        return;
+
+    // Tool 8: HTML Beautifier
+    function formatHTML() {
+        const text = document.getElementById('htmlFormatInput').value;
+        if (!text) {
+            document.getElementById('htmlFormatResult').textContent = "⚠️ Please paste HTML code.";
+            return;
+        }
+        try {
+            let indent = 0;
+            let formatted = text
+                .replace(/>\s+</g, '><')
+                .replace(/</g, '\n<')
+                .split('\n')
+                .filter(line => line.trim())
+                .map(line => {
+                    const trimmed = line.trim();
+                    if (trimmed.match(/^<\/[^>]+>/)) indent--;
+                    const result = '  '.repeat(Math.max(0, indent)) + trimmed;
+                    if (trimmed.match(/^<[^>]+[^\/>]>$/) && !trimmed.match(/^<[^>]+\/>$/)) indent++;
+                    return result;
+                })
+                .join('\n');
+            const uid = generateUniqueId();
+            document.getElementById('htmlFormatResult').innerHTML = `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;">${formatted}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
+        } catch(e) {
+            document.getElementById('htmlFormatResult').textContent = "⚠️ Invalid HTML format.";
+        }
     }
-    try {
-        let indent = 0;
-        let formatted = text
-            .replace(/>\s+</g, '><')
-            .replace(/</g, '\n<')
-            .split('\n')
-            .filter(line => line.trim())
-            .map(line => {
-                const trimmed = line.trim();
-                if (trimmed.match(/^<\/[^>]+>/)) indent--;
-                const result = '  '.repeat(Math.max(0, indent)) + trimmed;
-                if (trimmed.match(/^<[^>]+[^\/>]>$/) && !trimmed.match(/^<[^>]+\/>$/)) indent++;
-                return result;
-            })
-            .join('\n');
-        
-        const uid = generateUniqueId();
-        
-        // یہاں تبدیلی ہے: innerHTML کی جگہ textContent استعمال کیا گیا ہے تاکہ ٹیگز نظر آئیں
-        const resultBox = document.getElementById('htmlFormatResult');
-        resultBox.innerHTML = `<div id="${uid}" style="white-space:pre-wrap;font-family:monospace;font-size:12px;"></div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
-        document.getElementById(uid).textContent = formatted; 
-        
-    } catch(e) {
-        document.getElementById('htmlFormatResult').textContent = "⚠️ Invalid HTML format.";
-    }
-}
 
     // Tool 9: CSS Minifier
     function minifyCSS() {
@@ -1425,43 +1420,25 @@ function formatHTML() {
         document.getElementById('passResult').innerHTML = `<div id="${uid}" style="font-family:monospace;font-size:16px;">${password}</div><button class="copy-btn" onclick="safeCopy(document.getElementById('${uid}').textContent)">📋 کاپی کریں</button>`;
     }
 
-    // Tool 16: // Password Strength Checker کے لیے مکمل کوڈ
-function checkPasswordStrength() {
-    const password = document.getElementById('strengthInput').value;
-    const resultDiv = document.getElementById('strengthResult');
-    
-    if (!password) {
-        resultDiv.textContent = "⚠️ Enter password.";
-        return;
+    // Tool 16: Password Strength
+    function checkPasswordStrength() {
+        const password = document.getElementById('strengthInput').value;
+        if (!password) {
+            document.getElementById('strengthResult').textContent = "⚠️ Enter password.";
+            return;
+        }
+        let strength = 0;
+        if (password.length >= 8) strength++;
+        if (/[a-z]/.test(password)) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^a-zA-Z0-9]/.test(password)) strength++;
+        const levels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
+        const colors = ['#ff4444', '#ff8844', '#ffcc00', '#88cc44', '#44ff88'];
+        const level = Math.min(strength, 4);
+        document.getElementById('strengthResult').innerHTML = `🛡️ Strength: <strong style="color:${colors[level]}">${levels[level]}</strong> (Score: ${strength}/5)`;
     }
-    
-    let strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[a-z]/.test(password)) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/[0-9]/.test(password)) strength++;
-    if (/[^a-zA-Z0-9]/.test(password)) strength++;
-    
-    const levels = ['Very Weak', 'Weak', 'Medium', 'Strong', 'Very Strong'];
-    const colors = ['#ff4444', '#ff8844', '#ffcc00', '#88cc44', '#44ff88'];
-    const level = Math.min(strength, 4);
-    
-    // یہاں وہ ٹیکسٹ تیار کیا جا رہا ہے جو کاپی ہوگا
-    const textToCopy = `Strength: ${levels[level]} (Score: ${strength}/5)`;
-    
-    // آپ کی ویب سائٹ کے باقی ٹولز جیسا بٹن (یہی کوڈ کاپی کریں)
-    resultDiv.innerHTML = `🛡️ <strong style="color:${colors[level]}">${textToCopy}</strong> 
-    <button onclick="copyToClipboard('${textToCopy}')">📋 کاپی کریں</button>`;
-}
 
-// یہ وہ فنکشن ہے جو باقی ویب سائٹ میں بھی استعمال ہو رہا ہوگا
-function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        alert("کاپی ہو گیا! ✅"); // یا اگر آپ کا کوئی اپنا نوٹیفکیشن سسٹم ہے تو وہ یہاں لگا لیں
-    });
-}
-
-    
     // Tool 17: Age Calculator
     function calculateAge() {
         const dob = document.getElementById('dobInput').value;
