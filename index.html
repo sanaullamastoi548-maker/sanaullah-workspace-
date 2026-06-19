@@ -1948,7 +1948,54 @@ function copyToClipboard(text) {
         };
     }
 
-// =============================================================
+    // =============================================================
+    // PROMPT LIBRARY
+    // =============================================================
+    const prompts = [
+        const prompts = [
+    { title: "SEO ٹائٹل", category: "SEO", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
+    { title: "فائیور گِگ ڈسکرپشن", category: "Fiverr", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
+    { title: "بگنگ آرٹیکل", category: "Blogging", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
+    // اسی طرح اپنے باقی سارے پرامپٹس یہاں لکھتے جائیں
+];
+
+        { title: "ChatGPT for Coding", category: "ChatGPT", text: "Act as a senior developer. Help me debug this [Language] code: [Paste Code]. Explain the issue and provide a fix." },
+        { title: "ChatGPT for Content", category: "ChatGPT", text: "Write a 1000-word blog post on [Topic] with introduction, 5 headings, and conclusion." },
+        { title: "ChatGPT for Marketing", category: "ChatGPT", text: "Create a complete marketing strategy for [Product] including target audience, channels, and budget." },
+        { title: "SEO Title Generator", category: "SEO", text: "Generate 5 SEO-friendly titles for a blog about [Topic]. Include primary keyword [Keyword] and keep under 60 characters." },
+        { title: "Meta Description Writer", category: "SEO", text: "Write a compelling meta description for a webpage about [Topic]. Include [Keyword] and a call-to-action within 160 characters." },
+        { title: "SEO Keywords Research", category: "SEO", text: "List 10 long-tail keywords for [Topic] with low competition and high search volume." },
+        { title: "Blog Post Idea", category: "Blogging", text: "Generate 10 unique blog post ideas for a blog about [Niche]. Focus on trending topics." },
+        { title: "Blog Introduction", category: "Blogging", text: "Write a hook-based introduction for a blog post about [Topic]. Include a question and a statistic." },
+        { title: "Blog Conclusion", category: "Blogging", text: "Write a powerful conclusion for [Topic]. Summarize key points and include a call-to-action." },
+        { title: "Fiverr Gig Description", category: "Fiverr", text: "Write a professional, SEO-optimized Fiverr gig description for [Service Name]. Include benefits, packages, and an FAQ section." },
+        { title: "Fiverr Profile Bio", category: "Fiverr", text: "Create a short, persuasive Fiverr profile bio for a freelancer specializing in [Skill]." },
+        { title: "Fiverr Gig Title", category: "Fiverr", text: "Generate 5 click-worthy Fiverr gig titles for [Service]. Use keywords and power words." },
+        { title: "Upwork Proposal", category: "Upwork", text: "Write a high-converting Upwork proposal for a job related to [Project Name]. Mention [Your Skills] and keep it under 250 words." },
+        { title: "Upwork Cover Letter", category: "Upwork", text: "Draft a professional Upwork cover letter for a client looking for [Service]." },
+        { title: "Upwork Bio", category: "Upwork", text: "Write an optimized Upwork freelancer bio for [Your Profession]. Focus on results and experience." },
+        { title: "Email Marketing Copy", category: "Marketing", text: "Write a promotional email for a product called [Product Name]. Highlight benefits and include a clear CTA." },
+        { title: "Social Media Caption", category: "Marketing", text: "Create an engaging Instagram caption for a brand launching [New Product]. Use 3 hashtags." },
+        { title: "Facebook Ad Copy", category: "Marketing", text: "Write a short, persuasive Facebook ad for [Service/Product]. Include headline and description." },
+        { title: "YouTube Title Generator", category: "YouTube", text: "Generate 10 click-worthy YouTube titles for a video about [Topic]. Use power words and numbers." },
+        { title: "YouTube Description", category: "YouTube", text: "Write a complete YouTube video description for [Video Title]. Include summary and keywords." },
+        { title: "YouTube Script", category: "YouTube", text: "Write a 5-minute YouTube script for [Topic]. Include hook, intro, body, and call-to-action." },
+        { title: "Facebook Ad Headline", category: "Facebook Ads", text: "Generate 10 attention-grabbing headlines for a Facebook ad about [Product]." },
+        { title: "Facebook Ad Creative", category: "Facebook Ads", text: "Describe a high-converting Facebook ad creative for [Product] including image and copy." },
+        { title: "Facebook Ad Audience", category: "Facebook Ads", text: "Define the ideal Facebook ad audience for [Product]. Include demographics and interests." },
+        { title: "Code Debug Assistant", category: "Coding", text: "Act as a senior developer. Debug this [Language] code: [Paste Code]. Explain the issue and provide the corrected version." },
+        { title: "HTML Structure Generator", category: "Coding", text: "Generate a clean, semantic HTML5 structure for a webpage about [Topic]." },
+        { title: "CSS Styling Help", category: "Coding", text: "Write CSS code to style a [Component Name] with modern flexbox/grid." },
+        { title: "Business Plan", category: "Business", text: "Create a simple business plan for [Business Name]. Include mission, goals, and target audience." },
+        { title: "SWOT Analysis", category: "Business", text: "Perform a SWOT analysis for [Company]. List strengths, weaknesses, opportunities, and threats." },
+        { title: "Client Proposal", category: "Business", text: "Write a professional client proposal for [Service]. Include overview, pricing, and timeline." },
+        { title: "YouTube Thumbnail", category: "YouTube", text: "Describe 5 eye-catching YouTube thumbnail concepts for [Topic]. Mention colors, text, and emotions." },
+        { title: "Facebook Ad Retargeting", category: "Facebook Ads", text: "Create a retargeting ad for visitors who viewed [Product] but didn't purchase." },
+        { title: "Email Newsletter", category: "Marketing", text: "Write a weekly newsletter for [Niche]. Include 3 topics and a special offer." },
+        { title: "Fiverr FAQ", category: "Fiverr", text: "Write 10 FAQs for a Fiverr gig about [Service]. Address common client concerns." },
+        { title: "Upwork Portfolio", category: "Upwork", text: "Write a description for an Upwork portfolio project about [Project]. Highlight challenges and results." }
+    ];
+    // =============================================================
 // PROMPT LIBRARY - 1000+ Prompts
 // =============================================================
 const prompts = [];
@@ -2983,11 +3030,6 @@ const socialMediaPrompts = [
     { title: "Social Media Feedback Response", category: "Social Media", text: "Write a feedback response template for [Brand]." },
     { title: "Social Media Complaint Response", category: "Social Media", text: "Write a complaint response template for [Brand]." },
     { title: "Social Media Thank You Response", category: "Social Media", text: "Write a thank you response template for [Brand]." }
-    const prompts = [
-    { title: "SEO ٹائٹل", category: "SEO", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
-    { title: "فائیور گِگ ڈسکرپشن", category: "Fiverr", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
-    { title: "بگنگ آرٹیکل", category: "Blogging", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
-    // اسی طرح اپنے باقی سارے پرامپٹس یہاں لکھتے جائیں
 ];
 
 // =============================================================
@@ -3164,24 +3206,18 @@ console.log(`Total Prompts Loaded: ${prompts.length}`);
         filterPrompts();
         document.getElementById('promptCounter').textContent = '📚 کل Prompts: ' + prompts.length;
     };
-
-           <script src="prompts.js"></script>
+        <script src="prompts.js"></script>
     <script src="script.js"></script>
-
-    <script>
-        window.onload = function() {
-            // یہ چیک کرے گا کہ ڈیٹا فائل لوڈ ہو گئی ہے یا نہیں
-            if (typeof prompts !== 'undefined') {
-                document.getElementById('promptCounter').textContent = '📚 کل Prompts: ' + prompts.length;
-            }
-            // اگر آپ کا کوئی پرانا فنکشن ہے تو اسے بھی یہاں کال کر سکتے ہیں
-            if (typeof loadTrending === 'function') {
-                loadTrending();
-            }
-        };
-    </script>
-
+    
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
+
+</script>
+
+<!-- Google Translate Script -->
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
