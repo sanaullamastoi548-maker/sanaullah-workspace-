@@ -2005,16 +2005,7 @@ function copyToClipboard(text) {
             }
         };
     }
-    <script>
-    document.getElementById('supportForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // فارم کو ری لوڈ ہونے سے روکنے کے لیے
-        var form = e.target;
-        fetch(form.action, { method: 'POST', body: new FormData(form) })
-            .then(() => alert('آپ کا پیغام موصول ہو گیا ہے، شکریہ! / Your message has been received, thank you!'))
-            .catch(() => alert('کچھ غلطی ہوئی، دوبارہ کوشش کریں۔ / Something went wrong.'));
-    });
-  </script>
-
+    
     // =============================================================
     // PROMPT LIBRARY
     // =============================================================
@@ -2209,7 +2200,15 @@ function copyToClipboard(text) {
 <!-- Google Translate Script -->
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
-  
+  <script>
+    document.getElementById('supportForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // فارم کو ری لوڈ ہونے سے روکنے کے لیے
+        var form = e.target;
+        fetch(form.action, { method: 'POST', body: new FormData(form) })
+            .then(() => alert('آپ کا پیغام موصول ہو گیا ہے، شکریہ! / Your message has been received, thank you!'))
+            .catch(() => alert('کچھ غلطی ہوئی، دوبارہ کوشش کریں۔ / Something went wrong.'));
+    });
+  </script>
     
 </body>
 </html>
