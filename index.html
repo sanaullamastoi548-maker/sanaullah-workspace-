@@ -2983,6 +2983,11 @@ const socialMediaPrompts = [
     { title: "Social Media Feedback Response", category: "Social Media", text: "Write a feedback response template for [Brand]." },
     { title: "Social Media Complaint Response", category: "Social Media", text: "Write a complaint response template for [Brand]." },
     { title: "Social Media Thank You Response", category: "Social Media", text: "Write a thank you response template for [Brand]." }
+    const prompts = [
+    { title: "SEO ٹائٹل", category: "SEO", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
+    { title: "فائیور گِگ ڈسکرپشن", category: "Fiverr", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
+    { title: "بگنگ آرٹیکل", category: "Blogging", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
+    // اسی طرح اپنے باقی سارے پرامپٹس یہاں لکھتے جائیں
 ];
 
 // =============================================================
@@ -3159,6 +3164,11 @@ console.log(`Total Prompts Loaded: ${prompts.length}`);
         filterPrompts();
         document.getElementById('promptCounter').textContent = '📚 کل Prompts: ' + prompts.length;
     };
+
+       <script src="prompts.js"></script>
+    <script src="script.js"></script>
+</body>
+    
 </script>
 
 <!-- Google Translate Script -->
