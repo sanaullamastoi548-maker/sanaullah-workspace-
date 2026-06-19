@@ -1965,12 +1965,6 @@
         { title: "Fiverr FAQ", category: "Fiverr", text: "Write 10 FAQs for a Fiverr gig about [Service]. Address common client concerns." },
         { title: "Upwork Portfolio", category: "Upwork", text: "Write a description for an Upwork portfolio project about [Project]. Highlight challenges and results." }
     ];
-    const prompts = [
-    { title: "SEO ٹائٹل", category: "SEO", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
-    { title: "فائیور گِگ ڈسکرپشن", category: "Fiverr", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
-    { title: "بگنگ آرٹیکل", category: "Blogging", code: "یہاں آپ کا پورا پرامپٹ آئے گا..." },
-    // اسی طرح اپنے باقی سارے پرامپٹس یہاں لکھتے جائیں
-];
     // =============================================================
 // PROMPT LIBRARY - 1000+ Prompts
 // =============================================================
@@ -3180,7 +3174,7 @@ console.log(`Total Prompts Loaded: ${prompts.length}`);
     window.onload = function() {
         loadTrending();
         filterPrompts();
-        document.getElementById('promptCounter').textContent = '📚 کل Prompts: ' + prompts.length;
+        document.getElementById('promptCounter').textContent = '📚 کل Prompts: '1000 + prompts.length;
     };
         <script src="prompts.js"></script>
     <script src="script.js"></script>
